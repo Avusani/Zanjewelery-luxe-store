@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZanJewelry Atelier | Body Care, Gift Boxes & Incense</title>
+    <meta name="description" content="Moringa and Charcoal body care, gift boxes, facial oil and Tribal Soul White Sage Incense with WhatsApp ordering.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body data-page="body-care">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="ZanJewelry home">
+        <img src="assets/images/zanjewelry-logo-new.jpeg" alt="ZanJewelry Manufacturing logo">
+        <span>ZanJewelry Atelier</span>
+      </a>
+      <button class="icon-button menu-toggle" type="button" aria-label="Open menu">Menu</button>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#shop">Rings</a>
+        <a href="body-care.html#shop">Body Care</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="text-button" type="button" data-open-admin>Admin</button>
+        <a class="whatsapp-header" href="https://wa.me/27703887170" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero body-care-hero" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Body care, gift boxes and incense</p>
+          <h1>Skin Rituals</h1>
+          <p>Moringa and Charcoal body care products, curated gift boxes, facial oil and White Sage incense. Every product goes straight to WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#shop">Shop body care</a>
+            <a class="button secondary" href="index.html#shop">View rings</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" id="prices" aria-label="Product prices">
+        <span>Body wash R85</span>
+        <span>Body lotion R110</span>
+        <span>Soap R45</span>
+        <span>Incense R50</span>
+      </section>
+
+      <section class="section body-care-feature" aria-labelledby="body-care-title">
+        <div class="section-heading">
+          <p class="eyebrow">Separate body-care page</p>
+          <h2 id="body-care-title">Lotions, washes, gift boxes and incense</h2>
+        </div>
+        <div class="price-list">
+          <article><span>Body Wash</span><strong>R85</strong></article>
+          <article><span>Body Lotion</span><strong>R110</strong></article>
+          <article><span>Soap on a Rope</span><strong>R45</strong></article>
+          <article><span>Gift Box</span><strong>R380</strong></article>
+          <article><span>White Sage Incense</span><strong>R50</strong></article>
+        </div>
+      </section>
+
+      <section class="section shop-section" id="shop" aria-labelledby="shop-title">
+        <div class="section-heading split">
+          <div>
+            <p class="eyebrow">Shop body care</p>
+            <h2 id="shop-title">Choose a product, then order on WhatsApp</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Product filters">
+            <button class="chip active" type="button" data-filter="All">All</button>
+            <button class="chip" type="button" data-filter="Lotions, Washes & Soaps">Lotions</button>
+            <button class="chip" type="button" data-filter="Gift Boxes">Gift Boxes</button>
+            <button class="chip" type="button" data-filter="Bag & Extras">Extras</button>
+            <button class="chip" type="button" data-filter="Charcoal Detox">Charcoal</button>
+            <button class="chip" type="button" data-filter="Moringa Bergamot">Moringa</button>
+          </div>
+        </div>
+        <div class="product-grid" data-product-grid></div>
+      </section>
+
+      <section class="section" aria-labelledby="gift-title">
+        <div class="section-heading">
+          <p class="eyebrow">Featured body-care boxes</p>
+          <h2 id="gift-title">Gift-ready product sets</h2>
+        </div>
+        <div class="gift-grid">
+          <article>
+            <img src="assets/images/charcoal-detox-gift-box-new.png" alt="Charcoal detox gift box">
+            <h3>Charcoal Detox Gift Box</h3>
+            <p>Gift box price: <strong>R380</strong>.</p>
+          </article>
+          <article>
+            <img src="assets/images/moringa-range-new.jpeg" alt="Moringa body care range">
+            <h3>Moringa Bergamot Range</h3>
+            <p>Body wash R85, lotion R110 and soap R45.</p>
+          </article>
+          <article>
+            <img src="assets/images/tribal-soul-white-sage-incense.png" alt="Tribal Soul White Sage Incense">
+            <h3>Tribal Soul White Sage Incense</h3>
+            <p>Incense price: <strong>R50</strong>.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Body-care orders and enquiries</h2>
+          <p>Tap a product's WhatsApp button to send the product name, price and link automatically.</p>
+        </div>
+        <form class="contact-form">
+          <label>Name <input type="text" placeholder="Your name"></label>
+          <label>Email <input type="email" placeholder="you@example.com"></label>
+          <label>Message <textarea placeholder="What would you like help with?"></textarea></label>
+          <button class="button primary" type="submit">Send WhatsApp enquiry</button>
+        </form>
+      </section>
+    </main>
+
+    <aside class="drawer" data-admin-drawer aria-hidden="true">
+      <div class="drawer-panel admin-panel">
+        <button class="close-button" type="button" data-close-admin aria-label="Close admin">x</button>
+        <h2>Admin dashboard</h2>
+        <p>Add products, edit prices and track stock. Changes save in this browser.</p>
+        <form data-admin-form class="admin-form">
+          <input type="hidden" name="id">
+          <label>Name <input name="name" required></label>
+          <label>Category <select name="category"><option>Rings</option><option>Lotions, Washes & Soaps</option><option>Gift Boxes</option><option>Bag & Extras</option></select></label>
+          <label>Range <input name="gem" required></label>
+          <label>Price <input name="price" type="number" min="0" placeholder="Leave blank for price on request"></label>
+          <label>Stock <input name="stock" type="number" min="0" required></label>
+          <label>Image file <input name="image" placeholder="assets/images/product.png" required></label>
+          <label>Description <textarea name="description" required></textarea></label>
+          <button class="button primary" type="submit">Save product</button>
+        </form>
+        <div data-admin-products class="admin-products"></div>
+      </div>
+    </aside>
+
+    <div class="modal" data-product-modal aria-hidden="true">
+      <div class="modal-card">
+        <button class="close-button" type="button" data-close-product aria-label="Close product">x</button>
+        <div data-product-detail></div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <strong>ZanJewelry Atelier</strong>
+        <p>Body care, gift boxes, incense and WhatsApp ordering.</p>
+      </div>
+      <div>
+        <a href="index.html#shop">Rings</a>
+        <a href="body-care.html#shop">Body Care</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
