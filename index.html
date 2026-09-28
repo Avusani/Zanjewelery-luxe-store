@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZanJewelry Atelier | Ring Collection</title>
+    <meta name="description" content="A premium South African ring catalogue with WhatsApp product enquiries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body data-page="rings">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="ZanJewelry home">
+        <img src="assets/images/zanjewelry-logo-new.jpeg" alt="ZanJewelry Manufacturing logo">
+        <span>ZanJewelry Atelier</span>
+      </a>
+      <button class="icon-button menu-toggle" type="button" aria-label="Open menu">Menu</button>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html#shop">Rings</a>
+        <a href="body-care.html">Body Care</a>
+        <a href="#size-guide">Ring Size</a>
+        <a href="#story">Our Story</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="text-button" type="button" data-open-admin>Admin</button>
+        <a class="whatsapp-header" href="https://wa.me/27703887170" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Fine jewellery and WhatsApp ordering</p>
+          <h1>ZanJewelry Atelier</h1>
+          <p>A ring-only front page for statement, gemstone and diamond-style pieces. Every enquiry starts on WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#shop">Shop products</a>
+            <a class="button secondary" href="body-care.html">View body care</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Product prices">
+        <span>Ring catalogue</span>
+        <span>WhatsApp enquiries</span>
+        <span>Product link included</span>
+        <span>Price on request</span>
+      </section>
+
+      <section class="section collections" aria-labelledby="collections-title">
+        <div class="section-heading">
+          <p class="eyebrow">Featured collections</p>
+          <h2 id="collections-title">Ring collection</h2>
+        </div>
+        <div class="collection-grid">
+          <a class="collection-panel dark-panel" href="#shop" data-filter-link="Rings">
+            <img src="assets/images/ring-gold-snowflake-close.png" alt="Gold snowflake ring">
+            <span>Rings</span>
+            <strong>Fine jewellery pieces displayed as ring-focused products.</strong>
+          </a>
+          <a class="collection-panel" href="#shop" data-filter-link="Diamond">
+            <img src="assets/images/ring-diamond-statement-close.png" alt="Diamond statement ring">
+            <span>Diamond styles</span>
+            <strong>Close-up ring products with direct WhatsApp enquiry links.</strong>
+          </a>
+        </div>
+      </section>
+
+      <section class="section shop-section" id="shop" aria-labelledby="shop-title">
+        <div class="section-heading split">
+          <div>
+            <p class="eyebrow">Shop</p>
+            <h2 id="shop-title">Choose a ring, then enquire on WhatsApp</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Product filters">
+            <button class="chip active" type="button" data-filter="All">All</button>
+            <button class="chip" type="button" data-filter="Rings">Rings</button>
+            <button class="chip" type="button" data-filter="Diamond">Diamond</button>
+            <button class="chip" type="button" data-filter="Coloured Gemstones">Gemstones</button>
+            <button class="chip" type="button" data-filter="Gold">Gold</button>
+          </div>
+        </div>
+        <div class="product-grid" data-product-grid></div>
+      </section>
+
+      <section class="section shape-section" id="rings" aria-labelledby="rings-title">
+        <div class="section-heading">
+          <p class="eyebrow">Stone styles</p>
+          <h2 id="rings-title">Shop by stone style</h2>
+        </div>
+        <div class="shape-grid">
+          <button type="button" data-gem-filter="Diamond">Diamond</button>
+          <button type="button" data-gem-filter="Amethyst">Amethyst</button>
+          <button type="button" data-gem-filter="Coloured Gemstones">Coloured Gemstones</button>
+          <button type="button" data-gem-filter="Gold">Gold</button>
+          <button type="button" data-gem-filter="Silver / Diamond">Silver</button>
+          <button type="button" data-gem-filter="Rings">All Rings</button>
+        </div>
+      </section>
+
+      <section class="section guide-section" id="size-guide" aria-labelledby="guide-title">
+        <div>
+          <p class="eyebrow">Ring size guide</p>
+          <h2 id="guide-title">Measure before you order</h2>
+          <p>For fine rings, customers should confirm size before ordering or bespoke manufacture. This launch guide gives a simple measuring method until a printable sizer is added.</p>
+        </div>
+        <ol class="steps">
+          <li>Wrap a thin strip of paper around the finger.</li>
+          <li>Mark where the paper overlaps, then measure in millimetres.</li>
+          <li>Match the circumference to a UK/SA ring size before purchase.</li>
+          <li>For wide bands, consider going half a size up.</li>
+        </ol>
+      </section>
+
+      <section class="section reviews-section" aria-labelledby="reviews-title">
+        <div class="section-heading">
+          <p class="eyebrow">Reviews</p>
+          <h2 id="reviews-title">Early customer notes</h2>
+        </div>
+        <div class="reviews-grid">
+          <blockquote><span>5/5 stars</span> "The gift box looked beautiful and felt personal." <cite>Nomsa M.</cite></blockquote>
+          <blockquote><span>5/5 stars</span> "The ring consultation was calm, clear and premium." <cite>Thandi K.</cite></blockquote>
+          <blockquote><span>5/5 stars</span> "Loved the Moringa scent and the packaging." <cite>Lebo R.</cite></blockquote>
+        </div>
+      </section>
+
+      <section class="section story-section" id="story">
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2>Built from a real jewellery supply chain</h2>
+          <p>ZanJewelry Atelier brings together fine rings supplied through family manufacturing knowledge, with each piece available through direct WhatsApp enquiry.</p>
+        </div>
+        <img src="assets/images/zanjewelry-logo-new.jpeg" alt="ZanJewelry logo mark">
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Launch enquiries, orders and consultations</h2>
+          <p>Replace these placeholders with your business email, WhatsApp number and social links once confirmed.</p>
+        </div>
+        <form class="contact-form">
+          <label>Name <input type="text" placeholder="Your name"></label>
+          <label>Email <input type="email" placeholder="you@example.com"></label>
+          <label>Message <textarea placeholder="What would you like help with?"></textarea></label>
+          <button class="button primary" type="submit">Send enquiry</button>
+        </form>
+      </section>
+    </main>
+
+    <aside class="drawer" data-admin-drawer aria-hidden="true">
+      <div class="drawer-panel admin-panel">
+        <button class="close-button" type="button" data-close-admin aria-label="Close admin">x</button>
+        <h2>Admin dashboard</h2>
+        <p>Add products, edit prices and track stock. Changes save in this browser.</p>
+        <form data-admin-form class="admin-form">
+          <input type="hidden" name="id">
+          <label>Name <input name="name" required></label>
+          <label>Category <select name="category"><option>Rings</option><option>Lotions, Washes & Soaps</option><option>Gift Boxes</option><option>Bag & Extras</option></select></label>
+          <label>Range <input name="gem" required></label>
+          <label>Price <input name="price" type="number" min="0" placeholder="Leave blank for price on request"></label>
+          <label>Stock <input name="stock" type="number" min="0" required></label>
+          <label>Image file <input name="image" placeholder="assets/images/product.png" required></label>
+          <label>Description <textarea name="description" required></textarea></label>
+          <button class="button primary" type="submit">Save product</button>
+        </form>
+        <div data-admin-products class="admin-products"></div>
+      </div>
+    </aside>
+
+    <div class="modal" data-product-modal aria-hidden="true">
+      <div class="modal-card">
+        <button class="close-button" type="button" data-close-product aria-label="Close product">x</button>
+        <div data-product-detail></div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <strong>ZanJewelry Atelier</strong>
+        <p>Rings and WhatsApp ordering.</p>
+      </div>
+      <div>
+        <a href="#shop">Shop</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
