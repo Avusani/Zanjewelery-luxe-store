@@ -31,18 +31,23 @@ section[id]{scroll-margin-top:80px}
 .btn{display:inline-block;font:inherit;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 30px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:.2s;text-align:center}
 .btn-dark{background:var(--ink);color:var(--blush)}.btn-dark:hover{background:#000}
 .btn-line{border-color:var(--ink);color:var(--ink);background:transparent}.btn-line:hover{background:var(--ink);color:var(--blush)}
+.btn-light{background:#fff;color:var(--ink)}.btn-light:hover{background:var(--blush)}
+.btn-ghost{border-color:#fff;color:#fff;background:transparent}.btn-ghost:hover{background:#fff;color:var(--ink)}
 .btn-block{display:block;width:100%;padding:11px 14px;font-size:.7rem}
-.hero{background:linear-gradient(180deg,#fff 0%,var(--blush-soft) 90%)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:64px;padding-bottom:64px}
+
+/* ---------- FULL-WIDTH HERO — the bag fills the whole section ---------- */
+.hero{position:relative;min-height:660px;display:flex;align-items:center;overflow:hidden;background:var(--blush)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,15,.74) 0%,rgba(23,18,15,.48) 46%,rgba(23,18,15,.12) 100%)}
+.hero-content{position:relative;z-index:2;width:100%;padding-top:110px;padding-bottom:110px}
 .eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-50)}
-.hero-copy h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.4rem,5.2vw,4.1rem);line-height:1.06;margin:14px 0 18px}
-.hero-copy .lead{color:var(--ink-70);font-size:1.05rem;max-width:46ch}
+.hero .eyebrow{color:var(--blush)}
+.hero-copy h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,5.4vw,4.4rem);line-height:1.05;margin:14px 0 18px;color:#fff;max-width:15ch}
+.hero-copy .lead{color:rgba(255,255,255,.92);font-size:1.06rem;max-width:46ch}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-.hero-note{margin-top:18px;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50)}
-.hero-frame{position:relative;max-width:460px;width:100%;margin:0 auto;background:var(--blush);border:1px solid var(--blush-mid);border-radius:18px;padding:22px;box-shadow:0 18px 44px rgba(23,18,15,.14)}
-.hero-frame img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px}
-.hero-frame figcaption{margin-top:14px;text-align:center;font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-70)}
-.hero-badge{position:absolute;top:-14px;left:-10px;background:var(--ink);color:var(--blush);font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:10px 18px;border-radius:999px;z-index:2}
+.hero-note{margin-top:18px;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.hero-badge{position:absolute;top:24px;left:24px;z-index:3;background:var(--ink);color:var(--blush);font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:10px 18px;border-radius:999px}
+
 .latest{padding:56px 0 8px}
 .latest-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:30px}
 .latest-head h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.2vw,3.2rem);text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
@@ -124,7 +129,6 @@ input:focus,select,textarea:focus{outline:none;border-color:var(--ink);backgroun
   .grid{grid-template-columns:repeat(2,1fr);gap:18px}
   .cat-card{flex-basis:calc((100% - 26px)/2)}
   .band-grid,.story-grid,.contact-grid,.bridal-grid{grid-template-columns:1fr;gap:36px}
-  .hero-grid{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:48px}
   .reviews{grid-template-columns:1fr}
   .menu-btn{display:block;margin-left:auto}
   .header-actions .text-btn{display:none}
@@ -132,6 +136,9 @@ input:focus,select,textarea:focus{outline:none;border-color:var(--ink);backgroun
   .main-nav{display:none;position:absolute;top:76px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:6px 24px 16px;border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(23,18,15,.08)}
   .main-nav.open{display:flex}
   .main-nav a{padding:14px 0;border-bottom:1px solid var(--blush-soft);font-size:1rem}
+  .hero{min-height:560px}
+  .hero-overlay{background:linear-gradient(180deg,rgba(23,18,15,.35) 0%,rgba(23,18,15,.72) 100%)}
+  .hero-content{padding-top:80px;padding-bottom:80px}
 }
 @media(max-width:640px){
   .wrap{padding:0 16px}
@@ -144,7 +151,7 @@ input:focus,select,textarea:focus{outline:none;border-color:var(--ink);backgroun
   .grid{grid-template-columns:repeat(2,1fr);gap:14px}
   .card h3{font-size:.95rem}
   .card .btn{padding:10px 8px;font-size:.64rem;letter-spacing:.06em}
-  .hero-grid{padding-top:32px;padding-bottom:40px;gap:28px}
+  .hero{min-height:78vh}
   .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%}
   .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:4px 16px 10px;scrollbar-width:none}
@@ -188,23 +195,22 @@ input:focus,select,textarea:focus{outline:none;border-color:var(--ink);backgroun
 </header>
 
 <main>
+  <!-- ============ FULL-WIDTH HERO — the bag covers the whole section ============ -->
   <section class="hero" id="home">
-    <div class="wrap hero-grid">
+    <img class="hero-bg" alt="Leather weekender bag" data-img="leather-bag" data-l="Z" onerror="imgStep(this)">
+    <div class="hero-overlay"></div>
+    <span class="hero-badge">Featured</span>
+    <div class="wrap hero-content">
       <div class="hero-copy">
         <p class="eyebrow">ZanJewelry Manufacturing · Est. 2021</p>
         <h1>Rings for your moments. Beauty for your every day.</h1>
         <p class="lead">Discover fine rings — engagement, wedding and everyday gold, diamond and gemstone pieces — plus our new cosmetics line. Enquire or order directly on WhatsApp.</p>
         <div class="hero-actions">
-          <a class="btn btn-dark" href="#shop" onclick="setFilter('Rings')">Shop rings</a>
-          <a class="btn btn-line" href="#shop" onclick="setFilter('Cosmetics')">Shop cosmetics</a>
+          <a class="btn btn-light" href="#shop" onclick="setFilter('Rings')">Shop rings</a>
+          <a class="btn btn-ghost" href="#shop" onclick="setFilter('Cosmetics')">Shop cosmetics</a>
         </div>
         <p class="hero-note">Nationwide delivery · Consultations on WhatsApp</p>
       </div>
-      <figure class="hero-frame">
-        <span class="hero-badge">Featured</span>
-        <img alt="Leather weekender bag" data-img="leather-bag" data-l="Z" onerror="imgStep(this)">
-        <figcaption>Leather Weekender · Handmade in our atelier</figcaption>
-      </figure>
     </div>
   </section>
 
