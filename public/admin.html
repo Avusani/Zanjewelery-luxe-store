@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4DCD2">
+<title>ZanJewelry | Admin Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--cream:#FFFDFA;--line:#eee2dc;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Inter",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;min-height:100vh}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.topbar .wrap{display:flex;align-items:center;gap:14px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:1.2rem;text-decoration:none;color:var(--ink)}
+.brand img{width:40px;height:40px;border-radius:8px;object-fit:cover}
+.spacer{flex:1}
+.topbar a{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-70)}
+.topbar a:hover{color:var(--ink)}
+h1{font-family:var(--serif);font-size:2rem;margin:10px 0 4px}
+.sub{color:var(--ink-70);font-size:.95rem;margin-bottom:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 10px 30px rgba(23,18,15,.06)}
+.login-wrap{max-width:420px;margin:60px auto 0}
+.login-wrap h1{text-align:center}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:14px;font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-70)}
+input,select,textarea{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--cream);width:100%}
+input:focus,select,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.btn{display:inline-block;font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;text-align:center}
+.btn-dark{background:var(--ink);color:var(--blush)}.btn-dark:hover{background:#000}
+.btn-ghost{border-color:var(--line);color:var(--ink-70);background:#fff}
+.btn-block{display:block;width:100%;margin-top:18px}
+.error{color:#b3261e;font-size:.88rem;margin-top:12px;min-height:1.2em}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:1.6rem}
+.stat span{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50)}
+.admin-grid{display:grid;grid-template-columns:420px 1fr;gap:22px;align-items:start}
+.note{display:none;margin-top:12px;font-size:.85rem;font-weight:600;color:#1c7c39}
+.note.show{display:block}
+.preview{margin-top:10px;border:1px dashed var(--line);border-radius:10px;background:var(--cream);aspect-ratio:1/1;max-width:180px;object-fit:cover}
+.plist{display:flex;flex-direction:column;gap:10px}
+.pitem{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.pitem img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--blush-soft);flex-shrink:0}
+.pitem .info{flex:1;min-width:0}
+.pitem strong{display:block;font-size:.95rem}
+.pitem small{color:var(--ink-50);font-size:.78rem}
+.row-actions{display:flex;gap:8px;flex-shrink:0}
+.row-actions button{font:inherit;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;border:1.5px solid var(--line);background:var(--blush-soft);border-radius:999px;padding:8px 14px;cursor:pointer}
+.row-actions button:hover{background:var(--ink);color:var(--blush)}
+@media(max-width:900px){.admin-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stat:first-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/zanjewelry-logo-new.jpeg" alt="" onerror="this.style.display='none'">ZanJewelry Admin</a>
+    <span class="spacer"></span>
+    <a href="/" target="_blank" rel="noopener">View site ↗</a>
+    <a href="#" id="logoutBtn" hidden>Log out</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Login -->
+  <section id="loginView">
+    <div class="card login-wrap">
+      <h1>Admin Portal</h1>
+      <p class="sub" style="text-align:center">Enter your admin password to manage the shop.</p>
+      <form id="loginForm">
+        <label class="field">Password
+          <input type="password" id="password" required placeholder="Admin password" autocomplete="current-password">
+        </label>
+        <button class="btn btn-dark btn-block" type="submit">Log in</button>
+        <p class="error" id="loginError"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashView" hidden>
+    <h1>Post to your shop</h1>
+    <p class="sub">Anything you post here appears on the public website immediately — for every visitor.</p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="admin-grid">
+      <form class="card" id="productForm">
+        <input type="hidden" name="id" id="fId">
+        <label class="field">Product name <input name="name" required placeholder="e.g. Halo Cluster Engagement Ring"></label>
+        <label class="field">Type
+          <select name="type">
+            <option value="ring">Ring</option>
+            <option value="engagement">Engagement Ring</option>
+            <option value="wedding">Wedding Ring</option>
+            <option value="cosmetic">Cosmetic</option>
+          </select>
+        </label>
+        <label class="field">Save under (metal / stone)
+          <select name="material">
+            <option value="diamond">Diamond</option>
+            <option value="gold">Gold</option>
+            <option value="gemstone">Gemstone</option>
+            <option value="silver">Silver</option>
+            <option value="rose-gold">Rose Gold</option>
+            <option value="platinum">Platinum</option>
+            <option value="none">None (cosmetics)</option>
+          </select>
+        </label>
+        <label class="field">Price in Rand <input name="price" type="number" min="0" step="0.01" placeholder="Leave blank = price on request"></label>
+        <label class="field">Stock <input name="stock" type="number" min="0" value="1" required></label>
+        <label class="field">Photo (upload from phone or computer) <input type="file" name="imageFile" id="fFile" accept="image/*"></label>
+        <label class="field">…or image file name already on the site <input name="image" id="fImage" placeholder="e.g. cluster-1.jpg"></label>
+        <img class="preview" id="preview" alt="" hidden>
+        <label class="field">Description <textarea name="description" rows="3" required></textarea></label>
+        <button class="btn btn-dark btn-block" type="submit" id="saveBtn">Post to website</button>
+        <button class="btn btn-ghost btn-block" type="button" id="cancelEdit" hidden>Cancel edit</button>
+        <p class="note" id="note">✓ Saved — it's live on the website now.</p>
+      </form>
+
+      <div class="card">
+        <h2 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:14px">All products</h2>
+        <div class="plist" id="plist"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const TYPE={ring:"Ring",engagement:"Engagement",wedding:"Wedding",cosmetic:"Cosmetic"};
+const MAT={silver:"Silver",gold:"Gold","rose-gold":"Rose Gold",platinum:"Platinum",gemstone:"Gemstone",diamond:"Diamond",none:"—"};
+const money=p=>(p==null||p==="")?"Price on request":"R "+Number(p).toLocaleString("en-ZA");
+let token=localStorage.getItem("zmp-token")||"";
+let editingId=null;
+
+async function api(path,opts={}){
+  const headers={...(opts.headers||{})};
+  if(token)headers.Authorization="Bearer "+token;
+  if(!(opts.body instanceof FormData))headers["Content-Type"]="application/json";
+  const res=await fetch(path,{...opts,headers});
+  if(res.status===401){showLogin();throw new Error("Please log in");}
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw new Error(data.error||"Request failed");
+  return data;
+}
+function showLogin(){$("#loginView").hidden=false;$("#dashView").hidden=true;$("#logoutBtn").hidden=true;}
+function showDash(){$("#loginView").hidden=true;$("#dashView").hidden=false;$("#logoutBtn").hidden=false;load();}
+
+ $("#loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();$("#loginError").textContent="";
+  try{
+    const res=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:$("#password").value})});
+    const j=await res.json();
+    if(!res.ok)throw new Error(j.error||"Login failed");
+    token=j.token;localStorage.setItem("zmp-token",token);showDash();
+  }catch(ex){$("#loginError").textContent=ex.message;}
+});
+
+ $("#logoutBtn").addEventListener("click",async e=>{
+  e.preventDefault();
+  try{await api("/api/logout",{method:"POST"});}catch(_){}
+  token="";localStorage.removeItem("zmp-token");showLogin();
+});
+
+async function load(){
+  try{
+    const list=await api("/api/products");
+    const c=t=>list.filter(p=>p.type===t).length;
+    $("#stats").innerHTML=`
+      <div class="stat"><b>${list.length}</b><span>Total</span></div>
+      <div class="stat"><b>${c("ring")}</b><span>Rings</span></div>
+      <div class="stat"><b>${c("engagement")}</b><span>Engagement</span></div>
+      <div class="stat"><b>${c("wedding")}</b><span>Wedding</span></div>
+      <div class="stat"><b>${c("cosmetic")}</b><span>Cosmetics</span></div>`;
+    $("#plist").innerHTML=list.map(p=>`
+      <div class="pitem">
+        <img src="${esc(p.image)}" alt="" onerror="this.style.visibility='hidden'">
+        <div class="info"><strong>${esc(p.name)}</strong>
+          <small>${TYPE[p.type]||""} · ${MAT[p.material]||"—"} · ${p.stock} in stock · ${money(p.price)}</small></div>
+        <div class="row-actions">
+          <button data-edit="${p.id}">Edit</button>
+          <button data-del="${p.id}">Delete</button>
+        </div>
+      </div>`).join("")||'<p class="sub">No products yet — post your first one.</p>';
+  }catch(e){}
+}
+
+ $("#plist").addEventListener("click",e=>{
+  const edit=e.target.dataset.edit,del=e.target.dataset.del;
+  if(edit){
+    const p=window._products?.find(x=>x.id==edit);
+    if(!p)return;
+    editingId=p.id;
+    $("#fId").value=p.id;$("#productForm").name.value=p.name;
+    $("#productForm").type.value=p.type;$("#productForm").material.value=p.material;
+    $("#productForm").price.value=p.price??"";$("#productForm").stock.value=p.stock;
+    $("#fImage").value=p.image||"";$("#productForm").description.value=p.description;
+    if(p.image){$("#preview").src=p.image;$("#preview").hidden=false;}
+    $("#saveBtn").textContent="Update product";$("#cancelEdit").hidden=false;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  if(del){
+    if(!confirm("Delete this product from the website?"))return;
+    api("/api/products/"+del,{method:"DELETE"}).then(()=>{resetForm();load();}).catch(err=>alert(err.message));
+  }
+});
+
+ $("#fFile").addEventListener("change",e=>{
+  const f=e.target.files[0];
+  if(f){$("#preview").src=URL.createObjectURL(f);$("#preview").hidden=false;}
+});
+
+function resetForm(){
+  editingId=null;$("#productForm").reset();$("#fId").value="";
+  $("#preview").hidden=true;$("#saveBtn").textContent="Post to website";$("#cancelEdit").hidden=true;
+}
+ $("#cancelEdit").addEventListener("click",resetForm);
+
+ $("#productForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  try{
+    if(editingId)await api("/api/products/"+editingId,{method:"PUT",body:fd});
+    else await api("/api/products",{method:"POST",body:fd});
+    resetForm();load();
+    const n=$("#note");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);
+  }catch(err){alert(err.message);}
+});
+
+/* keep latest list for edit buttons */
+const _load=load;load=async function(){await _load();try{window._products=await api("/api/products");}catch(_){}};
+token?showDash():showLogin();
+</script>
+</body>
+</html>
