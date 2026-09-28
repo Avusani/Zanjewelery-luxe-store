@@ -1,2 +1,7 @@
 node_modules/
-data/
+.env
+data/products.json
+public/assets/images/uploads/*
+!public/assets/images/uploads/.gitkeep
+*.log
+.DS_Store
