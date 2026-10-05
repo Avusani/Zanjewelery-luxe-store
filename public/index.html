@@ -2,490 +2,303 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#F4DCD2">
-<title>ZanJewelry Atelier | Rings & Cosmetics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZanJewelry Atelier | Fine Jewellery & Cosmetics</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
-:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--blush-mid:#EAC8BB;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--cream:#FFFDFA;--tile:#F7F3F0;--line:#eee2dc;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Inter",Arial,sans-serif}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--tile:#F7F3F0;--line:#eee2dc;--serif:"Cormorant Garamond",serif}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-section[id]{scroll-margin-top:80px}
-.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
-.site-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
-.header-in{display:flex;align-items:center;gap:28px;height:76px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{width:48px;height:48px;object-fit:cover;border-radius:8px}
-.brand-name{font-family:var(--serif);font-size:1.4rem;font-weight:700;line-height:1.1}
-.brand-name small{display:block;font-family:var(--sans);font-size:.55rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-50)}
-.main-nav{display:flex;gap:24px;margin:0 auto}
-.main-nav a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--ink);padding:6px 0;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;gap:22px;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand img{width:42px;height:42px;border-radius:8px;object-fit:cover}
+.brand-name{font-family:var(--serif);font-size:1.3rem;font-weight:700;line-height:1.05}
+.brand-name small{display:block;font-size:.52rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-50)}
+.main-nav{display:flex;gap:18px;margin:0 auto}
+.main-nav a{text-decoration:none;font-size:.88rem;font-weight:500;color:var(--ink);padding:4px 0;border-bottom:2px solid transparent;white-space:nowrap}
 .main-nav a:hover{border-color:var(--ink)}
-.header-actions{display:flex;align-items:center;gap:8px}
-.text-btn{background:none;border:none;font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--ink-70);padding:8px 10px;text-decoration:none}
-.wa-pill{display:inline-block;text-decoration:none;font-size:.82rem;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:9px 20px;transition:.2s}
+.wa-pill{display:inline-block;text-decoration:none;font-size:.8rem;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:9px 20px}
 .wa-pill:hover{background:var(--ink);color:var(--blush)}
-.menu-btn{display:none;background:none;border:1.5px solid var(--ink);border-radius:999px;padding:9px 18px;font:inherit;font-size:.78rem;font-weight:700;cursor:pointer}
-.btn{display:inline-block;font:inherit;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 30px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:.2s;text-align:center}
-.btn-dark{background:var(--ink);color:var(--blush)}.btn-dark:hover{background:#000}
-.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}.btn-line:hover{background:var(--ink);color:var(--blush)}
-.btn-light{background:#fff;color:var(--ink)}.btn-light:hover{background:var(--blush)}
-.btn-ghost{border-color:#fff;color:#fff;background:transparent}.btn-ghost:hover{background:#fff;color:var(--ink)}
-.btn-block{display:block;width:100%;padding:11px 14px;font-size:.7rem}
-
-/* ---------- FULL-WIDTH HERO — the bag fills the whole section ---------- */
-.hero{position:relative;min-height:660px;display:flex;align-items:center;overflow:hidden;background:var(--blush)}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,15,.74) 0%,rgba(23,18,15,.48) 46%,rgba(23,18,15,.12) 100%)}
-.hero-content{position:relative;z-index:2;width:100%;padding-top:110px;padding-bottom:110px}
-.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-50)}
-.hero .eyebrow{color:var(--blush)}
-.hero-copy h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,5.4vw,4.4rem);line-height:1.05;margin:14px 0 18px;color:#fff;max-width:15ch}
-.hero-copy .lead{color:rgba(255,255,255,.92);font-size:1.06rem;max-width:46ch}
+.hero{position:relative;min-height:520px;display:flex;align-items:center;background:linear-gradient(120deg,#17120F,#3a2c24 55%,#8a6a58);overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,15,.78),rgba(23,18,15,.22))}
+.hero-content{position:relative;z-index:2;padding:90px 0}
+.eyebrow{font-size:.66rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--blush)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.3rem,5vw,4rem);line-height:1.06;margin:14px 0 16px;color:#fff;max-width:18ch}
+.hero p{color:rgba(255,255,255,.9);max-width:52ch}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-.hero-note{margin-top:18px;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-.hero-badge{position:absolute;top:24px;left:24px;z-index:3;background:var(--ink);color:var(--blush);font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:10px 18px;border-radius:999px}
-
-.latest{padding:56px 0 8px}
-.latest-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:30px}
-.latest-head h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.2vw,3.2rem);text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
-.latest-head .sub{margin-top:10px;color:var(--ink-70);font-size:1rem}
-.latest-link{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:4px;white-space:nowrap}
-.cat-wrap{position:relative}
-.cat-track{display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.cat-track::-webkit-scrollbar{display:none}
-.cat-card{flex:0 0 calc((100% - 52px)/3);scroll-snap-align:start;cursor:pointer;text-decoration:none;color:inherit}
-.cat-img{aspect-ratio:1/1.06;background:var(--tile);border-radius:4px;overflow:hidden}
-.cat-img img{width:100%;height:100%;object-fit:cover}
-.cat-card h3{font-weight:500;font-size:1.2rem;margin-top:14px}
-.dash{width:26px;height:2px;background:var(--ink);margin:9px 0}
-.cat-card p{color:var(--ink-70);font-size:.92rem}
-.cat-btn{position:absolute;top:36%;width:48px;height:48px;border-radius:50%;border:none;background:#fff;box-shadow:0 4px 18px rgba(23,18,15,.18);font-size:1.4rem;cursor:pointer;z-index:5}
-.cat-btn.prev{left:-12px}.cat-btn.next{right:-12px}
-.bridal{padding:72px 0 8px}
-.bridal h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.7rem);text-transform:uppercase;letter-spacing:.03em;margin:10px 0 8px}
-.bridal .intro{color:var(--ink-70);max-width:64ch;margin-bottom:26px}
-.bridal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-.bridal-panel{position:relative;min-height:380px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;border:none;padding:0;text-align:left;background:var(--tile)}
-.bridal-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.bridal-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,15,0) 30%,rgba(23,18,15,.76))}
-.bridal-txt{position:relative;z-index:1;color:#fff;padding:28px}
-.bridal-txt .eyebrow{color:var(--blush)}
-.bridal-txt h3{font-family:var(--serif);font-size:2rem;margin:6px 0 8px;line-height:1.1}
-.bridal-txt p{font-size:.93rem;opacity:.85;max-width:40ch}
-.bridal-cta{display:inline-block;margin-top:12px;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-bottom:2px solid #fff;padding-bottom:4px}
-.bridal-shop{margin-top:44px}
-.bridal-shop[hidden]{display:none}
-.hint{color:var(--ink-50);font-size:.9rem;margin-bottom:12px}
-.section{padding:72px 0}
-.shop-head{margin-bottom:22px}
-.shop-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3vw,2.4rem);text-transform:uppercase;letter-spacing:.03em}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.chip{font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:11px 20px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-70);cursor:pointer;transition:.2s;white-space:nowrap}
+.btn{display:inline-block;font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;text-align:center}
+.btn-dark{background:var(--ink);color:var(--blush)}.btn-dark:hover{background:#000}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-ghost{border-color:#fff;color:#fff}.btn-ghost:hover{background:#fff;color:var(--ink)}
+.section{padding:56px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.6rem);text-transform:uppercase;letter-spacing:.03em}
+.crumbs{font-size:.78rem;color:var(--ink-50);margin-bottom:10px}
+.crumbs a{color:var(--ink-70);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.page-banner{position:relative;min-height:230px;border-radius:10px;overflow:hidden;display:flex;align-items:flex-end;background:linear-gradient(140deg,var(--blush-soft),var(--blush));margin-bottom:26px}
+.page-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.page-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,15,.05),rgba(23,18,15,.62))}
+.pb-txt{position:relative;z-index:1;color:#fff;padding:26px}
+.pb-txt h1{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.05}
+.pb-txt p{opacity:.88;max-width:60ch}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 26px}
+.chip{font:inherit;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:11px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-70);cursor:pointer;text-decoration:none;display:inline-block}
 .chip.active{background:var(--ink);border-color:var(--ink);color:var(--blush)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-.card{cursor:pointer}
-.card-img{aspect-ratio:1/1;background:var(--tile);border-radius:4px;overflow:hidden}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.card{cursor:pointer;display:flex;flex-direction:column;position:relative}
+.card-img{aspect-ratio:1/1;background:var(--tile);border-radius:6px;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card h3{font-weight:500;font-size:1.05rem;margin-top:12px}
-.card .range{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);margin-top:4px}
-.card .price{font-size:.9rem;font-weight:600;color:var(--ink-70);margin:4px 0 10px}
-.band{background:var(--blush-soft)}
-.band-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-h2.title{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.2vw,2.6rem);margin:10px 0 14px}
-.muted{color:var(--ink-70)}
-.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:12px}
-.steps li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px 16px 60px;position:relative;font-size:.94rem}
-.steps li::before{content:counter(s);counter-increment:s;position:absolute;left:16px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:var(--blush);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.05rem}
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.reviews blockquote{background:var(--tile);border-radius:4px;padding:26px;font-size:.95rem;color:var(--ink-70)}
-.reviews blockquote span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--blush-mid);margin-bottom:12px}
-.reviews cite{display:block;margin-top:14px;font-style:normal;font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--ink)}
-.story-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.story-grid img{max-width:340px;margin:0 auto;border-radius:8px;box-shadow:0 18px 44px rgba(23,18,15,.14)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-form.panel{display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:0 10px 30px rgba(23,18,15,.06)}
-form.panel label{display:flex;flex-direction:column;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70)}
-input,select,textarea{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink);resize:vertical}
-input:focus,select,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
-.site-footer{background:var(--ink);color:var(--blush);padding:48px 0}
-.footer-grid{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
-.site-footer strong{font-family:var(--serif);font-size:1.35rem}
-.site-footer p{color:rgba(249,234,227,.65);font-size:.88rem;margin-top:6px;max-width:36ch}
-.site-footer a{display:block;color:var(--blush);text-decoration:none;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin:8px 0}
-.modal{position:fixed;inset:0;z-index:110;display:none;place-items:center;padding:18px}
+.card h3{font-weight:500;font-size:1.02rem;margin-top:12px}
+.range{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);margin-top:5px}
+.price{font-size:.9rem;font-weight:600;color:var(--ink-70);margin:4px 0 10px}
+.btn-block{display:block;width:100%;padding:11px 10px;font-size:.64rem;margin-top:auto}
+.flag{position:absolute;top:10px;left:10px;z-index:2;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--ink);color:var(--blush)}
+.flag.sold{background:#7a2c26}.flag.oos{background:#8a7a52}
+.strips{display:flex;gap:20px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.strips::-webkit-scrollbar{display:none}
+.strips .card{flex:0 0 250px}
+.cat-groups{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.group h3{font-family:var(--serif);font-size:1.5rem;margin-bottom:14px}
+.gcards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cat-card{flex:0 0 250px;text-decoration:none;color:inherit}
+.cat-img{aspect-ratio:1/1.05;background:var(--tile);border-radius:6px;overflow:hidden}
+.cat-img img{width:100%;height:100%;object-fit:cover}
+.cat-card h3{font-weight:500;font-size:1.1rem;margin-top:12px}
+.dash{width:26px;height:2px;background:var(--ink);margin:8px 0}
+.cat-card p{color:var(--ink-70);font-size:.88rem}
+.empty{color:var(--ink-50);grid-column:1/-1;padding:30px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--tile)}
+form.panel label{display:flex;flex-direction:column;gap:6px;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70)}
+input,textarea{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+input:focus,textarea:focus{outline:none;border-color:var(--ink)}
+.site-footer{background:var(--ink);color:var(--blush);padding:40px 0;margin-top:40px}
+.site-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.site-footer strong{font-family:var(--serif);font-size:1.3rem}
+.site-footer a{color:var(--blush);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;opacity:.85}
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(23,18,15,.55)}
 .modal.open{display:grid}
-.modal::before{content:"";position:absolute;inset:0;background:rgba(23,18,15,.55)}
-.modal-card{position:relative;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;background:var(--cream);border-radius:14px;padding:30px;box-shadow:0 24px 60px rgba(23,18,15,.3)}
-.close-x{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font:inherit;font-weight:700;cursor:pointer;z-index:2}
-.detail{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
-.detail img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--tile)}
-.detail h2{font-family:var(--serif);font-size:1.9rem;margin:6px 0}
-.detail .price{font-weight:600;color:var(--ink-70);margin-bottom:12px}
-.wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:70;display:none;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.82rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-@media(max-width:1020px){
-  .grid{grid-template-columns:repeat(2,1fr);gap:18px}
-  .cat-card{flex-basis:calc((100% - 26px)/2)}
-  .band-grid,.story-grid,.contact-grid,.bridal-grid{grid-template-columns:1fr;gap:36px}
-  .reviews{grid-template-columns:1fr}
-  .menu-btn{display:block;margin-left:auto}
-  .header-actions .text-btn{display:none}
-  .header-in{gap:14px}
-  .main-nav{display:none;position:absolute;top:76px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:6px 24px 16px;border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(23,18,15,.08)}
-  .main-nav.open{display:flex}
-  .main-nav a{padding:14px 0;border-bottom:1px solid var(--blush-soft);font-size:1rem}
-  .hero{min-height:560px}
-  .hero-overlay{background:linear-gradient(180deg,rgba(23,18,15,.35) 0%,rgba(23,18,15,.72) 100%)}
-  .hero-content{padding-top:80px;padding-bottom:80px}
-}
-@media(max-width:640px){
-  .wrap{padding:0 16px}
-  .header-in{height:64px}
-  .brand img{width:40px;height:40px}
-  .brand-name{font-size:1.12rem}
-  .brand-name small{letter-spacing:.3em;font-size:.5rem}
-  .main-nav{top:64px}
-  .wa-pill{padding:8px 14px;font-size:.74rem}
-  .grid{grid-template-columns:repeat(2,1fr);gap:14px}
-  .card h3{font-size:.95rem}
-  .card .btn{padding:10px 8px;font-size:.64rem;letter-spacing:.06em}
-  .hero{min-height:78vh}
-  .hero-actions{flex-direction:column}
-  .hero-actions .btn{width:100%}
-  .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:4px 16px 10px;scrollbar-width:none}
-  .chips::-webkit-scrollbar{display:none}
-  .cat-card{flex-basis:74%}
-  .cat-btn{display:none}
-  .bridal-panel{min-height:300px}
-  .bridal-txt{padding:20px}
-  .modal-card{padding:20px;border-radius:12px}
-  .detail{grid-template-columns:1fr}
-  .wa-float{display:block}
-  .section{padding:56px 0}
-  .latest{padding:40px 0 4px}
-  form.panel{padding:22px}
-}
+.modal-card{position:relative;width:100%;max-width:780px;max-height:88vh;overflow-y:auto;background:var(--tile);border-radius:14px;padding:28px}
+.close-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700;cursor:pointer;z-index:2}
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.detail .main-img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--tile);width:100%}
+.thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.thumbs img{width:58px;height:58px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
+.thumbs img.on{border-color:var(--ink)}
+.detail h2{font-family:var(--serif);font-size:1.8rem;margin:6px 0}
+.detail .price{font-weight:600;margin-bottom:12px}
+.muted{color:var(--ink-70)}
+.ref{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50)}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:70;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.cat-groups,.contact-grid,.detail{grid-template-columns:1fr}.gcards{grid-template-columns:1fr 1fr}.main-nav{display:none}}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap header-in">
-    <a class="brand" href="#home">
-      <img alt="ZanJewelry logo" data-img="zanjewelry-logo-new" data-l="Z" onerror="imgStep(this)">
-      <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
-    </a>
-    <button class="menu-btn" onclick="document.querySelector('.main-nav').classList.toggle('open')">Menu</button>
-    <nav class="main-nav">
-      <a href="#shop">Rings</a>
-      <a href="#bridal">Engagement</a>
-      <a href="#bridal">Wedding</a>
-      <a href="#shop" onclick="setFilter('Cosmetics')">Cosmetics</a>
-      <a href="#size-guide">Ring Size</a>
-      <a href="#story">Our Story</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <a class="text-btn" href="/admin.html">Admin</a>
-      <a class="wa-pill" id="waTop" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-  </div>
-</header>
+<header class="site-header"><div class="wrap header-in">
+  <a class="brand" href="#/">
+    <img id="brandLogo" alt="" hidden>
+    <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
+  </a>
+  <nav class="main-nav">
+    <a href="#/shop/jewellery">Jewellery</a>
+    <a href="#/shop/rings">Rings</a>
+    <a href="#/shop/engagement">Engagement</a>
+    <a href="#/shop/wedding">Wedding</a>
+    <a href="#/shop/cosmetics">Cosmetics</a>
+    <a href="#/" onclick="setTimeout(()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}),60)">Contact</a>
+  </nav>
+  <a class="wa-pill" data-wa="Hi ZanJewelry! I'd like to enquire." target="_blank" rel="noopener">WhatsApp</a>
+</div></header>
 
-<main>
-  <!-- ============ FULL-WIDTH HERO — the bag covers the whole section ============ -->
-  <section class="hero" id="home">
-    <img class="hero-bg" alt="Leather weekender bag" data-img="leather-bag" data-l="Z" onerror="imgStep(this)">
-    <div class="hero-overlay"></div>
-    <span class="hero-badge">Featured</span>
-    <div class="wrap hero-content">
-      <div class="hero-copy">
-        <p class="eyebrow">ZanJewelry Manufacturing · Est. 2021</p>
-        <h1>Rings for your moments. Beauty for your every day.</h1>
-        <p class="lead">Discover fine rings — engagement, wedding and everyday gold, diamond and gemstone pieces — plus our new cosmetics line. Enquire or order directly on WhatsApp.</p>
-        <div class="hero-actions">
-          <a class="btn btn-light" href="#shop" onclick="setFilter('Rings')">Shop rings</a>
-          <a class="btn btn-ghost" href="#shop" onclick="setFilter('Cosmetics')">Shop cosmetics</a>
-        </div>
-        <p class="hero-note">Nationwide delivery · Consultations on WhatsApp</p>
-      </div>
-    </div>
-  </section>
+<div id="app"></div>
 
-  <section class="latest wrap">
-    <div class="latest-head">
-      <div>
-        <h1>The Latest in Rings</h1>
-        <p class="sub">Browse by style, then enquire on WhatsApp.</p>
-      </div>
-      <a class="latest-link" id="waLatest" target="_blank" rel="noopener">Order on WhatsApp ↗</a>
-    </div>
-    <div class="cat-wrap">
-      <button class="cat-btn prev" aria-label="Scroll back">‹</button>
-      <div class="cat-track" id="catTrack">
-        <a class="cat-card" href="#shop" onclick="setFilter('Rings')">
-          <div class="cat-img"><img alt="Rings" data-img="cluster-1" data-l="R" onerror="imgStep(this)"></div>
-          <h3>Rings</h3><div class="dash"></div><p>You can never have enough — fine pieces made to order.</p>
-        </a>
-        <a class="cat-card" href="#shop" onclick="setFilter('Diamond')">
-          <div class="cat-img"><img alt="Diamond rings" data-img="diamond-1" data-l="D" onerror="imgStep(this)"></div>
-          <h3>Diamond</h3><div class="dash"></div><p>Close-set stones that catch the light beautifully.</p>
-        </a>
-        <a class="cat-card" href="#shop" onclick="setFilter('Gemstones')">
-          <div class="cat-img"><img alt="Gemstone rings" data-img="gemstone-1" data-l="G" onerror="imgStep(this)"></div>
-          <h3>Gemstones</h3><div class="dash"></div><p>Amethyst, ruby, sapphire and more on wearable bands.</p>
-        </a>
-        <a class="cat-card" href="#shop" onclick="setFilter('Gold')">
-          <div class="cat-img"><img alt="Gold rings" data-img="gold-1" data-l="Au" onerror="imgStep(this)"></div>
-          <h3>Gold</h3><div class="dash"></div><p>Everyday gold essentials, perfect for stacking.</p>
-        </a>
-      </div>
-      <button class="cat-btn next" aria-label="Scroll forward">›</button>
-    </div>
-  </section>
+<footer class="site-footer"><div class="wrap">
+  <div><strong>ZanJewelry Atelier</strong><p style="opacity:.65;font-size:.86rem">Fine jewellery and cosmetics · Est. 2021</p></div>
+  <a href="/admin">Admin Portal</a>
+</div></footer>
 
-  <section class="bridal wrap" id="bridal">
-    <p class="eyebrow">Shop by occasion</p>
-    <h2>Engagement & Wedding</h2>
-    <p class="intro">Choose your occasion, then pick your metal or stone — silver, gold, rose gold, platinum, gemstone or diamond.</p>
-    <div class="bridal-grid">
-      <button class="bridal-panel" data-bridal="engagement">
-        <img alt="Engagement rings" data-img="cluster-1" data-l="E" onerror="imgStep(this)">
-        <span class="bridal-txt">
-          <span class="eyebrow" style="display:block">Say yes</span>
-          <h3 style="display:block">Engagement Rings</h3>
-          <p style="display:block">Solitaires, halos and clusters — choose your style.</p>
-          <span class="bridal-cta">Choose your style →</span>
-        </span>
-      </button>
-      <button class="bridal-panel" data-bridal="wedding">
-        <img alt="Wedding rings" data-img="gold-1" data-l="W" onerror="imgStep(this)">
-        <span class="bridal-txt">
-          <span class="eyebrow" style="display:block">Forever bands</span>
-          <h3 style="display:block">Wedding Rings</h3>
-          <p style="display:block">Classic bands, eternity styles and matching sets.</p>
-          <span class="bridal-cta">Choose your style →</span>
-        </span>
-      </button>
-    </div>
-    <div class="bridal-shop" id="bridalShop" hidden>
-      <h2 class="title" id="bridalTitle">Engagement Rings</h2>
-      <p class="hint">Now choose your metal or stone style:</p>
-      <div class="chips" id="bridalMaterials" style="margin-bottom:24px">
-        <button class="chip active" data-material="all">All</button>
-        <button class="chip" data-material="silver">Silver</button>
-        <button class="chip" data-material="gold">Gold</button>
-        <button class="chip" data-material="rose-gold">Rose Gold</button>
-        <button class="chip" data-material="platinum">Platinum</button>
-        <button class="chip" data-material="gemstone">Gemstone</button>
-        <button class="chip" data-material="diamond">Diamond</button>
-      </div>
-      <div class="grid" id="bridalGrid"></div>
-    </div>
-  </section>
+<a class="wa-float" data-wa="Hi ZanJewelry! I'd like to enquire." target="_blank" rel="noopener">WhatsApp us</a>
 
-  <section class="section wrap" id="shop">
-    <div class="shop-head">
-      <h2>Shop the Collection</h2>
-      <div class="chips">
-        <button class="chip active" data-filter="All">All</button>
-        <button class="chip" data-filter="Rings">Rings</button>
-        <button class="chip" data-filter="Diamond">Diamond</button>
-        <button class="chip" data-filter="Cosmetics">Cosmetics</button>
-        <button class="chip" data-filter="Gemstones">Gemstones</button>
-        <button class="chip" data-filter="Gold">Gold</button>
-      </div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-  </section>
-
-  <section class="section band" id="size-guide" style="padding:0">
-    <div class="wrap band-grid" style="padding-top:64px;padding-bottom:64px">
-      <div>
-        <p class="eyebrow">Ring size guide</p>
-        <h2 class="title">Measure before you order</h2>
-        <p class="muted">Confirm your size before ordering or bespoke manufacture.</p>
-      </div>
-      <ol class="steps">
-        <li>Wrap a thin strip of paper around the finger.</li>
-        <li>Mark where it overlaps, then measure in millimetres.</li>
-        <li>Match the circumference to a UK/SA ring size.</li>
-        <li>For wide bands, go half a size up.</li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section wrap" style="padding-top:0" id="story-adjacent">
-    <p class="eyebrow">Reviews</p>
-    <h2 class="title">Early customer notes</h2>
-    <div class="reviews">
-      <blockquote><span>★★★★★</span>"The engagement ring consultation was calm, clear and premium."<cite>Thandi K.</cite></blockquote>
-      <blockquote><span>★★★★★</span>"Our wedding bands fit perfectly — thank you!"<cite>Nomsa & Sipho</cite></blockquote>
-      <blockquote><span>★★★★★</span>"The lip gloss set is now my everyday favourite."<cite>Lebo R.</cite></blockquote>
-    </div>
-  </section>
-
-  <section class="section band" id="story" style="padding:0">
-    <style>
-      .story-text p{color:var(--ink-70);margin:0 0 16px;max-width:62ch}
-      .story-quote{font-family:var(--serif)!important;font-size:1.45rem!important;color:var(--ink)!important;font-weight:600;line-height:1.3;border-left:3px solid var(--blush-mid);padding-left:18px;margin:26px 0 16px!important}
-      .story-sign{font-size:.72rem!important;font-weight:700!important;letter-spacing:.18em!important;text-transform:uppercase;color:var(--ink-50)!important;margin-top:26px!important}
-      .story-sign strong{display:block;color:var(--ink);letter-spacing:.08em;font-size:.8rem;margin-top:4px}
-      @media(max-width:640px){.story-quote{font-size:1.2rem!important}}
-    </style>
-    <div class="wrap" style="padding-top:64px;padding-bottom:64px">
-      <div class="story-grid">
-        <div class="story-text">
-          <p class="eyebrow" style="margin-bottom:10px">Our Story</p>
-          <h2 class="title" style="margin-top:0">From Manufacturing to Fine Jewellery</h2>
-          <p>ZanJewelry Atelier was born from a real jewellery manufacturing and supply-chain foundation, built through years of family knowledge, trusted relationships, and a passion for beautifully crafted jewellery.</p>
-          <p>Since 2021, ZanJewelry Manufacturing has been at the heart of our journey — giving us a deeper understanding of jewellery beyond the finished piece. From sourcing and manufacturing to selecting designs that feel timeless, every detail is approached with care.</p>
-          <p>ZanJewelry Atelier brings that experience directly to you through a carefully curated collection of elegant rings and fine jewellery.</p>
-          <p>We believe finding the right piece should feel personal. Whether it marks a proposal, a milestone, a gift to someone special, or simply a moment worth celebrating, our jewellery is chosen to become part of your story.</p>
-          <p class="story-quote">Crafted through knowledge. Selected with purpose. Made for your moments.</p>
-          <p>Rather than simply placing jewellery on a shelf, we create a more personal buying experience. Browse our collection, discover a piece you love, and connect with us directly through <a href="https://wa.me/27703887170" target="_blank" rel="noopener" style="color:var(--ink);font-weight:600">WhatsApp</a> for enquiries, availability, pricing, and assistance.</p>
-          <p class="story-sign">ZanJewelry Manufacturing · Est. 2021
-            <strong>ZanJewelry Atelier — Fine Jewellery, Personal Stories.</strong></p>
-        </div>
-        <img alt="ZanJewelry Manufacturing monogram" data-img="zanjewelry-logo-new" data-l="ZMP" onerror="imgStep(this)">
-      </div>
-    </div>
-  </section>
-
-  <section class="section wrap" id="contact">
-    <div class="contact-grid">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2 class="title">Enquiries, orders & consultations</h2>
-        <p class="muted">Send the form and it opens WhatsApp with your message ready — or tap the WhatsApp button up top.</p>
-      </div>
-      <form class="panel" id="contactForm">
-        <label>Name <input name="name" required placeholder="Your name"></label>
-        <label>Email <input name="email" type="email" required placeholder="you@example.com"></label>
-        <label>Message <textarea name="message" rows="4" required placeholder="What would you like help with?"></textarea></label>
-        <button class="btn btn-dark" type="submit">Send via WhatsApp</button>
-      </form>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap footer-grid">
-    <div>
-      <strong>ZanJewelry Atelier</strong>
-      <p>Fine rings and cosmetics, with WhatsApp ordering. ZanJewelry Manufacturing — Est. 2021.</p>
-    </div>
-    <div>
-      <a href="#shop">Shop</a>
-      <a href="#bridal">Engagement & Wedding</a>
-      <a href="/admin.html">Admin Portal</a>
-    </div>
-  </div>
-</footer>
-
-<a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp us</a>
-
-<div class="modal" id="productModal">
-  <div class="modal-card">
-    <button class="close-x" data-close-product>✕</button>
-    <div id="productDetail"></div>
-  </div>
-</div>
+<div class="modal" id="productModal"><div class="modal-card">
+  <button class="close-x" onclick="closeModal()">✕</button>
+  <div id="productDetail"></div>
+</div></div>
 
 <script>
 const $=(s,r=document)=>r.querySelector(s);
-const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const TYPE={ring:"Ring",engagement:"Engagement",wedding:"Wedding",cosmetic:"Cosmetic"};
-const MAT={silver:"Silver",gold:"Gold","rose-gold":"Rose Gold",platinum:"Platinum",gemstone:"Gemstone",diamond:"Diamond",none:""};
-let WA="27703887170", products=[];
-const money=p=>(p==null||p==="")?"Price on request":"R "+Number(p).toLocaleString("en-ZA");
-const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+const MAT={none:"",gold:"Gold",silver:"Silver","rose-gold":"Rose Gold",platinum:"Platinum",diamond:"Diamond",gemstone:"Gemstone"};
+const PLACE=l=>"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#F4DCD2"/><text x="50%" y="54%" font-family="Georgia,serif" font-size="180" fill="#17120F" text-anchor="middle" dominant-baseline="middle">'+esc(l||"Z")+'</text></svg>');
+const imgFail=im=>{im.onerror=null;im.src=PLACE(im.dataset.letter||"Z");};
+const imgFor=p=>{const s=String((p.images&&p.images[0])||p.image||"");return (/^https?:/.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
 
-const PLACE=l=>"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#F4DCD2"/><text x="50%" y="55%" font-family="Georgia,serif" font-size="180" fill="#17120F" text-anchor="middle" dominant-baseline="middle">'+(l||"Z")+'</text></svg>');
-function chain(p){
-  const s=String(p||"").trim();
-  if(!s) return "";
-  if(/^(https?:)?\/\//.test(s)||s.startsWith("/")) return s;
-  const base=s.replace(/\.(png|jpe?g|webp)\s*$/i,"");
-  const out=[];["","images/","assets/images/"].forEach(d=>["jpg","jpeg","png","webp"].forEach(e=>out.push(d+base+"."+e)));
-  return out.join("|");
-}
-function imgStep(img){
-  const alts=(img.dataset.alts||"").split("|").filter(Boolean);
-  if(alts.length){img.dataset.alts=alts.slice(1).join("|");img.src=alts[0];}
-  else{img.onerror=null;img.src=PLACE(img.dataset.l);}
-}
-document.querySelectorAll("img[data-img]").forEach(im=>{im.dataset.alts=chain(im.dataset.img);im.src=im.dataset.alts.split("|")[0]||PLACE(im.dataset.l);});
+let WA="27703887170",products=[],categories=[],content={hero:{},banners:{}};
+let view={slug:null,material:"All",sub:"All"};
+const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
+const money=p=>(p==null||p===""||p==null)?"Enquire for price":"R "+Number(p).toLocaleString("en-ZA");
+const catOf=s=>categories.find(c=>c.slug===s);
+const pathOf=s=>{const out=[];let c=catOf(s),g=0;while(c&&g++<8){out.unshift(c);c=catOf(c.parent);}return out;};
+const inCat=(p,slug)=>p.category===slug||pathOf(p.category).some(c=>c.slug===slug);
 
-const imgTag=(src,l)=>{const c=chain(src);const s=c?c.split("|")[0]:PLACE(l);const a=c?esc(c):"";return `<img src="${esc(s)}" data-alts="${a}" data-l="${esc(l)}" loading="lazy" alt="" onerror="imgStep(this)">`;};
-
-function cardHTML(p){return `
-  <article class="card" data-id="${p.id}">
-    <div class="card-img">${imgTag(p.image,p.name[0])}</div>
-    <div class="range">${TYPE[p.type]||"Ring"}${p.material!=="none"?" · "+(MAT[p.material]||""):""}</div>
-    <h3>${esc(p.name)}</h3>
+function cardHTML(p){
+  const img=imgFor(p)||PLACE((p.name||"Z")[0]);
+  const label=[(p.path||[]).map(x=>x.name).join(" · "),MAT[p.material]||""].filter(Boolean).join(" · ");
+  const flag=p.stockStatus==="sold"?'<span class="flag sold">Sold</span>':p.stockStatus==="out-of-stock"?'<span class="flag oos">Out of stock</span>':"";
+  return `<article class="card" data-id="${esc(p.id)}">${flag}
+    <div class="card-img"><img src="${esc(img)}" data-letter="${esc((p.name||"Z")[0])}" loading="lazy" alt="${esc(p.name)}" onerror="imgFail(this)"></div>
+    <div class="range">${esc(label)}</div><h3>${esc(p.name)}</h3>
     <div class="price">${money(p.price)}</div>
-    <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()"
-       href="${wa(`Hi ZanJewelry! I'm interested in the ${p.name} (${money(p.price)}). Is it available?`)}">Enquire on WhatsApp</a>
-  </article>`;}
-
-let filter="All";
-function matches(p){switch(filter){case "All":return true;case "Rings":return p.type!=="cosmetic";case "Diamond":return p.material==="diamond";case "Gemstones":return p.material==="gemstone";case "Gold":return p.material==="gold";case "Cosmetics":return p.type==="cosmetic";default:return true;}}
-function renderGrid(){$("#productGrid").innerHTML=products.filter(matches).map(cardHTML).join("")||'<p class="muted">No pieces in this view yet — try another filter.</p>';}
-function setFilter(f){filter=f;$$("#shop .chip").forEach(c=>c.classList.toggle("active",c.dataset.filter===f));renderGrid();}
- $$("#shop .chip").forEach(c=>c.addEventListener("click",()=>setFilter(c.dataset.filter)));
-
-let bridalType="engagement",bridalMaterial="all";
-function renderBridal(){
-  $("#bridalTitle").textContent=bridalType==="engagement"?"Engagement Rings":"Wedding Rings";
-  const list=products.filter(p=>p.type===bridalType&&(bridalMaterial==="all"||p.material===bridalMaterial));
-  $("#bridalGrid").innerHTML=list.map(cardHTML).join("")||'<p class="muted">No pieces in this style yet — check back soon.</p>';
+    <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(`Hi ZanJewelry! I'm interested in ${p.name} (Ref ${p.reference}). Is it available?`)}">Enquire on WhatsApp</a>
+  </article>`;
 }
- $$(".bridal-panel").forEach(b=>b.addEventListener("click",()=>{
-  bridalType=b.dataset.bridal;bridalMaterial="all";
-  $$("#bridalMaterials .chip").forEach(c=>c.classList.toggle("active",c.dataset.material==="all"));
-  $("#bridalShop").hidden=false;renderBridal();
-  $("#bridalShop").scrollIntoView({behavior:"smooth"});
-}));
- $$("#bridalMaterials .chip").forEach(c=>c.addEventListener("click",()=>{bridalMaterial=c.dataset.material;$$("#bridalMaterials .chip").forEach(x=>x.classList.toggle("active",x===c));renderBridal();}));
 
-function openProduct(p){
-  $("#productDetail").innerHTML=`
-    <div class="detail">${imgTag(p.image,p.name[0])}
-      <div>
-        <div class="range" style="font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-50)">${TYPE[p.type]||""}${p.material!=="none"?" · "+(MAT[p.material]||""):""}</div>
-        <h2>${esc(p.name)}</h2>
-        <div class="price">${money(p.price)} · ${p.stock} in stock</div>
-        <p class="muted" style="margin-bottom:20px">${esc(p.description)}</p>
-        <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(`Hi ZanJewelry! I'd like more details on the ${p.name}.`)}">Enquire on WhatsApp</a>
+function renderHome(){
+  const h=content.hero||{};
+  const feat=products.filter(p=>p.featured).slice(0,8);
+  const latest=products.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,8);
+  const group=(hub,title)=>{
+    const kids=categories.filter(c=>c.parent===hub&&c.active!==false);
+    if(!kids.length)return"";
+    return `<div class="group"><h3>${esc(title)}</h3><div class="gcards">${kids.map(c=>{
+      const img=products.filter(p=>inCat(p,c.slug)).map(imgFor).find(Boolean)||"";
+      return `<a class="cat-card" href="#/shop/${c.slug}">
+        <div class="cat-img"><img src="${esc(img||PLACE(c.name[0]))}" data-letter="${esc(c.name[0])}" alt="${esc(c.name)}" onerror="imgFail(this)"></div>
+        <h3>${esc(c.name)}</h3><div class="dash"></div><p>${esc(c.description||"")}</p></a>`;
+    }).join("")}</div></div>`;
+  };
+  $("#app").innerHTML=`
+  <section class="hero">
+    ${h.image?`<img class="hero-bg" src="${esc(h.image)}" alt="" onerror="this.remove()">`:""}
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-content">
+      <p class="eyebrow">${esc(h.eyebrow||"ZanJewelry Manufacturing · Est. 2021")}</p>
+      <h1>${esc(h.heading||"Rings for your moments. Beauty for your every day.")}</h1>
+      <p>${esc(h.sub||"")}</p>
+      <div class="hero-actions">
+        ${h.ctaText?`<a class="btn btn-white" href="${esc(h.ctaLink||"#/shop/rings")}">${esc(h.ctaText)}</a>`:""}
+        ${h.cta2Text?`<a class="btn btn-ghost" href="${esc(h.ctaLink2||h.cta2Link||"#/shop/cosmetics")}">${esc(h.cta2Text)}</a>`:""}
       </div>
-    </div>`;
+    </div>
+  </section>
+  <main>
+    ${feat.length?`<section class="section wrap"><div class="sec-head"><h2>Featured</h2></div><div class="strips">${feat.map(cardHTML).join("")}</div></section>`:""}
+    <section class="section wrap" style="padding-top:20px"><div class="cat-groups">${group("jewellery","Shop Jewellery")}${group("cosmetics","Shop Cosmetics")}</div></section>
+    <section class="section wrap" style="padding-top:0"><div class="sec-head"><h2>The Latest</h2><a class="chip" href="#/shop/jewellery">View all</a></div>
+      <div class="grid">${latest.map(cardHTML).join("")||'<p class="empty">Nothing yet — post your first piece from the admin portal.</p>'}</div></section>
+    <section class="section wrap" id="contact"><div class="contact-grid">
+      <div><p class="eyebrow" style="color:var(--ink-50)">Contact</p><h2 style="font-family:var(--serif);font-size:2rem">Enquiries & orders</h2>
+        <p class="muted">Send the form and it opens WhatsApp with your message ready.</p></div>
+      <form class="panel" id="contactForm">
+        <label>Name <input name="name" required></label>
+        <label>Email <input name="email" type="email" required></label>
+        <label>Message <textarea name="message" rows="4" required></textarea></label>
+        <button class="btn btn-dark" type="submit">Send via WhatsApp</button>
+      </form>
+    </div></section>
+  </main>`;
+  $("#contactForm").addEventListener("submit",e=>{
+    e.preventDefault();const g=n=>e.target.elements[n].value.trim();
+    window.open(wa(`Hi ZanJewelry! My name is ${g("name")}. ${g("message")} (Reply to: ${g("email")})`),"_blank");
+  });
+}
+
+function renderCategory(slug){
+  const cat=catOf(slug);
+  if(!cat||cat.active===false){$("#app").innerHTML='<section class="section wrap"><h1 style="font-family:var(--serif)">Page not found</h1><p class="muted"><a href="#/">Back to home</a></p></section>';return;}
+  view={slug,material:"All",sub:"All"};
+  drawCategory();
+}
+
+function drawCategory(){
+  const cat=catOf(view.slug);
+  const crumb=pathOf(view.slug);
+  const bn=(content.banners||{})[view.slug]||{};
+  const kids=categories.filter(c=>c.parent===view.slug&&c.active!==false);
+  const scope=products.filter(p=>inCat(p,view.slug));
+  const isJewellery=cat.productType==="jewellery";
+  const subs=[...new Set(scope.map(p=>p.subcategory).filter(Boolean))];
+  let list=scope;
+  if(isJewellery&&view.material!=="All")list=list.filter(p=>p.material===view.material);
+  if(view.sub!=="All")list=list.filter(p=>p.subcategory===view.sub);
+
+  const chips=[
+    ...kids.map(c=>`<a class="chip" href="#/shop/${c.slug}">${esc(c.name)}</a>`),
+    ...(isJewellery?["All","gold","silver","rose-gold","platinum","diamond","gemstone"].map(m=>
+      `<button class="chip ${view.material===m?"active":""}" data-mat="${m}">${m==="All"?"All":MAT[m]}</button>`):[]),
+    ...subs.map(s=>`<button class="chip ${view.sub===s?"active":""}" data-sub="${esc(s)}">${esc(s)}</button>`)
+  ].join("");
+
+  $("#app").innerHTML=`
+  <section class="section wrap" style="padding-top:28px">
+    <p class="crumbs"><a href="#/">Home</a>${crumb.map(c=>` / <a href="#/shop/${c.slug}">${esc(c.name)}</a>`).join("")}</p>
+    <div class="page-banner">
+      ${bn.image?`<img src="${esc(bn.image)}" alt="" onerror="this.remove()">`:""}
+      <div class="pb-txt"><h1>${esc(bn.title||cat.name)}</h1><p>${esc(bn.description||cat.description||"")}</p></div>
+    </div>
+    ${chips?`<div class="chips">${chips}</div>`:""}
+    <div class="grid">${list.map(cardHTML).join("")||'<p class="empty">Nothing here yet — check back soon.</p>'}</div>
+  </section>`;
+
+  document.querySelectorAll("[data-mat]").forEach(b=>b.addEventListener("click",()=>{view.material=b.dataset.mat;drawCategory();}));
+  document.querySelectorAll("[data-sub]").forEach(b=>b.addEventListener("click",()=>{view.sub=b.dataset.sub;drawCategory();}));
+}
+
+function openProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  const imgs=(p.images&&p.images.length?p.images:[""]).filter(Boolean);
+  const label=[(p.path||[]).map(x=>x.name).join(" · "),MAT[p.material]||"",p.gemstone?p.gemstone[0].toUpperCase()+p.gemstone.slice(1):""].filter(Boolean).join(" · ");
+  $("#productDetail").innerHTML=`<div class="detail">
+    <div><img class="main-img" id="pdMain" src="${esc(imgFor(p)||PLACE((p.name||"Z")[0]))}" onerror="imgFail(this)" data-letter="${esc((p.name||"Z")[0])}">
+      ${imgs.length>1?`<div class="thumbs">${imgs.map((s,i)=>`<img src="${esc(s)}" class="${i===0?"on":""}" onclick="document.getElementById('pdMain').src='${esc(s)}';document.querySelectorAll('.thumbs img').forEach(x=>x.classList.remove('on'));this.classList.add('on')">`).join("")}</div>`:""}
+    </div>
+    <div><div class="range">${esc(label)}</div><h2>${esc(p.name)}</h2>
+      <div class="ref">Ref ${esc(p.reference||"")}</div>
+      <div class="price">${money(p.price)} · ${p.stockStatus==="sold"?"Sold":p.stockStatus==="out-of-stock"?"Out of stock":"In stock"}</div>
+      <p class="muted" style="margin-bottom:18px">${esc(p.description||"")}</p>
+      <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(`Hi ZanJewelry! I'd like more details on ${p.name} (Ref ${p.reference}).`)}">Enquire on WhatsApp</a></div>
+  </div>`;
   $("#productModal").classList.add("open");document.body.style.overflow="hidden";
 }
-const closeProduct=()=>{$("#productModal").classList.remove("open");document.body.style.overflow="";};
-document.addEventListener("click",e=>{const card=e.target.closest(".card");if(!card||e.target.closest("a"))return;const p=products.find(x=>x.id==card.dataset.id);if(p)openProduct(p);});
- $$("[data-close-product]").forEach(b=>b.addEventListener("click",closeProduct));
- $("#productModal").addEventListener("click",e=>{if(e.target.id==="productModal")closeProduct();});
+function closeModal(){$("#productModal").classList.remove("open");document.body.style.overflow="";}
+document.addEventListener("click",e=>{
+  const card=e.target.closest(".card");
+  if(card&&card.dataset.id&&!e.target.closest("a")){openProduct(card.dataset.id);return;}
+  if(e.target.id==="productModal")closeModal();
+});
 
- $("#contactForm").addEventListener("submit",e=>{e.preventDefault();const f=e.target,g=n=>f.elements[n].value.trim();window.open(wa(`Hi ZanJewelry! My name is ${g("name")}. ${g("message")} (Reply to: ${g("email")})`),"_blank");});
-
-const track=$("#catTrack");
- $(".cat-btn.next").addEventListener("click",()=>track.scrollBy({left:track.clientWidth*.8,behavior:"smooth"}));
- $(".cat-btn.prev").addEventListener("click",()=>track.scrollBy({left:-track.clientWidth*.8,behavior:"smooth"}));
- $$(".main-nav a").forEach(a=>a.addEventListener("click",()=>$(".main-nav").classList.remove("open")));
+function route(){
+  const m=(location.hash||"#/").match(/^#\/shop\/([\w-]+)/);
+  if(m)renderCategory(decodeURIComponent(m[1]));else renderHome();
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
 
 (async()=>{
-  try{
-    const [cfg,list]=await Promise.all([fetch("/api/config").then(r=>r.json()),fetch("/api/products").then(r=>r.json())]);
-    WA=cfg.whatsapp||WA;products=list;
-  }catch(e){products=[];}
-  $("#waTop").href=wa("Hi ZanJewelry! I'd like to enquire.");
-  $("#waLatest").href=wa("Hi ZanJewelry! I'd like to place an order.");
-  $("#waFloat").href=wa("Hi ZanJewelry! I'd like to enquire.");
-  renderGrid();renderBridal();
+  try{const cfg=await fetch("/api/config").then(r=>r.json());WA=cfg.whatsapp||WA;}catch(_){}
+  document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa(a.dataset.wa));
+  const load=async()=>{
+    try{
+      const [p,c,ct,si]=await Promise.all([
+        fetch("/api/products").then(r=>r.json()),
+        fetch("/api/categories").then(r=>r.json()),
+        fetch("/api/content").then(r=>r.json()),
+        fetch("/api/site-images").then(r=>r.json()).catch(()=>({}))
+      ]);
+      const changed=JSON.stringify(p)!==JSON.stringify(products);
+      products=p;categories=c;content=ct;
+      if(si.logo){const l=$("#brandLogo");if(l.src!==si.logo){l.src=si.logo;l.hidden=false;}}
+      if(changed||!$("#app").innerHTML)route();
+    }catch(_){}
+  };
+  await load();
+  setInterval(load,20000);
+  window.addEventListener("focus",load);
 })();
 </script>
 </body>
