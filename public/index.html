@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
 .chip.active{background:var(--ink);border-color:var(--ink);color:var(--blush)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .card{cursor:pointer;display:flex;flex-direction:column;position:relative}
-.card-img{aspect-ratio:1/1;background:var(--tile);border-radius:6px;overflow:hidden}
+.card-img{aspect-ratio:1/1;background:var(--blush-soft);border-radius:6px;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover}
 .card h3{font-weight:500;font-size:1.02rem;margin-top:12px}
 .range{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);margin-top:5px}
@@ -66,36 +66,48 @@ img{max-width:100%;display:block}
 .group h3{font-family:var(--serif);font-size:1.5rem;margin-bottom:14px}
 .gcards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .cat-card{flex:0 0 250px;text-decoration:none;color:inherit}
-.cat-img{aspect-ratio:1/1.05;background:var(--tile);border-radius:6px;overflow:hidden}
+.cat-img{aspect-ratio:1/1.05;background:var(--blush-soft);border-radius:6px;overflow:hidden}
 .cat-img img{width:100%;height:100%;object-fit:cover}
 .cat-card h3{font-weight:500;font-size:1.1rem;margin-top:12px}
 .dash{width:26px;height:2px;background:var(--ink);margin:8px 0}
 .cat-card p{color:var(--ink-70);font-size:.88rem}
 .empty{color:var(--ink-50);grid-column:1/-1;padding:30px 0}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--tile)}
+form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--blush-soft)}
 form.panel label{display:flex;flex-direction:column;gap:6px;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70)}
-input,textarea{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
-input:focus,textarea:focus{outline:none;border-color:var(--ink)}
+input,textarea,select{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .site-footer{background:var(--ink);color:var(--blush);padding:40px 0;margin-top:40px}
 .site-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .site-footer strong{font-family:var(--serif);font-size:1.3rem}
 .site-footer a{color:var(--blush);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;opacity:.85}
 .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(23,18,15,.55)}
 .modal.open{display:grid}
-.modal-card{position:relative;width:100%;max-width:780px;max-height:88vh;overflow-y:auto;background:var(--tile);border-radius:14px;padding:28px}
+.modal-card{position:relative;width:100%;max-width:780px;max-height:88vh;overflow-y:auto;background:var(--blush-soft);border-radius:14px;padding:28px}
 .close-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700;cursor:pointer;z-index:2}
 .detail{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.detail .main-img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--tile);width:100%}
+.detail .main-img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--blush-soft);width:100%}
 .thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.thumbs img{width:58px;height:58px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
+.thumbs img{width:58px;height:58px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent;background:var(--blush-soft)}
 .thumbs img.on{border-color:var(--ink)}
 .detail h2{font-family:var(--serif);font-size:1.8rem;margin:6px 0}
 .detail .price{font-weight:600;margin-bottom:12px}
 .muted{color:var(--ink-70)}
 .ref{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50)}
 .wa-float{position:fixed;right:16px;bottom:16px;z-index:70;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.cat-groups,.contact-grid,.detail{grid-template-columns:1fr}.gcards{grid-template-columns:1fr 1fr}.main-nav{display:none}}
+
+/* ---------- Ring Customizer ---------- */
+.cz-grid{display:grid;grid-template-columns:1fr 340px;gap:30px;align-items:start}
+.cz-step{font-family:var(--serif);font-size:1.4rem;margin:26px 0 12px}
+.cz-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.big{font:inherit;text-align:left;border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:18px;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.big.on{border-color:var(--ink);background:var(--blush-soft)}
+.big span{color:var(--ink-70);font-size:.85rem}
+.cz-styles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cz-styles .big img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--blush-soft);width:100%}
+.cz-styles .big strong{font-size:.9rem}
+.cz-summary .card{padding:20px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.cat-groups,.contact-grid,.detail,.cz-grid,.cz-two{grid-template-columns:1fr}.gcards{grid-template-columns:1fr 1fr}.cz-styles{grid-template-columns:repeat(2,1fr)}.main-nav{display:none}}
 </style>
 </head>
 <body>
@@ -111,6 +123,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)}
     <a href="#/shop/engagement">Engagement</a>
     <a href="#/shop/wedding">Wedding</a>
     <a href="#/shop/cosmetics">Cosmetics</a>
+    <a href="#/customizer">Customize Your Ring</a>
     <a href="#/" onclick="setTimeout(()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}),60)">Contact</a>
   </nav>
   <a class="wa-pill" data-wa="Hi ZanJewelry! I'd like to enquire." target="_blank" rel="noopener">WhatsApp</a>
@@ -134,14 +147,13 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)}
 const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const MAT={none:"",gold:"Gold",silver:"Silver","rose-gold":"Rose Gold",platinum:"Platinum",diamond:"Diamond",gemstone:"Gemstone"};
-const PLACE=l=>"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#F4DCD2"/><text x="50%" y="54%" font-family="Georgia,serif" font-size="180" fill="#17120F" text-anchor="middle" dominant-baseline="middle">'+esc(l||"Z")+'</text></svg>');
+const PLACE=l=>"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#F9EDE7"/><text x="50%" y="54%" font-family="Georgia,serif" font-size="180" fill="#17120F" text-anchor="middle" dominant-baseline="middle">'+esc(l||"Z")+'</text></svg>');
 const imgFail=im=>{im.onerror=null;im.src=PLACE(im.dataset.letter||"Z");};
 const imgFor=p=>{const s=String((p.images&&p.images[0])||p.image||"");return (/^https?:/.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
 
-let WA="27703887170",products=[],categories=[],content={hero:{},banners:{}};
+let WA="27703887170",products=[],categories=[],content={hero:{},banners:{}},cust=null;
 let view={slug:null,material:"All",sub:"All"};
 const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
-const money=p=>(p==null||p===""||p==null)?"Enquire for price":"R "+Number(p).toLocaleString("en-ZA");
 const catOf=s=>categories.find(c=>c.slug===s);
 const pathOf=s=>{const out=[];let c=catOf(s),g=0;while(c&&g++<8){out.unshift(c);c=catOf(c.parent);}return out;};
 const inCat=(p,slug)=>p.category===slug||pathOf(p.category).some(c=>c.slug===slug);
@@ -153,7 +165,6 @@ function cardHTML(p){
   return `<article class="card" data-id="${esc(p.id)}">${flag}
     <div class="card-img"><img src="${esc(img)}" data-letter="${esc((p.name||"Z")[0])}" loading="lazy" alt="${esc(p.name)}" onerror="imgFail(this)"></div>
     <div class="range">${esc(label)}</div><h3>${esc(p.name)}</h3>
-    <div class="price">${money(p.price)}</div>
     <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(`Hi ZanJewelry! I'm interested in ${p.name} (Ref ${p.reference}). Is it available?`)}">Enquire on WhatsApp</a>
   </article>`;
 }
@@ -172,6 +183,7 @@ function renderHome(){
         <h3>${esc(c.name)}</h3><div class="dash"></div><p>${esc(c.description||"")}</p></a>`;
     }).join("")}</div></div>`;
   };
+  const showCz=cust&&cust.enabled!==false;
   $("#app").innerHTML=`
   <section class="hero">
     ${h.image?`<img class="hero-bg" src="${esc(h.image)}" alt="" onerror="this.remove()">`:""}
@@ -182,7 +194,8 @@ function renderHome(){
       <p>${esc(h.sub||"")}</p>
       <div class="hero-actions">
         ${h.ctaText?`<a class="btn btn-white" href="${esc(h.ctaLink||"#/shop/rings")}">${esc(h.ctaText)}</a>`:""}
-        ${h.cta2Text?`<a class="btn btn-ghost" href="${esc(h.ctaLink2||h.cta2Link||"#/shop/cosmetics")}">${esc(h.cta2Text)}</a>`:""}
+        ${h.cta2Text?`<a class="btn btn-ghost" href="${esc(h.cta2Link||"#/shop/cosmetics")}">${esc(h.cta2Text)}</a>`:""}
+        ${showCz?`<a class="btn btn-ghost" href="#/customizer">Customize Your Ring</a>`:""}
       </div>
     </div>
   </section>
@@ -259,7 +272,7 @@ function openProduct(id){
     </div>
     <div><div class="range">${esc(label)}</div><h2>${esc(p.name)}</h2>
       <div class="ref">Ref ${esc(p.reference||"")}</div>
-      <div class="price">${money(p.price)} · ${p.stockStatus==="sold"?"Sold":p.stockStatus==="out-of-stock"?"Out of stock":"In stock"}</div>
+      <div class="price">${p.stockStatus==="sold"?"Sold":p.stockStatus==="out-of-stock"?"Out of stock":"In stock"}</div>
       <p class="muted" style="margin-bottom:18px">${esc(p.description||"")}</p>
       <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(`Hi ZanJewelry! I'd like more details on ${p.name} (Ref ${p.reference}).`)}">Enquire on WhatsApp</a></div>
   </div>`;
@@ -272,9 +285,79 @@ document.addEventListener("click",e=>{
   if(e.target.id==="productModal")closeModal();
 });
 
+/* ---------- RING CUSTOMIZER ---------- */
+let sel={};
+const czFind=(arr,id)=>(cust&&cust[arr]||[]).find(x=>x.id===id);
+function czName(k,v){
+  if(!v)return"";
+  if(k==="type")return czFind("diamondTypes",v)?.name||"";
+  if(k==="style")return czFind("styles",v)?.name||"";
+  if(k==="metal")return czFind("metals",v)?.name||"";
+  return v;
+}
+function estimate(){
+  const t=czFind("diamondTypes",sel.type),s=czFind("styles",sel.style),m=czFind("metals",sel.metal);
+  if(!t||!s||!m||t.pricePerCarat==null||s.basePrice==null)return null;
+  return Math.round(Number(s.basePrice)+Number(m.surcharge||0)+Number(t.pricePerCarat)*(Number(sel.carat)||0));
+}
+function chipRow(list,cur,fn,fmt){return list.map(v=>`<button class="chip ${String(cur)===String(v)?"active":""}" data-cz="${fn}" data-v="${esc(v)}">${esc(fmt?fmt(v):v)}</button>`).join("");}
+function renderCustomizer(){
+  if(!cust||cust.enabled===false){$("#app").innerHTML='<section class="section wrap"><h1 style="font-family:var(--serif)">Customizer coming soon</h1><p class="muted"><a href="#/">Back to home</a></p></section>';return;}
+  const types=(cust.diamondTypes||[]).filter(t=>t.active!==false);
+  const styles=(cust.styles||[]).filter(s=>s.active!==false);
+  const metals=(cust.metals||[]).filter(m=>m.active!==false);
+  $("#app").innerHTML=`<section class="section wrap" style="padding-top:28px">
+    <p class="crumbs"><a href="#/">Home</a> / Customize Your Ring</p>
+    <div class="sec-head"><h2>Customize Your Ring</h2></div>
+    <div class="cz-grid"><div>
+      <h3 class="cz-step">1 · Choose your diamond</h3>
+      <div class="cz-two">${types.map(t=>`<button class="big ${sel.type===t.id?"on":""}" data-cz="type" data-v="${t.id}"><strong>${esc(t.name)}</strong><span>${esc(t.desc||"")}</span></button>`).join("")}</div>
+      <h3 class="cz-step">2 · Ring style</h3>
+      <div class="cz-styles">${styles.map(s=>`<button class="big ${sel.style===s.id?"on":""}" data-cz="style" data-v="${s.id}"><img src="${esc(s.image||PLACE(s.name[0]))}" data-letter="${esc(s.name[0])}" onerror="imgFail(this)" alt=""><strong>${esc(s.name)}</strong><span>${esc(s.category||"")}</span></button>`).join("")}</div>
+      <h3 class="cz-step">3 · Metal</h3>
+      <div class="chips">${chipRow(metals.map(m=>m.id),sel.metal,"metal",v=>metals.find(m=>m.id===v).name)}</div>
+      <h3 class="cz-step">4 · Diamond shape</h3>
+      <div class="chips">${chipRow(cust.shapes||[],sel.shape,"shape")}</div>
+      <h3 class="cz-step">5 · Carat</h3>
+      <div class="chips">${chipRow((cust.carats||[]).map(String),sel.carat,"carat",v=>v+" ct")}</div>
+      <h3 class="cz-step">6 · Quality</h3>
+      <p class="muted" style="font-size:.8rem;margin-bottom:6px">Colour</p><div class="chips">${chipRow(cust.colours||[],sel.colour,"colour")}</div>
+      <p class="muted" style="font-size:.8rem;margin-bottom:6px">Clarity</p><div class="chips">${chipRow(cust.clarities||[],sel.clarity,"clarity")}</div>
+      <p class="muted" style="font-size:.8rem;margin-bottom:6px">Cut</p><div class="chips">${chipRow(cust.cuts||[],sel.cut,"cut")}</div>
+      <h3 class="cz-step">7 · Ring size</h3>
+      <select id="czSize" style="max-width:220px">${(cust.sizes||[]).map(s=>`<option ${String(sel.size)===String(s)?"selected":""}>${esc(s)}</option>`).join("")}</select>
+      <p class="muted" style="font-size:.85rem;margin-top:8px">Don't know your size? <a href="#/" onclick="setTimeout(()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}),60)" style="color:var(--ink)">Contact us</a> — we'll help you measure.</p>
+    </div>
+    <aside class="cz-summary" id="czSummary"></aside></div></section>`;
+  $("#czSize").addEventListener("change",e=>{sel.size=e.target.value;drawSummary();});
+  drawSummary();
+}
+function drawSummary(){
+  const el=$("#czSummary");if(!el)return;
+  const rows=[["Diamond",czName("type",sel.type)],["Style",czName("style",sel.style)],["Metal",czName("metal",sel.metal)],["Shape",sel.shape],["Carat",sel.carat?sel.carat+" ct":""],["Colour",sel.colour],["Clarity",sel.clarity],["Cut",sel.cut],["Size",sel.size?"US "+sel.size:""]].filter(r=>r[1]);
+  const est=estimate();
+  el.innerHTML=`<div class="card" style="position:sticky;top:90px">
+    <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:8px">Your custom ring</h3>
+    ${rows.map(r=>`<p style="font-size:.9rem;margin:6px 0"><b>${r[0]}:</b> ${esc(r[1])}</p>`).join("")||'<p class="muted" style="font-size:.9rem">Start choosing — your spec appears here.</p>'}
+    ${est?`<p style="margin-top:10px"><b>Estimated price:</b> R ${est.toLocaleString("en-ZA")}</p>`:""}
+    <button class="btn btn-dark btn-block" id="czEnquire" style="margin-top:14px">Enquire on WhatsApp</button></div>`;
+  $("#czEnquire").addEventListener("click",()=>{
+    const msg="Hello ZanJewelry, I would like to enquire about a custom ring.\n\n"
+      +rows.map(r=>`${r[0]}: ${r[1]}`).join("\n")
+      +(est?`\nEstimated price: R ${est.toLocaleString("en-ZA")}`:"");
+    window.open(wa(msg),"_blank");
+  });
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-cz]");if(!b)return;
+  sel[b.dataset.cz]=b.dataset.v;renderCustomizer();
+});
+
 function route(){
   const m=(location.hash||"#/").match(/^#\/shop\/([\w-]+)/);
-  if(m)renderCategory(decodeURIComponent(m[1]));else renderHome();
+  if(m)renderCategory(decodeURIComponent(m[1]));
+  else if(location.hash==="#/customizer")renderCustomizer();
+  else renderHome();
   window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
@@ -284,16 +367,17 @@ window.addEventListener("hashchange",route);
   document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa(a.dataset.wa));
   const load=async()=>{
     try{
-      const [p,c,ct,si]=await Promise.all([
+      const [p,c,ct,si,cz]=await Promise.all([
         fetch("/api/products").then(r=>r.json()),
         fetch("/api/categories").then(r=>r.json()),
         fetch("/api/content").then(r=>r.json()),
-        fetch("/api/site-images").then(r=>r.json()).catch(()=>({}))
+        fetch("/api/site-images").then(r=>r.json()).catch(()=>({})),
+        fetch("/api/customizer").then(r=>r.json()).catch(()=>null)
       ]);
       const changed=JSON.stringify(p)!==JSON.stringify(products);
-      products=p;categories=c;content=ct;
+      products=p;categories=c;content=ct;cust=cz;
       if(si.logo){const l=$("#brandLogo");if(l.src!==si.logo){l.src=si.logo;l.hidden=false;}}
-      if(changed||!$("#app").innerHTML)route();
+      if((changed&&!location.hash.startsWith("#/customizer"))||!$("#app").innerHTML)route();
     }catch(_){}
   };
   await load();
