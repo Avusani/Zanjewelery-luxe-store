@@ -241,7 +241,18 @@ const upload = multer({
 });
 
 /* ================= PUBLIC API ================= */
-app.get('/healthz', (_q, res) => res.json({ ok: true }));
+app.get('/healthz', (_q, res) => {
+  let uploads = 0;
+  try { uploads = fs.readdirSync(UPLOAD_DIR).length; } catch {}
+  res.json({
+    ok: true,
+    dataDir: DATA_DIR,
+    uploads,
+    products: products.length,
+    users: users.length,
+    siteImages: Object.keys(siteImages || {})
+  });
+});
 app.get('/api/config', (_q, res) => res.json({ whatsapp: settings.whatsapp || WHATSAPP }));
 app.get('/api/settings', (_q, res) => res.json(settings));
 app.get('/api/categories', (_q, res) => res.json(categories.slice().sort((a, b) => (a.order || 99) - (b.order || 99))));
