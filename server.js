@@ -1,5 +1,5 @@
 /* ============================================================
-   ZanJewelry CMS server — complete backend
+   ZanJewelry CMS server — complete backend (v2, cache-safe)
    Users · Products · Diamonds · Categories · Reviews · Pages
    Blog · Settings · Subscribers · Multi-hero · Site images
    ============================================================ */
@@ -221,10 +221,16 @@ const requireAuth = (req, res, next) => isAuthed(req) ? next() : res.status(401)
 
 /* ================= MIDDLEWARE + UPLOADS ================= */
 app.set('trust proxy', 1);
+/* FIX 2: never let browsers/proxies cache the API or the HTML —
+   admin changes and fresh deploys appear immediately everywhere */
+app.use('/api', (_q, res, next) => { res.setHeader('Cache-Control', 'no-store, max-age=0'); next(); });
 app.use(express.json({ limit: '4mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
-app.use('/uploads', express.static(UPLOAD_DIR));
+app.use(express.static(path.join(__dirname, 'public'), {
+  extensions: ['html'],
+  setHeaders: (res, p) => { if (p.endsWith('.html')) res.setHeader('Cache-Control', 'no-store'); }
+}));
+app.use('/uploads', express.static(UPLOAD_DIR, { maxAge: '1h' }));
 const upload = multer({
   storage: multer.diskStorage({
     destination: (_r, _f, cb) => cb(null, UPLOAD_DIR),
@@ -358,7 +364,10 @@ const saveProduct = (req, res) => {
   const existing = b.id ? products.find((p) => p.id === b.id) : null;
   const files = (req.files || []).filter((f) => f.fieldname === 'imageFiles' || f.fieldname === 'imageFile');
   const product = normalizeProduct(b, existing, files);
-  if (files.length && existing?.images) existing.images.forEach(delFile);
+  /* FIX 1: only delete old photo files that are NO LONGER on the product —
+     photos the admin kept must survive an edit */
+  const keep = new Set(product.images);
+  if (existing?.images) existing.images.forEach((old) => { if (!keep.has(old)) delFile(old); });
   const idx = products.findIndex((p) => p.id === product.id);
   if (idx >= 0) products[idx] = product; else products.unshift(product);
   writeJSON(FILES.products, products);
@@ -592,7 +601,7 @@ app.delete('/api/site-images/:slot', requireAuth, (req, res) => {
 });
 
 /* ================= ERRORS + START ================= */
-app.get('/admin', (_q, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
+app.get('/admin', (_q, res) => { res.setHeader('Cache-Control', 'no-store'); res.sendFile(path.join(__dirname, 'public', 'admin.html')); });
 app.use((err, _q, res, _n) => res.status(err.status || 400).json({ error: err.message || 'Upload failed' }));
 app.use((_q, res) => res.status(404).send('Not found'));
 app.listen(PORT, () => console.log(`✨ ZanJewelry CMS running on port ${PORT} — login: Awonke`));
