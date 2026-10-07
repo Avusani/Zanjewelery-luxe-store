@@ -6,7 +6,7 @@
 <title>ZanJewelry | Admin</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
-:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--cream:#FFFDFA;--line:#eee2dc;--serif:"Cormorant Garamond",serif}
+:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--cream:#FFFDFA;--line:#eee2dc;--serif:"Cormorant Garamond",serif;--gold:#c9a227}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.55}
 img{max-width:100%;display:block}
@@ -17,9 +17,12 @@ img{max-width:100%;display:block}
 .brand img{width:38px;height:38px;border-radius:8px;object-fit:cover;vertical-align:middle;margin-right:8px}
 .spacer{flex:1}
 .topbar a{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-70)}
-.tabs{display:flex;gap:8px;margin:18px 0}
+.who{display:inline-flex;align-items:center;gap:8px;background:var(--blush-soft);border-radius:999px;padding:7px 16px;font-size:.74rem;font-weight:600}
+.who .dot{width:9px;height:9px;border-radius:50%;background:#1c7c39}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}
 .tab{font:inherit;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
 .tab.active{background:var(--ink);color:var(--blush);border-color:var(--ink)}
+.tab .cnt{display:inline-block;background:#b3261e;color:#fff;border-radius:999px;font-size:.6rem;padding:1px 7px;margin-left:6px}
 h1{font-family:var(--serif);font-size:1.9rem;margin-bottom:4px}
 .sub{color:var(--ink-70);font-size:.92rem;margin-bottom:20px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}
@@ -27,6 +30,7 @@ h1{font-family:var(--serif);font-size:1.9rem;margin-bottom:4px}
 input,select,textarea{font:inherit;font-size:15px;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--cream);width:100%}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);background:#fff}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .btn{display:inline-block;font:inherit;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:999px;border:1.5px solid transparent;cursor:pointer}
 .btn-dark{background:var(--ink);color:var(--blush)}
 .btn-ghost{border-color:var(--line);color:var(--ink-70);background:#fff}
@@ -35,13 +39,15 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .inline{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;font-size:.8rem!important;letter-spacing:0!important;text-transform:none!important;font-weight:500!important}
 .note{display:none;margin-top:12px;font-size:.85rem;font-weight:600;color:#1c7c39}
 .note.show{display:block}
+.warn{display:none;background:#fdf3e7;border:1.5px solid #e8d5b5;color:#8a6a2f;border-radius:10px;padding:12px 16px;font-size:.85rem;margin-bottom:18px}
+.warn.show{display:block}
 .plist{display:flex;flex-direction:column;gap:10px}
 .pitem{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 .pitem img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--blush-soft);flex-shrink:0}
 .pitem .info{flex:1;min-width:0}
 .pitem strong{display:block;font-size:.95rem}
 .pitem small{color:var(--ink-50);font-size:.76rem}
-.row-actions{display:flex;gap:8px;flex-shrink:0}
+.row-actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
 .row-actions button{font:inherit;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;border:1.5px solid var(--line);background:var(--blush-soft);border-radius:999px;padding:8px 14px;cursor:pointer}
 .row-actions button:hover{background:var(--ink);color:var(--blush)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
@@ -49,6 +55,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .chip.active{background:var(--ink);color:var(--blush);border-color:var(--ink)}
 .badge{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--blush-soft);padding:3px 9px;border-radius:999px;margin-right:4px}
 .badge.draft{background:#f3e2b8}.badge.sold{background:#f6d5d2}
+.badge.pending{background:#f3e2b8}.badge.approved{background:#dcefdd}.badge.declined{background:#f6d5d2}
+.badge.owner{background:#e8ddfb}
 .ithumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .ithumb{position:relative;width:76px;height:76px}
 .ithumb img{width:100%;height:100%;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
@@ -59,10 +67,25 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .cbody{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-items:start}
 .bimg img{height:90px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px;background:var(--blush-soft)}
 .view{display:none}.view.show{display:block}
+.subtabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.subtab{font:inherit;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
+.subtab.active{background:var(--ink);color:var(--blush);border-color:var(--ink)}
+.stars{color:var(--gold);letter-spacing:2px}
+.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+.toolbar button{font:inherit;font-size:.68rem;font-weight:700;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+.toolbar button:hover{background:var(--blush-soft)}
+textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;font-size:13.5px;line-height:1.7}
+.pagerow{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff}
+.pagerow .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pagerow .phead strong{font-size:.95rem}
+.pagerow .pbody{margin-top:12px;display:none}
+.pagerow.open .pbody{display:block}
+.revphoto{width:74px;height:74px;border-radius:10px;object-fit:cover;background:var(--blush-soft);flex-shrink:0}
+.mini{font-size:.8rem;color:var(--ink-50)}
 #loginView{max-width:420px;margin:60px auto 0}
 #loginView h1{text-align:center}
 .err{color:#b3261e;font-size:.86rem;margin-top:10px;min-height:1.2em}
-@media(max-width:820px){.row,.cbody{grid-template-columns:1fr}}
+@media(max-width:820px){.row,.row3,.cbody{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -70,32 +93,44 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 <header class="topbar"><div class="wrap">
   <span class="brand"><img id="logoImg" hidden>ZanJewelry Admin</span>
   <span class="spacer"></span>
+  <span class="who" id="whoChip" hidden><span class="dot"></span><span id="whoName">Admin</span></span>
   <a href="/" target="_blank" rel="noopener">View site ↗</a>
   <a href="#" id="logoutBtn" hidden>Log out</a>
 </div></header>
 
 <main class="wrap">
 
+<!-- ================= LOGIN ================= -->
 <section id="loginView">
   <h1>Admin Portal</h1>
-  <p class="sub" style="text-align:center">Enter your admin password.</p>
+  <p class="sub" style="text-align:center">Enter your username and password.</p>
   <div class="card">
     <form id="loginForm">
-      <label class="field">Password <input type="password" id="password" required autocomplete="current-password"></label>
+      <label class="field">Username <input type="text" id="username" required autocomplete="username" placeholder="Your username"></label>
+      <label class="field">Password
+        <input type="password" id="password" required autocomplete="current-password" placeholder="Your password">
+        <span class="inline" style="margin-top:8px"><input type="checkbox" id="showPw" style="width:auto"> Show password</span>
+      </label>
       <button class="btn btn-dark btn-block">Log in</button>
       <p class="err" id="loginError"></p>
     </form>
   </div>
 </section>
 
+<!-- ================= DASHBOARD ================= -->
 <section id="dashView" hidden>
   <div class="tabs">
     <button class="tab active" data-tab="products">Products</button>
+    <button class="tab" data-tab="diamonds">Diamonds</button>
     <button class="tab" data-tab="categories">Categories</button>
+    <button class="tab" data-tab="reviews" id="reviewsTab">Reviews</button>
+    <button class="tab" data-tab="content">Website Content</button>
     <button class="tab" data-tab="home">Homepage</button>
+    <button class="tab" data-tab="settings">Settings</button>
+    <button class="tab" data-tab="users">Users</button>
   </div>
 
-  <!-- ================= PRODUCTS ================= -->
+  <!-- ============ PRODUCTS ============ -->
   <div class="view show" id="v-products">
     <h1 id="formTitle">Post a new product</h1>
     <p class="sub">One upload fills every category in its path — automatically.</p>
@@ -133,9 +168,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
           <label class="field">Sub-type (e.g. Lip Gloss, Face Mist) <input name="subcategory" id="fSub" list="subList" placeholder="Lip Gloss">
             <datalist id="subList"><option>Lip Gloss</option><option>Lipstick</option><option>Lip Liner</option><option>Lip Oil</option><option>Face Mist</option><option>Serum</option><option>Moisturiser</option><option>Body Butter</option><option>Body Wash</option><option>Soap</option><option>Eau de Parfum</option><option>Body Spray</option></datalist>
           </label>
-          <label class="field">Price in Rand <input name="price" type="number" min="0" step="0.01" placeholder="Blank = enquire for price"></label>
+          <label class="field">Price in Rand <span style="text-transform:none;letter-spacing:0;font-weight:500">(hidden on the site — used only in WhatsApp enquiries)</span> <input name="price" type="number" min="0" step="0.01" placeholder="Optional"></label>
         </div>
-        <div class="row" id="priceRow" style="display:none"></div>
         <div class="row">
           <label class="field">Status
             <select name="stockStatus" id="fStatus">
@@ -158,7 +192,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
         <p class="note" id="note">✓ Saved — live on the website now.</p>
       </form>
     </div>
-
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.35rem;margin-bottom:12px">All products</h2>
       <div class="chips" id="pFilters">
@@ -172,7 +205,44 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
     </div>
   </div>
 
-  <!-- ================= CATEGORIES ================= -->
+  <!-- ============ DIAMONDS ============ -->
+  <div class="view" id="v-diamonds">
+    <h1>Loose diamonds</h1>
+    <p class="sub">These appear in "Shop by Diamond Shape" on the site. No price is ever shown to customers.</p>
+    <p class="warn" id="diaWarn">⚠ The server has no /api/diamonds yet — add the diamonds block to server.js.</p>
+    <div class="card">
+      <form id="diaForm">
+        <input type="hidden" id="dId">
+        <div class="row">
+          <label class="field">Type <select id="dType"><option value="natural">Natural</option><option value="lab">Lab-Grown</option></select></label>
+          <label class="field">Shape <select id="dShape"><option>Round</option><option>Princess</option><option>Cushion</option><option>Emerald</option><option>Oval</option><option>Pear</option><option>Marquise</option><option>Radiant</option><option>Asscher</option><option>Heart</option></select></label>
+        </div>
+        <div class="row3">
+          <label class="field">Carat <input type="number" id="dCarat" step="0.01" min="0.01" required placeholder="0.50"></label>
+          <label class="field">Colour <select id="dColour"><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></label>
+          <label class="field">Clarity <select id="dClarity"><option>FL</option><option>IF</option><option>VVS1</option><option>VVS2</option><option>VS1</option><option>VS2</option><option>SI1</option><option>SI2</option></select></label>
+        </div>
+        <div class="row3">
+          <label class="field">Cut <select id="dCut"><option>Ideal</option><option>Excellent</option><option>Very Good</option><option>Good</option></select></label>
+          <label class="field">Certificate <input id="dCert" placeholder="e.g. GIA 2200123456"></label>
+          <label class="field">Internal price (never shown) <input type="number" id="dPrice" min="0" placeholder="Optional — your records"></label>
+        </div>
+        <label class="field">Photo (optional — the diamond icon shows if empty) <input type="file" id="dFile" accept="image/*"></label>
+        <div class="row">
+          <label class="inline"><input type="checkbox" id="dCertified" checked> Certified (shows badge)</label>
+          <label class="inline"><input type="checkbox" id="dSold"> Sold (hidden from shop)</label>
+        </div>
+        <button class="btn btn-dark btn-block" id="dSave" type="submit">Add diamond</button>
+        <button class="btn btn-ghost btn-block" type="button" id="dCancel" hidden>Cancel edit</button>
+      </form>
+    </div>
+    <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:12px">All diamonds</h2>
+      <div class="plist" id="diaList"></div>
+    </div>
+  </div>
+
+  <!-- ============ CATEGORIES ============ -->
   <div class="view" id="v-categories">
     <h1>Categories & banners</h1>
     <p class="sub">The tree drives the whole site. Each category gets its own page and banner.</p>
@@ -193,21 +263,86 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
     <div id="catList"></div>
   </div>
 
-  <!-- ================= HOMEPAGE ================= -->
+  <!-- ============ REVIEWS ============ -->
+  <div class="view" id="v-reviews">
+    <h1>Customer reviews</h1>
+    <p class="sub">Approve or decline reviews submitted from the website. Approved reviews (and their photos) appear in "Be Inspired" and on the Customer Reviews page.</p>
+    <p class="warn" id="revWarn">⚠ The server has no reviews endpoints yet — reviews are being sent to WhatsApp instead. Add the reviews block to server.js.</p>
+    <div class="chips" id="rFilters">
+      <button class="chip active" data-r="pending">Pending</button>
+      <button class="chip" data-r="approved">Approved</button>
+      <button class="chip" data-r="declined">Declined</button>
+      <button class="chip" data-r="all">All</button>
+    </div>
+    <div class="plist" id="revList"></div>
+  </div>
+
+  <!-- ============ WEBSITE CONTENT ============ -->
+  <div class="view" id="v-content">
+    <h1>Website content</h1>
+    <p class="sub">Every footer link opens its own page — edit them here. Customers never see this content on the homepage.</p>
+    <p class="warn" id="pgWarn">⚠ The server has no pages endpoints yet — add the pages block to server.js.</p>
+    <div class="subtabs">
+      <button class="subtab active" data-c="pages">Pages</button>
+      <button class="subtab" data-c="blog">Blog posts</button>
+    </div>
+    <div id="c-pages">
+      <div class="card">
+        <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px">Create a new page</h2>
+        <div class="row" style="align-items:end">
+          <label class="field" style="margin-top:0">Page name <input id="newPageName" placeholder="e.g. Jewelry Care Guide"></label>
+          <button class="btn btn-dark" type="button" onclick="createPage()">Create page</button>
+        </div>
+      </div>
+      <div id="pagesList"></div>
+    </div>
+    <div id="c-blog" style="display:none">
+      <div class="card">
+        <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px" id="blogFormTitle">New blog post</h2>
+        <form id="blogForm">
+          <input type="hidden" id="bId">
+          <label class="field">Title <input id="bTitle" required placeholder="e.g. 5 Things to Know Before Buying Gold Jewellery"></label>
+          <div class="row3">
+            <label class="field">Author <input id="bAuthor" placeholder="ZanJewelry Team"></label>
+            <label class="field">Date <input type="date" id="bDate"></label>
+            <label class="field" style="justify-content:end"><span class="inline"><input type="checkbox" id="bPub" checked> Published</span></label>
+          </div>
+          <label class="field">Cover image <input type="file" id="bFile" accept="image/*"></label>
+          <div id="bImgPrev" class="ithumbs"></div>
+          <label class="field">Article
+            <div class="toolbar">
+              <button type="button" onclick="edWrap('#bBody','<h2>','</h2>')">Heading</button>
+              <button type="button" onclick="edWrap('#bBody','<p>','</p>')">Paragraph</button>
+              <button type="button" onclick="edWrap('#bBody','<b>','</b>')">Bold</button>
+              <button type="button" onclick="edWrap('#bBody','<i>','</i>')">Italic</button>
+              <button type="button" onclick="edWrap('#bBody','<ul>\n<li>','</li>\n<li></li>\n</ul>')">List</button>
+              <button type="button" onclick="edWrap('#bBody','<a href=&quot;https://&quot;>','</a>')">Link</button>
+              <button type="button" onclick="edWrap('#bBody','<img src=&quot;https://&quot; alt=&quot;&quot; style=&quot;max-width:100%;border-radius:10px&quot;>','')">Image</button>
+            </div>
+            <textarea id="bBody" rows="8" required placeholder="Write the article… (HTML allowed)"></textarea></label>
+          <button class="btn btn-dark btn-block" id="bSave" type="submit">Publish post</button>
+          <button class="btn btn-ghost btn-block" type="button" id="bCancel" hidden>Cancel edit</button>
+          <p class="note" id="bNote">✓ Blog updated.</p>
+        </form>
+      </div>
+      <div class="plist" id="blogList"></div>
+    </div>
+  </div>
+
+  <!-- ============ HOMEPAGE ============ -->
   <div class="view" id="v-home">
     <h1>Homepage control</h1>
-    <p class="sub">Change the hero picture and text any time — no code, no redeploy.</p>
+    <p class="sub">Hero pictures rotate every 3 seconds. Upload up to 3 for the slideshow.</p>
     <div class="card">
       <form id="heroForm">
-        <label class="field">Hero image <input type="file" id="heroFile" accept="image/*"></label>
-        <div id="heroPreview" style="margin-top:10px"></div>
+        <label class="field">Hero pictures — up to 3; the site cross-fades them every 3 seconds <input type="file" id="heroFile" accept="image/*" multiple></label>
+        <div class="ithumbs" id="heroStrip"></div>
         <label class="field">Eyebrow (small line above heading) <input name="eyebrow" id="hEyebrow"></label>
         <label class="field">Heading <input name="heading" id="hHeading" required></label>
         <label class="field">Sub-heading <textarea name="sub" id="hSub" rows="2"></textarea></label>
         <div class="row">
           <label class="field">Button 1 text <input name="ctaText" id="hCta1"></label>
-          <label class="field">Button 1 link <input name="ctaLink" id="hLink1" list="linkList" placeholder="#/shop/rings">
-            <datalist id="linkList"></datalist></label>
+          <label class="field">Button 1 link <input name="ctaLink" id="hLink1" list="linkList" placeholder="#/diamonds"></label>
         </div>
         <div class="row">
           <label class="field">Button 2 text <input name="cta2Text" id="hCta2"></label>
@@ -218,11 +353,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
       </form>
     </div>
     <div class="card">
-      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Brand logo</h2>
-      <div class="row" style="align-items:center">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Section banners & logo</h2>
+      <div class="row3" id="slotCards"></div>
+      <div class="row" style="margin-top:18px;align-items:center">
         <div><img id="logoPrev" style="height:70px;border-radius:8px;background:var(--blush-soft)" hidden></div>
         <div>
-          <input type="file" id="logoFile" accept="image/*">
+          <label class="field" style="margin-top:0">Brand logo <input type="file" id="logoFile" accept="image/*"></label>
           <div class="row" style="margin-top:10px">
             <button class="btn btn-dark" type="button" onclick="upLogo()">Upload logo</button>
             <button class="btn btn-red" type="button" onclick="delLogo()">Remove logo</button>
@@ -231,19 +367,92 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
       </div>
     </div>
   </div>
+
+  <!-- ============ SETTINGS ============ -->
+  <div class="view" id="v-settings">
+    <h1>Settings</h1>
+    <p class="sub">Change these once and the whole website updates — no code, no redeploy.</p>
+    <p class="warn" id="setWarn">⚠ The server has no /api/settings yet — add the settings block to server.js.</p>
+    <div class="card">
+      <form id="setForm">
+        <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:4px">Brand & contact</h2>
+        <div class="row">
+          <label class="field">WhatsApp number (international, no +) <input id="sWhatsApp" placeholder="27703887170"></label>
+          <label class="field">Business email <input id="sEmail" placeholder="hello@zanjewelry.co.za"></label>
+        </div>
+        <h2 style="font-family:var(--serif);font-size:1.3rem;margin:20px 0 4px">Social media</h2>
+        <div class="row3">
+          <label class="field">Instagram URL <input id="sInstagram" placeholder="https://instagram.com/…"></label>
+          <label class="field">Facebook URL <input id="sFacebook" placeholder="https://facebook.com/…"></label>
+          <label class="field">TikTok URL <input id="sTikTok" placeholder="https://tiktok.com/@…"></label>
+        </div>
+        <h2 style="font-family:var(--serif);font-size:1.3rem;margin:20px 0 4px">Footer</h2>
+        <div class="row">
+          <label class="field">Tagline <input id="sTagline" placeholder="Jewelry made to celebrate you."></label>
+          <label class="field">Copyright line <input id="sCopyright" placeholder="© 2026 ZanJewelry. All Rights Reserved."></label>
+        </div>
+        <div class="row">
+          <label class="field">Newsletter heading <input id="sNewsHead" placeholder="Stay Connected"></label>
+          <label class="field">Newsletter description <input id="sNewsText" placeholder="New collections, quiet launches, member offers."></label>
+        </div>
+        <button class="btn btn-dark btn-block">Save settings</button>
+        <p class="note" id="setNote">✓ Settings saved.</p>
+      </form>
+    </div>
+    <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Newsletter subscribers <span class="mini" id="subCount"></span></h2>
+      <p class="warn" id="subWarn">⚠ The server has no /api/subscribers yet.</p>
+      <div id="subList" class="plist"></div>
+      <button class="btn btn-ghost" type="button" onclick="copySubs()" style="margin-top:12px">Copy email list</button>
+    </div>
+  </div>
+
+  <!-- ============ USERS ============ -->
+  <div class="view" id="v-users">
+    <h1>Admin users</h1>
+    <p class="sub">Anyone listed here can log in with their own username and password. New accounts work immediately — no Railway setup needed. You cannot delete yourself or the last remaining account.</p>
+    <p class="warn" id="usrWarn">⚠ The server has no /api/users yet — add the users block to server.js (it seeds Awonke / Awonke@2026 automatically).</p>
+    <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px" id="usrFormTitle">Add a user</h2>
+      <form id="userForm">
+        <input type="hidden" id="uId">
+        <div class="row">
+          <label class="field">Username <input id="uName" required autocomplete="off" placeholder="e.g. Awonke"></label>
+          <label class="field">Password
+            <input type="password" id="uPw" required autocomplete="new-password" placeholder="Set or change the password">
+            <span class="inline" style="margin-top:8px"><input type="checkbox" id="uShow" style="width:auto"> Show password</span>
+          </label>
+        </div>
+        <button class="btn btn-dark btn-block" id="uSave" type="submit">Create user</button>
+        <button class="btn btn-ghost btn-block" type="button" id="uCancel" hidden>Cancel</button>
+        <p class="note" id="uNote">✓ User saved — they can log in right away.</p>
+      </form>
+    </div>
+    <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:12px">All users <span class="mini" id="usrCount"></span></h2>
+      <div class="plist" id="usrList"></div>
+    </div>
+  </div>
 </section>
 </main>
 
 <script>
 const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const MAT={none:"—",gold:"Gold",silver:"Silver","rose-gold":"Rose Gold",platinum:"Platinum",diamond:"Diamond",gemstone:"Gemstone"};
-const STATUS={ "in-stock":"In stock","out-of-stock":"Out of stock","sold":"Sold" };
+const STATUS={"in-stock":"In stock","out-of-stock":"Out of stock","sold":"Sold"};
 const money=p=>(p==null||p==="")?"Enquire for price":"R "+Number(p).toLocaleString("en-ZA");
 const PH='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="#F9EDE7"/></svg>');
+const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
+const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
+
 let token=localStorage.getItem("zj-token")||"";
+let myUsername="";
 let products=[],categories=[],content={hero:{},banners:{}},siteImages={};
+let allDia=[],reviews=[],pages=[],posts=[],settings={},subs=[],users=[];
 let editingId=null,currentImages=[],listFilter="all",formType="jewellery";
+let currentHeroImages=[],revFilter="pending",contentSub="pages",editingPost=null,editingUser=null;
 
 async function api(path,opts={}){
   const headers={...(opts.headers||{})};
@@ -255,30 +464,53 @@ async function api(path,opts={}){
   if(!res.ok)throw new Error(data.error||"Request failed");
   return data;
 }
-function showLogin(){$("#loginView").style.display="block";$("#dashView").hidden=true;$("#logoutBtn").hidden=true;}
+function setWho(name){
+  myUsername=name||"Admin";
+  $("#whoName").textContent=myUsername;
+  $("#whoChip").hidden=false;
+}
+function showLogin(){$("#loginView").style.display="block";$("#dashView").hidden=true;$("#logoutBtn").hidden=true;$("#whoChip").hidden=true;}
 function showDash(){$("#loginView").style.display="none";$("#dashView").hidden=false;$("#logoutBtn").hidden=false;refresh();}
 
+/* ---------- LOGIN (username + password) ---------- */
+ $("#showPw").addEventListener("change",()=>{$("#password").type=$("#showPw").checked?"text":"password";});
+ $("#uShow").addEventListener("change",()=>{$("#uPw").type=$("#uShow").checked?"text":"password";});
  $("#loginForm").addEventListener("submit",async e=>{
   e.preventDefault();$("#loginError").textContent="";
   try{
-    const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:$("#password").value})});
+    const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({username:$("#username").value.trim(),password:$("#password").value})});
     const j=await r.json();
     if(!r.ok)throw new Error(j.error||"Login failed");
-    token=j.token;localStorage.setItem("zj-token",token);showDash();
+    token=j.token;localStorage.setItem("zj-token",token);
+    setWho(j.username||$("#username").value.trim());
+    showDash();
   }catch(ex){$("#loginError").textContent=ex.message;}
 });
  $("#logoutBtn").addEventListener("click",async e=>{
   e.preventDefault();try{await api("/api/logout",{method:"POST"});}catch(_){}
-  token="";localStorage.removeItem("zj-token");showLogin();
+  token="";localStorage.removeItem("zj-token");myUsername="";showLogin();
 });
 
 async function refresh(){
-  try{
-    [products,categories,content,siteImages]=await Promise.all([
-      api("/api/admin/products"),api("/api/categories"),api("/api/content"),api("/api/site-images")
-    ]);
-    renderList();renderCats();fillHero();fillSelects();renderLogo();
-  }catch(e){if(e.message!=="Please log in")alert(e.message);}
+  const jobs=[
+    api("/api/admin/products").then(d=>products=Array.isArray(d)?d:[]).catch(()=>{}),
+    api("/api/categories").then(d=>categories=Array.isArray(d)?d:[]).catch(()=>{}),
+    api("/api/content").then(d=>content=d||{hero:{},banners:{}}).catch(()=>{}),
+    api("/api/site-images").then(d=>siteImages=d||{}).catch(()=>{}),
+    api("/api/diamonds").then(d=>{allDia=Array.isArray(d)?d:[];$("#diaWarn").classList.remove("show");}).catch(()=>$("#diaWarn").classList.add("show")),
+    api("/api/admin/reviews").then(d=>{reviews=Array.isArray(d)?d:[];$("#revWarn").classList.remove("show");}).catch(()=>$("#revWarn").classList.add("show")),
+    api("/api/pages").then(d=>{pages=Array.isArray(d)?d:[];$("#pgWarn").classList.remove("show");}).catch(()=>$("#pgWarn").classList.add("show")),
+    api("/api/admin/blog").then(d=>posts=Array.isArray(d)?d:[]).catch(()=>{}),
+    api("/api/settings").then(d=>{settings=d||{};$("#setWarn").classList.remove("show");}).catch(()=>$("#setWarn").classList.add("show")),
+    api("/api/subscribers").then(d=>{subs=Array.isArray(d)?d:[];$("#subWarn").classList.remove("show");}).catch(()=>$("#subWarn").classList.add("show")),
+    api("/api/users").then(d=>{users=Array.isArray(d)?d:[];$("#usrWarn").classList.remove("show");}).catch(()=>$("#usrWarn").classList.add("show"))
+  ];
+  await Promise.all(jobs);
+  renderList();renderCats();fillHero();fillSelects();renderLogo();renderSlots();
+  renderDia();renderReviews();renderPages();renderBlog();fillSettings();renderSubs();renderUsers();
+  const pend=reviews.filter(r=>(r.status||"pending")==="pending").length;
+  $("#reviewsTab").innerHTML="Reviews"+(pend?` <span class="cnt">${pend}</span>`:"");
 }
 
 /* ---------- tabs ---------- */
@@ -287,9 +519,15 @@ document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("show"));
   $("#v-"+t.dataset.tab).classList.add("show");
 }));
+ $$(".subtab").forEach(t=>t.addEventListener("click",()=>{
+  $$(".subtab").forEach(x=>x.classList.toggle("active",x===t));
+  contentSub=t.dataset.c;
+  $("#c-pages").style.display=contentSub==="pages"?"block":"none";
+  $("#c-blog").style.display=contentSub==="blog"?"block":"none";
+}));
 
-/* ---------- product form ---------- */
-function pathLabel(c){const parts=[];let cur=c,g=0;while(cur&&g++<8){parts.unshift(cur.name);cur=categories.find(x=>x.slug===cur.parent);}return parts.join(" › ");}
+/* ================= PRODUCTS ================= */
+function pathLabel(c){const parts=[];let cur=c,g=0;while(cur&&g++<8){parts.unshift(cur.name);cur=categories.find(x=>x.slug===cur.parent);}return parts.join(" › ")||c.name;}
 function fillSelects(){
   const catSel=$("#fCategory");
   const opts=categories.filter(c=>c.parent&&c.productType===formType);
@@ -297,7 +535,10 @@ function fillSelects(){
   catSel.innerHTML=opts.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("")||'<option value="">— add a category first —</option>';
   if(opts.some(c=>c.slug===cur))catSel.value=cur;
   $("#cParent").innerHTML='<option value="">— top level —</option>'+categories.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("");
-  $("#linkList").innerHTML=categories.map(c=>`<option value="#/shop/${c.slug}">`).join("");
+  $("#linkList").innerHTML=categories.map(c=>`<option value="#/shop/${c.slug}"></option>`).join("")
+    +'<option value="#/diamonds"></option>'
+    +Object.keys(PAGE_SEED).map(s=>`<option value="#/page/${s}"></option>`).join("")
+    +'<option value="#contact"></option>';
 }
  $("#fType").addEventListener("change",e=>{
   formType=e.target.value;
@@ -307,7 +548,7 @@ function fillSelects(){
   fillSelects();
 });
  $("#fMaterial").addEventListener("change",e=>{$("#gemRow").style.display=e.target.value==="gemstone"?"flex":"none";});
- $("#fFile").addEventListener("change",()=>{renderThumbs();});
+ $("#fFile").addEventListener("change",renderThumbs);
 function renderThumbs(){
   const inp=$("#fFile");
   $("#imgStrip").innerHTML=currentImages.map((s,i)=>`<div class="ithumb"><img src="${esc(s)}"><button type="button" onclick="rmImg(${i})">✕</button></div>`).join("")
@@ -323,13 +564,12 @@ function resetForm(){
   $("#formTitle").textContent="Post a new product";$("#fRef").value="";
 }
  $("#cancelEdit").addEventListener("click",resetForm);
-
  $("#productForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const fd=new FormData(e.target);
   fd.set("images",JSON.stringify(currentImages));
   [...$("#fFile").files].forEach(f=>fd.append("imageFiles",f));
-  if(fd.get("productType")==="cosmetic"){fd.set("material","none");}
+  if(fd.get("productType")==="cosmetic")fd.set("material","none");
   try{
     if(editingId)await api("/api/products/"+editingId,{method:"PUT",body:fd});
     else await api("/api/products",{method:"POST",body:fd});
@@ -337,12 +577,10 @@ function resetForm(){
     const n=$("#note");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);
   }catch(err){alert(err.message);}
 });
-
-/* ---------- product list ---------- */
  $("#pFilters").addEventListener("click",e=>{
   const b=e.target.closest(".chip");if(!b)return;
   listFilter=b.dataset.f;
-  document.querySelectorAll("#pFilters .chip").forEach(x=>x.classList.toggle("active",x===b));
+  $$("#pFilters .chip").forEach(x=>x.classList.toggle("active",x===b));
   renderList();
 });
 function renderList(){
@@ -354,21 +592,19 @@ function renderList(){
   });
   $("#plist").innerHTML=list.map(p=>`
     <div class="pitem">
-      <img src="${esc(p.image||PH)}" alt="">
+      <img src="${esc(p.image||(p.images&&p.images[0])||PH)}" alt="">
       <div class="info"><strong>${esc(p.name)}</strong>
-        <small>${esc(pathLabel(categories.find(c=>c.slug===p.category)||{name:p.category}))} · ${MAT[p.material]||"—"}${p.subcategory?" · "+esc(p.subcategory):""} · ${money(p.price)} · ${STATUS[p.stockStatus]||""}</small>
+        <small>${esc(pathLabel(categories.find(c=>c.slug===p.category)||{name:p.category}))} · ${MAT[p.material]||"—"}${p.subcategory?" · "+esc(p.subcategory):""} · ${STATUS[p.stockStatus]||""}</small>
         <div style="margin-top:6px">
           ${p.featured?'<span class="badge">Featured</span>':""}
           ${p.published===false?'<span class="badge draft">Draft</span>':""}
           ${p.stockStatus==="sold"?'<span class="badge sold">Sold</span>':""}
           <span class="badge">${esc(p.reference||"")}</span>
-        </div>
-      </div>
+        </div></div>
       <div class="row-actions">
         <button data-edit="${p.id}">Edit</button>
         <button data-del="${p.id}">Delete</button>
-      </div>
-    </div>`).join("")||'<p class="sub">Nothing here yet.</p>';
+      </div></div>`).join("")||'<p class="sub">Nothing here yet.</p>';
 }
  $("#plist").addEventListener("click",async e=>{
   const id=e.target.dataset.edit||e.target.dataset.del;
@@ -399,11 +635,55 @@ function renderList(){
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
-/* ---------- categories ---------- */
+/* ================= DIAMONDS ================= */
+function renderDia(){
+  $("#diaList").innerHTML=allDia.map(d=>`
+    <div class="pitem">
+      <img src="${esc(d.image||PH)}" alt="" style="background:#e9e9e9">
+      <div class="info"><strong>${Number(d.carat).toFixed(2)}ct ${esc(d.shape)} ${d.type==="lab"?"Lab-Grown":"Natural"}</strong>
+        <small>${esc(d.colour)} · ${esc(d.clarity)} · ${esc(d.cut)}${d.cert?" · "+esc(d.cert):""}${d.sold?" · SOLD":""} · ${esc(d.ref||"")}</small></div>
+      <div class="row-actions"><button data-dedit="${d.id}">Edit</button><button data-ddel="${d.id}">Delete</button></div>
+    </div>`).join("")||'<p class="sub">No diamonds yet.</p>';
+}
+function resetDia(){$("#diaForm").reset();$("#dId").value="";$("#dSave").textContent="Add diamond";$("#dCancel").hidden=true;}
+ $("#dCancel").addEventListener("click",resetDia);
+ $("#diaList").addEventListener("click",async e=>{
+  const ed=e.target.dataset.dedit,del=e.target.dataset.ddel;
+  if(del){
+    if(!confirm("Delete this diamond?"))return;
+    try{await api("/api/diamonds/"+del,{method:"DELETE"});refresh();}catch(err){alert(err.message);}
+    return;
+  }
+  if(ed){
+    const d=allDia.find(x=>x.id===ed);if(!d)return;
+    $("#dId").value=d.id;$("#dType").value=d.type||"natural";$("#dShape").value=d.shape;
+    $("#dCarat").value=d.carat;$("#dPrice").value=d.price??"";
+    $("#dColour").value=d.colour;$("#dClarity").value=d.clarity;$("#dCut").value=d.cut;
+    $("#dCert").value=d.cert||"";$("#dCertified").checked=!!d.certified;$("#dSold").checked=!!d.sold;
+    $("#dFile").value="";$("#dSave").textContent="Update diamond";$("#dCancel").hidden=false;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+});
+ $("#diaForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const fd=new FormData(),id=$("#dId").value;
+  fd.append("type",$("#dType").value);fd.append("shape",$("#dShape").value);
+  fd.append("carat",$("#dCarat").value);fd.append("price",$("#dPrice").value);
+  fd.append("colour",$("#dColour").value);fd.append("clarity",$("#dClarity").value);
+  fd.append("cut",$("#dCut").value);fd.append("cert",$("#dCert").value);
+  fd.append("certified",$("#dCertified").checked);fd.append("sold",$("#dSold").checked);
+  const f=$("#dFile").files[0];if(f)fd.append("imageFile",f);
+  try{
+    if(id)await api("/api/diamonds/"+id,{method:"PUT",body:fd});
+    else await api("/api/diamonds",{method:"POST",body:fd});
+    resetDia();refresh();
+  }catch(err){alert(err.message);}
+});
+
+/* ================= CATEGORIES ================= */
  $("#catForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const fd=new FormData(e.target);
-  const body=Object.fromEntries(fd.entries());
+  const body=Object.fromEntries(new FormData(e.target).entries());
   try{await api("/api/categories",{method:"POST",body:JSON.stringify(body)});e.target.reset();refresh();}
   catch(err){alert(err.message);}
 });
@@ -412,7 +692,8 @@ function renderCats(){
     const b=(content.banners||{})[c.slug]||{};
     return `<div class="ccard">
       <div class="chead"><strong>${esc(pathLabel(c))}</strong><span class="badge">${c.productType}</span>
-        ${c.parent?`<span class="spacer"></span><button class="row-actions" style="all:unset;cursor:pointer" onclick="delCat('${c.slug}')"><button class="btn btn-red" style="padding:7px 14px;font-size:.6rem">Delete</button></button>`:""}
+        <span class="spacer"></span>
+        ${c.parent?`<button class="btn btn-red" style="padding:7px 14px;font-size:.6rem" onclick="delCat('${c.slug}')">Delete</button>`:""}
       </div>
       <div class="cbody">
         <div>
@@ -425,15 +706,12 @@ function renderCats(){
           <input type="file" id="bf-${c.slug}" accept="image/*">
           <button class="btn btn-dark" style="margin-top:8px" onclick="saveBanner('${c.slug}')">Save banner</button>
         </div>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join("");
 }
 async function saveBanner(slug){
   const fd=new FormData();
-  fd.append("data",JSON.stringify({banners:{[slug]:{
-    title:$("#bt-"+slug).value,description:$("#bd-"+slug).value,active:$("#ba-"+slug).checked
-  }}}));
+  fd.append("data",JSON.stringify({banners:{[slug]:{title:$("#bt-"+slug).value,description:$("#bd-"+slug).value,active:$("#ba-"+slug).checked}}}));
   const f=$("#bf-"+slug).files[0];
   if(f)fd.append("banner-"+slug,f);
   try{content=await api("/api/content",{method:"PUT",body:fd});refresh();}catch(err){alert(err.message);}
@@ -444,27 +722,234 @@ async function delCat(slug){
   catch(err){alert(err.message);}
 }
 
-/* ---------- homepage ---------- */
+/* ================= REVIEWS ================= */
+ $("#rFilters").addEventListener("click",e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  revFilter=b.dataset.r;
+  $$("#rFilters .chip").forEach(x=>x.classList.toggle("active",x===b));
+  renderReviews();
+});
+function renderReviews(){
+  const list=reviews.filter(r=>revFilter==="all"||String(r.status||"pending")===revFilter)
+    .slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  $("#revList").innerHTML=list.map(r=>`
+    <div class="pitem" style="align-items:flex-start">
+      ${r.image?`<img class="revphoto" src="${esc(r.image)}" alt="">`:`<div class="revphoto" style="display:grid;place-items:center;font-size:1.4rem">💬</div>`}
+      <div class="info">
+        <strong>${esc(r.name)} <span class="stars" style="font-size:.85rem">${starStr(r.rating)}</span></strong>
+        <small>${esc(fmtDate(r.date||r.createdAt))} · ${esc(r.title||"")}</small>
+        <p style="font-size:.88rem;color:var(--ink-70);margin-top:6px">${esc(r.text||r.review||"")}</p>
+        <div style="margin-top:8px"><span class="badge ${esc(r.status||"pending")}">${esc(r.status||"pending")}</span></div>
+      </div>
+      <div class="row-actions">
+        <button data-rapp="${r.id}">Approve</button>
+        <button data-rdec="${r.id}">Decline</button>
+        <button data-rdel="${r.id}">Delete</button>
+      </div></div>`).join("")||'<p class="sub">Nothing here.</p>';
+}
+ $("#revList").addEventListener("click",async e=>{
+  const ap=e.target.dataset.rapp,dc=e.target.dataset.rdec,dl=e.target.dataset.rdel;
+  try{
+    if(ap)await api("/api/reviews/"+ap,{method:"PUT",body:JSON.stringify({status:"approved"})});
+    else if(dc)await api("/api/reviews/"+dc,{method:"PUT",body:JSON.stringify({status:"declined"})});
+    else if(dl){if(!confirm("Delete this review permanently?"))return;await api("/api/reviews/"+dl,{method:"DELETE"});}
+    else return;
+    refresh();
+  }catch(err){alert(err.message);}
+});
+
+/* ================= WEBSITE CONTENT — PAGES ================= */
+const PAGE_SEED={
+  "customer-support":"Customer Support","virtual-appointment":"Book Virtual Appointment",
+  "about-us":"About Us","blog":"Blog","help-centre":"Help Centre","reviews":"Customer Reviews",
+  "orders":"View Your Orders","repairs-sizing":"Repairs & Sizing","returns-exchange":"Returns or Exchange",
+  "terms":"Terms & Conditions of Sale","returns-refunds":"Returns, Refunds & Exchanges",
+  "shipping":"Shipping & Delivery","warranty":"Warranty & Care","privacy":"Privacy Notice",
+  "cookies":"Cookie Policy","paia":"PAIA Manual","complaints":"Complaints & Disputes","company":"Company & Legal Information"
+};
+function edWrap(sel,open,close){
+  const ta=$(sel),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;
+  ta.value=v.slice(0,s)+open+v.slice(s,e)+close+v.slice(e);
+  ta.focus();ta.selectionStart=ta.selectionEnd=s+open.length+(e-s);
+}
+async function createPage(){
+  const name=$("#newPageName").value.trim();
+  if(!name)return alert("Give the page a name first");
+  const slug=name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  try{
+    await api("/api/pages/"+slug,{method:"PUT",body:JSON.stringify({title:name,content:"",published:false})});
+    $("#newPageName").value="";refresh();
+  }catch(err){alert(err.message);}
+}
+function renderPages(){
+  const known=Object.keys(PAGE_SEED).map(s=>{
+    const p=pages.find(x=>x.slug===s);
+    return p||{slug:s,title:PAGE_SEED[s],content:"",published:true,image:""};
+  });
+  const custom=pages.filter(p=>!PAGE_SEED[p.slug]);
+  const all=[...known,...custom];
+  $("#pagesList").innerHTML=all.map(p=>`
+    <div class="pagerow" id="pr-${p.slug}">
+      <div class="phead">
+        <strong>${esc(p.title||PAGE_SEED[p.slug]||p.slug)}</strong>
+        <span class="badge">${esc(p.slug)}</span>
+        <span class="badge ${p.published===false?"draft":"approved"}">${p.published===false?"draft":"published"}</span>
+        <span class="spacer"></span>
+        <a class="mini" href="/#/page/${esc(p.slug)}" target="_blank" rel="noopener">View on site ↗</a>
+        <button class="btn btn-ghost" style="padding:7px 14px;font-size:.6rem" onclick="document.getElementById('pr-${p.slug}').classList.toggle('open')">Edit</button>
+      </div>
+      <div class="pbody">
+        <div class="row">
+          <label class="field">Page title <input id="pt-${p.slug}" value="${esc(p.title||"")}"></label>
+          <label class="field inline" style="align-self:end"><input type="checkbox" id="pp-${p.slug}" ${p.published!==false?"checked":""}> Published (visible on the site)</label>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div>
+            <label class="field">Page image (optional, shown at the top)</label>
+            <div class="bimg">${p.image?`<img src="${esc(p.image)}">`:""}</div>
+            <input type="file" id="pimg-${p.slug}" accept="image/*">
+          </div>
+          <div>
+            <label class="field">Content
+              <div class="toolbar">
+                <button type="button" onclick="edWrap('#pc-${p.slug}','<h2>','</h2>')">Heading</button>
+                <button type="button" onclick="edWrap('#pc-${p.slug}','<p>','</p>')">Paragraph</button>
+                <button type="button" onclick="edWrap('#pc-${p.slug}','<b>','</b>')">Bold</button>
+                <button type="button" onclick="edWrap('#pc-${p.slug}','<ul>\\n<li>','</li>\\n</ul>')">List</button>
+                <button type="button" onclick="edWrap('#pc-${p.slug}','<img src=&quot;https://&quot; alt=&quot;&quot; style=&quot;max-width:100%;border-radius:10px&quot;>','')">Image</button>
+              </div>
+              <textarea id="pc-${p.slug}" class="editor" rows="8" placeholder="Write this page's content… (HTML allowed)">${esc(p.content||"")}</textarea></label>
+            <button class="btn btn-dark" style="margin-top:12px" onclick="savePage('${p.slug}')">Save page</button>
+          </div>
+        </div>
+      </div>
+    </div>`).join("");
+}
+async function savePage(slug){
+  const fd=new FormData();
+  fd.append("data",JSON.stringify({
+    title:$("#pt-"+slug).value,
+    content:$("#pc-"+slug).value,
+    published:$("#pp-"+slug).checked
+  }));
+  const f=$("#pimg-"+slug)?.files[0];
+  if(f)fd.append("pageImage",f);
+  try{await api("/api/pages/"+slug,{method:"PUT",body:fd});refresh();}catch(err){alert(err.message);}
+}
+
+/* ================= WEBSITE CONTENT — BLOG ================= */
+function renderBlog(){
+  $("#blogList").innerHTML=posts.slice().sort((a,b)=>(b.date||b.createdAt||0)-(a.date||a.createdAt||0)).map(p=>`
+    <div class="pitem">
+      <img src="${esc(p.image||PH)}" alt="">
+      <div class="info"><strong>${esc(p.title)}</strong>
+        <small>${esc(p.author||"")} · ${esc(fmtDate(p.date||p.createdAt))}</small>
+        <div style="margin-top:6px"><span class="badge ${p.published===false?"draft":"approved"}">${p.published===false?"draft":"published"}</span></div></div>
+      <div class="row-actions"><button data-bedit="${p.id}">Edit</button><button data-bdel="${p.id}">Delete</button></div>
+    </div>`).join("")||'<p class="sub">No posts yet.</p>';
+}
+ $("#bFile").addEventListener("change",()=>{
+  const f=$("#bFile").files[0];
+  $("#bImgPrev").innerHTML=f?`<div class="ithumb"><img src="${URL.createObjectURL(f)}"></div>`:"";
+});
+function resetBlog(){
+  editingPost=null;
+  $("#blogForm").reset();$("#bId").value="";$("#bImgPrev").innerHTML="";
+  $("#bDate").value=new Date().toISOString().slice(0,10);
+  $("#bSave").textContent="Publish post";$("#bCancel").hidden=true;
+  $("#blogFormTitle").textContent="New blog post";
+}
+ $("#bCancel").addEventListener("click",resetBlog);
+ $("#blogList").addEventListener("click",async e=>{
+  const ed=e.target.dataset.bedit,del=e.target.dataset.bdel;
+  if(del){
+    if(!confirm("Delete this post?"))return;
+    try{await api("/api/blog/"+del,{method:"DELETE"});refresh();}catch(err){alert(err.message);}
+    return;
+  }
+  if(ed){
+    const p=posts.find(x=>x.id===ed);if(!p)return;
+    editingPost=p.id;
+    $("#blogFormTitle").textContent="Edit: "+p.title;
+    $("#bId").value=p.id;$("#bTitle").value=p.title||"";$("#bAuthor").value=p.author||"";
+    $("#bDate").value=(p.date||"").slice(0,10)||new Date().toISOString().slice(0,10);
+    $("#bBody").value=p.body||p.content||"";$("#bPub").checked=p.published!==false;
+    $("#bImgPrev").innerHTML=p.image?`<div class="ithumb"><img src="${esc(p.image)}"></div>`:"";
+    $("#bSave").textContent="Update post";$("#bCancel").hidden=false;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+});
+ $("#blogForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const fd=new FormData();
+  fd.append("data",JSON.stringify({
+    title:$("#bTitle").value,author:$("#bAuthor").value,
+    date:$("#bDate").value,body:$("#bBody").value,published:$("#bPub").checked
+  }));
+  const f=$("#bFile").files[0];if(f)fd.append("imageFile",f);
+  try{
+    if(editingPost)await api("/api/blog/"+editingPost,{method:"PUT",body:fd});
+    else await api("/api/blog",{method:"POST",body:fd});
+    resetBlog();refresh();
+    const n=$("#bNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);
+  }catch(err){alert(err.message);}
+});
+
+/* ================= HOMEPAGE (multi-hero + slots) ================= */
 function fillHero(){
   const h=content.hero||{};
+  currentHeroImages=(Array.isArray(h.images)&&h.images.length)?h.images.slice():(h.image?[h.image]:[]);
+  renderHeroStrip();
   $("#hEyebrow").value=h.eyebrow||"";$("#hHeading").value=h.heading||"";$("#hSub").value=h.sub||"";
   $("#hCta1").value=h.ctaText||"";$("#hLink1").value=h.ctaLink||"";
   $("#hCta2").value=h.cta2Text||"";$("#hLink2").value=h.cta2Link||"";
-  $("#heroPreview").innerHTML=h.image?`<img src="${esc(h.image)}" style="height:130px;width:100%;object-fit:cover;border-radius:10px">`:"";
+  $("#heroFile").value="";
 }
+function renderHeroStrip(){
+  $("#heroStrip").innerHTML=currentHeroImages.map((s,i)=>`
+    <div class="ithumb"><img src="${esc(s)}"><button type="button" onclick="rmHero(${i})">✕</button></div>`).join("")
+    ||'<p class="mini">No hero pictures yet — the site shows its gradient fallback.</p>';
+}
+function rmHero(i){currentHeroImages.splice(i,1);renderHeroStrip();}
  $("#heroForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const fd=new FormData();
   fd.append("data",JSON.stringify({hero:{
     eyebrow:$("#hEyebrow").value,heading:$("#hHeading").value,sub:$("#hSub").value,
-    ctaText:$("#hCta1").value,ctaLink:$("#hLink1").value,cta2Text:$("#hCta2").value,cta2Link:$("#hLink2").value
+    ctaText:$("#hCta1").value,ctaLink:$("#hLink1").value,cta2Text:$("#hCta2").value,cta2Link:$("#hLink2").value,
+    images:currentHeroImages
   }}));
-  const f=$("#heroFile").files[0];
-  if(f)fd.append("heroImage",f);
+  [...$("#heroFile").files].forEach(f=>fd.append("heroImages",f));
   try{content=await api("/api/content",{method:"PUT",body:fd});fillHero();
     const n=$("#heroNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);}
   catch(err){alert(err.message);}
 });
+const SLOTS=[
+  {key:"bridal-engagement",label:"Engagement banner"},
+  {key:"bridal-wedding",label:"Wedding banner"}
+];
+function renderSlots(){
+  $("#slotCards").innerHTML=SLOTS.map(s=>`
+    <div class="ccard" style="margin:0">
+      <div class="bimg">${siteImages[s.key]?`<img src="${esc(siteImages[s.key])}">`:""}</div>
+      <label class="field" style="margin-top:8px">${s.label} <input type="file" id="slot-${s.key}" accept="image/*"></label>
+      <div class="row" style="margin-top:10px">
+        <button class="btn btn-dark" style="padding:9px 12px;font-size:.62rem" onclick="upSlot('${s.key}')">Upload</button>
+        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:9px 12px;font-size:.62rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
+      </div>
+    </div>`).join("");
+}
+async function upSlot(key){
+  const f=$("#slot-"+key).files[0];if(!f)return alert("Choose an image first");
+  const fd=new FormData();fd.append("imageFile",f);
+  try{siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});renderSlots();}
+  catch(err){alert(err.message);}
+}
+async function delSlot(key){
+  if(!confirm("Remove this image? The section falls back to its default."))return;
+  try{siteImages=await api("/api/site-images/"+key,{method:"DELETE"});renderSlots();}
+  catch(err){alert(err.message);}
+}
 function renderLogo(){
   if(siteImages.logo){$("#logoImg").src=siteImages.logo;$("#logoImg").hidden=false;$("#logoPrev").src=siteImages.logo;$("#logoPrev").hidden=false;}
   else{$("#logoImg").hidden=true;$("#logoPrev").hidden=true;}
@@ -478,9 +963,113 @@ async function delLogo(){
   try{siteImages=await api("/api/site-images/logo",{method:"DELETE"});renderLogo();}catch(err){alert(err.message);}
 }
 
+/* ================= SETTINGS ================= */
+function fillSettings(){
+  $("#sWhatsApp").value=settings.whatsapp||"";
+  $("#sEmail").value=settings.email||"";
+  $("#sInstagram").value=settings.instagram||"";
+  $("#sFacebook").value=settings.facebook||"";
+  $("#sTikTok").value=settings.tiktok||"";
+  $("#sTagline").value=settings.tagline||"";
+  $("#sCopyright").value=settings.copyright||"";
+  $("#sNewsHead").value=settings.newsletterHeading||"";
+  $("#sNewsText").value=settings.newsletterText||"";
+}
+ $("#setForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const body={
+    whatsapp:$("#sWhatsApp").value.trim(),email:$("#sEmail").value.trim(),
+    instagram:$("#sInstagram").value.trim(),facebook:$("#sFacebook").value.trim(),tiktok:$("#sTikTok").value.trim(),
+    tagline:$("#sTagline").value.trim(),copyright:$("#sCopyright").value.trim(),
+    newsletterHeading:$("#sNewsHead").value.trim(),newsletterText:$("#sNewsText").value.trim()
+  };
+  try{
+    settings=await api("/api/settings",{method:"PUT",body:JSON.stringify(body)});
+    const n=$("#setNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);
+  }catch(err){alert(err.message);}
+});
+function renderSubs(){
+  $("#subCount").textContent=subs.length?`(${subs.length})`:"";
+  $("#subList").innerHTML=subs.map(s=>`
+    <div class="pitem"><div class="info"><strong>${esc(s.email)}</strong><small>${esc(fmtDate(s.createdAt||s.date))}</small></div></div>`).join("")
+    ||'<p class="sub">No subscribers yet.</p>';
+}
+function copySubs(){
+  const emails=subs.map(s=>s.email).filter(Boolean).join(", ");
+  if(!emails)return alert("No subscribers yet");
+  navigator.clipboard.writeText(emails).then(()=>alert("Email list copied")).catch(()=>alert("Copy failed"));
+}
+
+/* ================= USERS (admin accounts) ================= */
+function renderUsers(){
+  $("#usrCount").textContent=users.length?`(${users.length})`:"";
+  $("#usrList").innerHTML=users.map(u=>{
+    const isMe=(u.username||"").toLowerCase()===myUsername.toLowerCase();
+    return `<div class="pitem">
+      <div class="revphoto" style="display:grid;place-items:center;font-size:1.3rem;background:var(--blush-soft)">👤</div>
+      <div class="info"><strong>${esc(u.username)} ${isMe?'<span class="badge approved">you</span>':""}${u.owner?'<span class="badge owner">main admin</span>':""}</strong>
+        <small>Created ${esc(fmtDate(u.createdAt))} · can log in with username + password</small></div>
+      <div class="row-actions">
+        <button data-uedit="${esc(u.username)}">Edit / change password</button>
+        <button data-udel="${esc(u.username)}">Delete</button>
+      </div></div>`;
+  }).join("")||'<p class="sub">No users yet.</p>';
+}
+function resetUserForm(){
+  editingUser=null;
+  $("#userForm").reset();$("#uId").value="";
+  $("#uSave").textContent="Create user";$("#uCancel").hidden=true;
+  $("#usrFormTitle").textContent="Add a user";
+}
+ $("#uCancel").addEventListener("click",resetUserForm);
+ $("#usrList").addEventListener("click",e=>{
+  const ed=e.target.dataset.uedit,del=e.target.dataset.udel;
+  if(ed){
+    const u=users.find(x=>x.username===ed);if(!u)return;
+    editingUser=u.username;
+    $("#usrFormTitle").textContent="Edit user: "+u.username;
+    $("#uName").value=u.username;$("#uPw").value="";
+    $("#uPw").placeholder="Leave blank to keep the current password";
+    $("#uSave").textContent="Save changes";$("#uCancel").hidden=false;
+    window.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
+  if(del){
+    if((del||"").toLowerCase()===myUsername.toLowerCase())return alert("You cannot delete the account you're logged in with.");
+    if(users.length<=1)return alert("You cannot delete the last remaining admin account.");
+    if(!confirm(`Delete user "${del}"? They will no longer be able to log in.`))return;
+    api("/api/users/"+encodeURIComponent(del),{method:"DELETE"})
+      .then(refresh).catch(err=>alert(err.message));
+  }
+});
+ $("#userForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const uname=$("#uName").value.trim();
+  const pw=$("#uPw").value;
+  if(!uname)return alert("Username is required");
+  if(!editingUser&&!pw)return alert("Please set a password for the new user");
+  try{
+    if(editingUser){
+      const body={username:uname};
+      if(pw)body.password=pw;
+      await api("/api/users/"+encodeURIComponent(editingUser),{method:"PUT",body:JSON.stringify(body)});
+    }else{
+      await api("/api/users",{method:"POST",body:JSON.stringify({username:uname,password:pw})});
+    }
+    resetUserForm();refresh();
+    const n=$("#uNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);
+  }catch(err){alert(err.message);}
+});
+
 /* ---------- init ---------- */
 (async()=>{
-  try{const j=await api("/api/me");if(j.authed){showDash();return;}}catch(_){}
+  $("#bDate").value=new Date().toISOString().slice(0,10);
+  if(token){
+    try{
+      const j=await api("/api/me");
+      if(j.authed){setWho(j.username||"Admin");showDash();return;}
+    }catch(_){}
+  }
   token="";localStorage.removeItem("zj-token");showLogin();
 })();
 </script>
