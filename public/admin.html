@@ -167,7 +167,6 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
             </select>
           </label>
         </div>
-        <!-- FIX: price is ALWAYS visible now (was trapped in the cosmetics-only row) -->
         <label class="field">Price in Rand <span style="text-transform:none;letter-spacing:0;font-weight:500">(never shown on the site — used only in WhatsApp enquiries)</span> <input name="price" type="number" min="0" step="0.01" placeholder="Optional — e.g. 4500"></label>
         <div class="row">
           <label class="field">Status
@@ -369,6 +368,12 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
     </div>
 
     <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.35rem;margin-bottom:4px">Category card pictures</h2>
+      <p class="sub" style="margin-bottom:16px">These are the square cards under "Shop the Collection" (Rings, Engagement, Pendants, Gemstones, Gold — plus any categories you add). Without a picture they show a letter; upload one and it replaces the letter.</p>
+      <div class="row3" id="catSlotCards"></div>
+    </div>
+
+    <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Brand logo</h2>
       <div class="row" style="align-items:center">
         <div><img id="logoPrev" style="height:70px;border-radius:8px;background:var(--blush-soft)" hidden onerror="this.hidden=true"></div>
@@ -483,7 +488,6 @@ async function api(path,opts={}){
   return data;
 }
 function setWho(name){
-  /* fallback: never display a garbled/legacy username */
   myUsername=(name&&/^[A-Za-z0-9][A-Za-z0-9 ._-]{0,39}$/.test(name))?name:"Admin";
   $("#whoName").textContent=myUsername;
   $("#whoChip").hidden=false;
@@ -526,8 +530,11 @@ async function refresh(){
     api("/api/users").then(d=>{users=Array.isArray(d)?d:[];$("#usrWarn").classList.remove("show");}).catch(()=>$("#usrWarn").classList.add("show"))
   ];
   await Promise.all(jobs);
-  renderList();renderCats();fillHero();fillSelects();renderLogo();renderSlots();
-  renderDia();renderReviews();renderPages();renderBlog();fillSettings();renderSubs();renderUsers();
+  try{
+    renderList();renderCats();fillHero();fillSelects();renderLogo();
+    renderSlots();renderCatSlots();
+    renderDia();renderReviews();renderPages();renderBlog();fillSettings();renderSubs();renderUsers();
+  }catch(err){console.error("render error:",err);}
   const pend=reviews.filter(r=>(r.status||"pending")==="pending").length;
   $("#reviewsTab").innerHTML="Reviews"+(pend?` <span class="cnt">${pend}</span>`:"");
 }
@@ -919,7 +926,7 @@ function resetBlog(){
   }catch(err){alert(err.message);}
 });
 
-/* ================= HOMEPAGE (hero + section banners + logo) ================= */
+/* ================= HOMEPAGE — hero + section banners + category cards + logo ================= */
 function fillHero(){
   const h=content.hero||{};
   currentHeroImages=(Array.isArray(h.images)&&h.images.length)?h.images.slice():(h.image?[h.image]:[]);
@@ -948,6 +955,27 @@ function rmHero(i){currentHeroImages.splice(i,1);renderHeroStrip();}
     const n=$("#heroNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);}
   catch(err){alert(err.message);}
 });
+
+/* shared slot uploader — used by section banners AND category cards */
+async function upSlot(key){
+  const inp=$("#slot-"+key);if(!inp)return;
+  const f=inp.files[0];if(!f)return alert("Choose a picture first");
+  const fd=new FormData();fd.append("imageFile",f);
+  try{
+    siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});
+    $("#slotWarn").classList.remove("show");
+    renderSlots();renderCatSlots();renderLogo();
+  }catch(err){
+    if((err.message||"").toLowerCase().includes("unknown slot"))$("#slotWarn").classList.add("show");
+    alert(err.message);
+  }
+}
+async function delSlot(key){
+  if(!confirm("Remove this picture? The section falls back to its default."))return;
+  try{siteImages=await api("/api/site-images/"+key,{method:"DELETE"});renderSlots();renderCatSlots();renderLogo();}
+  catch(err){alert(err.message);}
+}
+
 const SLOTS=[
   {key:"bridal-engagement",label:"Engagement section picture",desc:"The big 'Say yes — Engagement Rings' banner"},
   {key:"bridal-wedding",label:"Wedding section picture",desc:"The big 'Forever bands — Wedding Rings' banner"}
@@ -965,23 +993,29 @@ function renderSlots(){
       </div>
     </div>`).join("");
 }
-async function upSlot(key){
-  const f=$("#slot-"+key).files[0];if(!f)return alert("Choose a picture first");
-  const fd=new FormData();fd.append("imageFile",f);
-  try{
-    siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});
-    $("#slotWarn").classList.remove("show");
-    renderSlots();
-  }catch(err){
-    if((err.message||"").toLowerCase().includes("unknown slot"))$("#slotWarn").classList.add("show");
-    alert(err.message);
-  }
+
+/* Category card pictures — one slot per category + the two material cards */
+function renderCatSlots(){
+  const el=$("#catSlotCards");if(!el)return;
+  const base=(categories||[])
+    .filter(c=>c.slug!=="jewellery"&&c.slug!=="cosmetics")
+    .map(c=>({key:"cat-"+c.slug,label:c.name}));
+  [["cat-gemstones","Gemstones"],["cat-gold","Gold"]].forEach(([k,l])=>{
+    if(!base.some(b=>b.key===k))base.push({key:k,label:l});
+  });
+  el.innerHTML=base.map(s=>`
+    <div class="slotcard">
+      <h3>${esc(s.label)}</h3>
+      <p class="mini">Square card picture — it crops to fit the card.</p>
+      <div class="bimg">${siteImages[s.key]?`<img src="${esc(ub(siteImages[s.key]))}">`:'<div class="noimg">No picture yet — shows a letter</div>'}</div>
+      <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-${s.key}" accept="image/*"></label>
+      <div class="row" style="margin-top:10px">
+        <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" onclick="upSlot('${s.key}')">Upload picture</button>
+        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
+      </div>
+    </div>`).join("");
 }
-async function delSlot(key){
-  if(!confirm("Remove this picture? The section falls back to its gradient default."))return;
-  try{siteImages=await api("/api/site-images/"+key,{method:"DELETE"});renderSlots();}
-  catch(err){alert(err.message);}
-}
+
 function renderLogo(){
   if(siteImages.logo){$("#logoImg").src=ub(siteImages.logo);$("#logoImg").hidden=false;$("#logoPrev").src=ub(siteImages.logo);$("#logoPrev").hidden=false;}
   else{$("#logoImg").hidden=true;$("#logoPrev").hidden=true;}
