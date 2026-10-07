@@ -42,6 +42,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .note.show{display:block}
 .warn{display:none;background:#fdf3e7;border:1.5px solid #e8d5b5;color:#8a6a2f;border-radius:10px;padding:12px 16px;font-size:.85rem;margin-bottom:18px}
 .warn.show{display:block}
+.errbox{display:none;background:#fdecea;border:1.5px solid #e8b5b0;color:#8a2f2a;border-radius:10px;padding:12px 16px;font-size:.8rem;margin:12px 0;font-family:monospace;word-break:break-all}
+.errbox.show{display:block}
 .info-box{background:var(--blush-soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:.85rem;color:var(--ink-70);margin-bottom:18px}
 .plist{display:flex;flex-direction:column;gap:10px}
 .pitem{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
@@ -249,9 +251,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-categories">
     <h1>Categories & banners</h1>
     <p class="sub">The tree drives the whole site. Each category gets its own page and banner.</p>
-    <div class="info-box">
-      <b>How categories appear on the site:</b> every active category becomes a chip in "Shop the Collection" and opens its own page. After adding one here, it appears on the site within ~15 seconds.
-    </div>
+    <div class="info-box">Every active category becomes a chip in "Shop the Collection" and opens its own page. New categories appear on the site within ~15 seconds.</div>
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px">Add a category</h2>
       <form id="catForm">
@@ -340,7 +340,6 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-home">
     <h1>Homepage control</h1>
     <p class="sub">Hero pictures rotate every 3 seconds. Upload up to 3 for the slideshow.</p>
-    <p class="warn" id="slotWarn">⚠ The server is rejecting banner slots ("Unknown slot") — deploy the latest server.js.</p>
     <div class="card">
       <form id="heroForm">
         <label class="field">Hero pictures — up to 3; the site cross-fades them every 3 seconds <input type="file" id="heroFile" accept="image/*" multiple></label>
@@ -361,16 +360,40 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
       </form>
     </div>
 
+    <!-- STATIC uploaders — these are plain HTML and can never be blank -->
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.35rem;margin-bottom:4px">Engagement & Wedding section pictures</h2>
-      <p class="sub" style="margin-bottom:16px">These are the two big banners in "Shop the Collection" on the homepage. Upload one picture per section — the text stays as it is.</p>
-      <div class="row" id="slotCards"></div>
+      <p class="sub" style="margin-bottom:16px">The two big banners in "Shop the Collection" on the homepage.</p>
+      <div class="row">
+        <div class="slotcard">
+          <h3>Engagement section picture</h3>
+          <p class="mini">The big "Say yes — Engagement Rings" banner</p>
+          <div class="bimg"><img id="img-bridal-engagement" style="display:none" alt=""><div class="noimg" id="noimg-bridal-engagement">No picture yet</div></div>
+          <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-bridal-engagement" accept="image/*"></label>
+          <div class="row" style="margin-top:10px">
+            <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" type="button" onclick="upSlotSimple('bridal-engagement')">Upload picture</button>
+            <button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" type="button" onclick="delSlotSimple('bridal-engagement')">Remove</button>
+          </div>
+          <div class="errbox" id="err-bridal-engagement"></div>
+        </div>
+        <div class="slotcard">
+          <h3>Wedding section picture</h3>
+          <p class="mini">The big "Forever bands — Wedding Rings" banner</p>
+          <div class="bimg"><img id="img-bridal-wedding" style="display:none" alt=""><div class="noimg" id="noimg-bridal-wedding">No picture yet</div></div>
+          <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-bridal-wedding" accept="image/*"></label>
+          <div class="row" style="margin-top:10px">
+            <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" type="button" onclick="upSlotSimple('bridal-wedding')">Upload picture</button>
+            <button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" type="button" onclick="delSlotSimple('bridal-wedding')">Remove</button>
+          </div>
+          <div class="errbox" id="err-bridal-wedding"></div>
+        </div>
+      </div>
     </div>
 
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.35rem;margin-bottom:4px">Category card pictures</h2>
-      <p class="sub" style="margin-bottom:16px">These are the square cards under "Shop the Collection" (Rings, Engagement, Pendants, Gemstones, Gold — plus any categories you add). Without a picture they show a letter; upload one and it replaces the letter.</p>
-      <div class="row3" id="catSlotCards"></div>
+      <p class="sub" style="margin-bottom:16px">The square cards under "Shop the Collection". Without a picture they show a letter; upload one and it replaces the letter.</p>
+      <div class="row3" id="catSlotCards"><p class="mini">Loading…</p></div>
     </div>
 
     <div class="card">
@@ -456,6 +479,109 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
 </main>
 
 <script>
+/* ============================================================
+   STANDALONE SLOT UPLOADERS — defined FIRST, zero dependencies,
+   so the picture uploaders can never be broken by other code.
+   ============================================================ */
+let token=localStorage.getItem("zj-token")||"";
+let siteImages={};
+let IMG_T=Date.now();
+
+function slotShowErr(key,msg){
+  const el=document.getElementById("err-"+key);
+  if(el){el.textContent=msg||"";el.classList.toggle("show",!!msg);}
+}
+async function upSlotSimple(key){
+  const inp=document.getElementById("slot-"+key);
+  const f=inp&&inp.files&&inp.files[0];
+  if(!f)return alert("Choose a picture first");
+  if(!token)return alert("Session expired — please log in again");
+  slotShowErr(key,"Uploading…");
+  const fd=new FormData();fd.append("imageFile",f);
+  try{
+    const r=await fetch("/api/site-images/"+key,{method:"POST",headers:{Authorization:"Bearer "+token},body:fd});
+    if(r.status===401){slotShowErr(key,"");return alert("Session expired — please log in again");}
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok){slotShowErr(key,(j.error||"Upload failed")+" (server said "+r.status+")");return;}
+    siteImages=j;IMG_T=Date.now();
+    slotShowErr(key,"");
+    paintSiteImages();
+  }catch(ex){slotShowErr(key,"Network error: "+ex.message);}
+}
+async function delSlotSimple(key){
+  if(!confirm("Remove this picture? The section falls back to its default."))return;
+  if(!token)return alert("Session expired — please log in again");
+  try{
+    const r=await fetch("/api/site-images/"+key,{method:"DELETE",headers:{Authorization:"Bearer "+token}});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)return alert(j.error||"Remove failed");
+    siteImages=j;IMG_T=Date.now();paintSiteImages();
+  }catch(ex){alert("Network error: "+ex.message);}
+}
+function paintSiteImages(){
+  ["bridal-engagement","bridal-wedding"].forEach(k=>{
+    const img=document.getElementById("img-"+k),no=document.getElementById("noimg-"+k);
+    if(!img||!no)return;
+    if(siteImages[k]){img.src=siteImages[k]+"?t="+IMG_T;img.style.display="block";no.style.display="none";}
+    else{img.style.display="none";no.style.display="grid";}
+  });
+  const li=document.getElementById("logoImg"),lp=document.getElementById("logoPrev");
+  if(siteImages.logo){
+    if(li){li.src=siteImages.logo+"?t="+IMG_T;li.hidden=false;}
+    if(lp){lp.src=siteImages.logo+"?t="+IMG_T;lp.hidden=false;}
+  }else{
+    if(li)li.hidden=true;if(lp)lp.hidden=true;
+  }
+}
+
+/* ============================================================
+   CATEGORY CARD UPLOADERS — hardcoded fallback list, so they
+   always appear; shows the reason on-screen if anything fails.
+   ============================================================ */
+const CAT_SLOT_FALLBACK=["rings","engagement","wedding","earrings","necklaces","pendants","bracelets","makeup","lip-products","skincare","fragrance","body-care"];
+function renderCatSlots(){
+  const el=document.getElementById("catSlotCards");
+  if(!el)return;
+  try{
+    let cats=[];
+    try{cats=(typeof categories==="object"&&Array.isArray(categories))?categories:[];}catch(_){}
+    let base=cats.filter(c=>c.slug&&c.slug!=="jewellery"&&c.slug!=="cosmetics").map(c=>({key:"cat-"+c.slug,label:c.name}));
+    CAT_SLOT_FALLBACK.forEach(sl=>{
+      if(!base.some(b=>b.key==="cat-"+sl))base.push({key:"cat-"+sl,label:sl.replace(/-/g," ").replace(/\b\w/g,m=>m.toUpperCase())});
+    });
+    el.innerHTML=base.map(s=>`
+      <div class="slotcard">
+        <h3>${s.label.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</h3>
+        <p class="mini">Square card picture — it crops to fit.</p>
+        <div class="bimg" id="bimg-${s.key}">${siteImages[s.key]?`<img src="${siteImages[s.key]}?t=${IMG_T}">`:'<div class="noimg">No picture yet — shows a letter</div>'}</div>
+        <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-${s.key}" accept="image/*"></label>
+        <div class="row" style="margin-top:10px">
+          <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" type="button" onclick="upCatSlot('${s.key}')">Upload picture</button>
+          ${siteImages[s.key]?`<button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" type="button" onclick="delSlotSimple('${s.key}');setTimeout(renderCatSlots,400)">Remove</button>`:""}
+        </div>
+      </div>`).join("");
+  }catch(ex){
+    el.innerHTML='<p class="mini" style="color:#b3261e">Renderer error: '+String(ex&&ex.message||ex)+'</p>';
+  }
+}
+async function upCatSlot(key){
+  const inp=document.getElementById("slot-"+key);
+  const f=inp&&inp.files&&inp.files[0];
+  if(!f)return alert("Choose a picture first");
+  if(!token)return alert("Session expired — please log in again");
+  const fd=new FormData();fd.append("imageFile",f);
+  try{
+    const r=await fetch("/api/site-images/"+key,{method:"POST",headers:{Authorization:"Bearer "+token},body:fd});
+    if(r.status===401)return alert("Session expired — please log in again");
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)return alert((j.error||"Upload failed")+(j.error&&j.error.toLowerCase().includes("unknown slot")?"\n\n→ Your server needs the cat- slot patch: in POST /api/site-images/:slot change the check to:\nif (!SITE_SLOTS.includes(req.params.slot) && !req.params.slot.startsWith('cat-'))":""));
+    siteImages=j;IMG_T=Date.now();renderCatSlots();
+  }catch(ex){alert("Network error: "+ex.message);}
+}
+
+/* ============================================================
+   MAIN APP
+   ============================================================ */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -464,12 +590,9 @@ const STATUS={"in-stock":"In stock","out-of-stock":"Out of stock","sold":"Sold"}
 const PH='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="#F9EDE7"/></svg>');
 const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
 const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
-let IMG_T=Date.now();
 const ub=p=>p?(p+(p.includes("?")?"&":"?")+"t="+IMG_T):p;
-
-let token=localStorage.getItem("zj-token")||"";
 let myUsername="";
-let products=[],categories=[],content={hero:{},banners:{}},siteImages={};
+let products=[],categories=[],content={hero:{},banners:{}};
 let allDia=[],reviews=[],pages=[],posts=[],settings={},subs=[],users=[];
 let editingId=null,currentImages=[],listFilter="all",formType="jewellery";
 let currentHeroImages=[],revFilter="pending",contentSub="pages",editingPost=null,editingUser=null;
@@ -478,9 +601,7 @@ async function api(path,opts={}){
   const headers={...(opts.headers||{})};
   if(token)headers.Authorization="Bearer "+token;
   if(!(opts.body instanceof FormData))headers["Content-Type"]="application/json";
-  const url=(!opts.method||opts.method==="GET")
-    ? path+(path.includes("?")?"&":"?")+"t="+Date.now()
-    : path;
+  const url=(!opts.method||opts.method==="GET")?path+(path.includes("?")?"&":"?")+"t="+Date.now():path;
   const res=await fetch(url,{...opts,headers});
   if(res.status===401){showLogin();throw new Error("Please log in");}
   const data=await res.json().catch(()=>({}));
@@ -530,11 +651,9 @@ async function refresh(){
     api("/api/users").then(d=>{users=Array.isArray(d)?d:[];$("#usrWarn").classList.remove("show");}).catch(()=>$("#usrWarn").classList.add("show"))
   ];
   await Promise.all(jobs);
-  try{
-    renderList();renderCats();fillHero();fillSelects();renderLogo();
-    renderSlots();renderCatSlots();
-    renderDia();renderReviews();renderPages();renderBlog();fillSettings();renderSubs();renderUsers();
-  }catch(err){console.error("render error:",err);}
+  try{renderList();renderCats();fillHero();fillSelects();paintSiteImages();renderCatSlots();}catch(ex){console.error("render A:",ex);}
+  try{renderDia();renderReviews();}catch(ex){console.error("render B:",ex);}
+  try{renderPages();renderBlog();fillSettings();renderSubs();renderUsers();}catch(ex){console.error("render C:",ex);}
   const pend=reviews.filter(r=>(r.status||"pending")==="pending").length;
   $("#reviewsTab").innerHTML="Reviews"+(pend?` <span class="cnt">${pend}</span>`:"");
 }
@@ -559,7 +678,7 @@ function fillSelects(){
   const cur=catSel.value;
   catSel.innerHTML=opts.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("")||'<option value="">— add a category first —</option>';
   if(opts.some(c=>c.slug===cur))catSel.value=cur;
-  $("#cParent").innerHTML='<option value="">— top level (container only) —</option>'+categories.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("");
+  $("#cParent").innerHTML='<option value="">— top level —</option>'+categories.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("");
   $("#linkList").innerHTML=categories.map(c=>`<option value="#/shop/${c.slug}"></option>`).join("")
     +'<option value="#/diamonds"></option>'
     +Object.keys(PAGE_SEED).map(s=>`<option value="#/page/${s}"></option>`).join("")
@@ -926,7 +1045,7 @@ function resetBlog(){
   }catch(err){alert(err.message);}
 });
 
-/* ================= HOMEPAGE — hero + section banners + category cards + logo ================= */
+/* ================= HOMEPAGE — hero form + logo ================= */
 function fillHero(){
   const h=content.hero||{};
   currentHeroImages=(Array.isArray(h.images)&&h.images.length)?h.images.slice():(h.image?[h.image]:[]);
@@ -955,78 +1074,13 @@ function rmHero(i){currentHeroImages.splice(i,1);renderHeroStrip();}
     const n=$("#heroNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);}
   catch(err){alert(err.message);}
 });
-
-/* shared slot uploader — used by section banners AND category cards */
-async function upSlot(key){
-  const inp=$("#slot-"+key);if(!inp)return;
-  const f=inp.files[0];if(!f)return alert("Choose a picture first");
-  const fd=new FormData();fd.append("imageFile",f);
-  try{
-    siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});
-    $("#slotWarn").classList.remove("show");
-    renderSlots();renderCatSlots();renderLogo();
-  }catch(err){
-    if((err.message||"").toLowerCase().includes("unknown slot"))$("#slotWarn").classList.add("show");
-    alert(err.message);
-  }
-}
-async function delSlot(key){
-  if(!confirm("Remove this picture? The section falls back to its default."))return;
-  try{siteImages=await api("/api/site-images/"+key,{method:"DELETE"});renderSlots();renderCatSlots();renderLogo();}
-  catch(err){alert(err.message);}
-}
-
-const SLOTS=[
-  {key:"bridal-engagement",label:"Engagement section picture",desc:"The big 'Say yes — Engagement Rings' banner"},
-  {key:"bridal-wedding",label:"Wedding section picture",desc:"The big 'Forever bands — Wedding Rings' banner"}
-];
-function renderSlots(){
-  $("#slotCards").innerHTML=SLOTS.map(s=>`
-    <div class="slotcard">
-      <h3>${esc(s.label)}</h3>
-      <p class="mini">${esc(s.desc)}</p>
-      <div class="bimg">${siteImages[s.key]?`<img src="${esc(ub(siteImages[s.key]))}">`:'<div class="noimg">No picture yet — the section shows its blush gradient</div>'}</div>
-      <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-${s.key}" accept="image/*"></label>
-      <div class="row" style="margin-top:10px">
-        <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" onclick="upSlot('${s.key}')">Upload picture</button>
-        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
-      </div>
-    </div>`).join("");
-}
-
-/* Category card pictures — one slot per category + the two material cards */
-function renderCatSlots(){
-  const el=$("#catSlotCards");if(!el)return;
-  const base=(categories||[])
-    .filter(c=>c.slug!=="jewellery"&&c.slug!=="cosmetics")
-    .map(c=>({key:"cat-"+c.slug,label:c.name}));
-  [["cat-gemstones","Gemstones"],["cat-gold","Gold"]].forEach(([k,l])=>{
-    if(!base.some(b=>b.key===k))base.push({key:k,label:l});
-  });
-  el.innerHTML=base.map(s=>`
-    <div class="slotcard">
-      <h3>${esc(s.label)}</h3>
-      <p class="mini">Square card picture — it crops to fit the card.</p>
-      <div class="bimg">${siteImages[s.key]?`<img src="${esc(ub(siteImages[s.key]))}">`:'<div class="noimg">No picture yet — shows a letter</div>'}</div>
-      <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-${s.key}" accept="image/*"></label>
-      <div class="row" style="margin-top:10px">
-        <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" onclick="upSlot('${s.key}')">Upload picture</button>
-        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
-      </div>
-    </div>`).join("");
-}
-
-function renderLogo(){
-  if(siteImages.logo){$("#logoImg").src=ub(siteImages.logo);$("#logoImg").hidden=false;$("#logoPrev").src=ub(siteImages.logo);$("#logoPrev").hidden=false;}
-  else{$("#logoImg").hidden=true;$("#logoPrev").hidden=true;}
-}
 async function upLogo(){
   const f=$("#logoFile").files[0];if(!f)return alert("Choose a logo image first");
   const fd=new FormData();fd.append("imageFile",f);
-  try{siteImages=await api("/api/site-images/logo",{method:"POST",body:fd});renderLogo();}catch(err){alert(err.message);}
+  try{siteImages=await api("/api/site-images/logo",{method:"POST",body:fd});IMG_T=Date.now();paintSiteImages();}catch(err){alert(err.message);}
 }
 async function delLogo(){
-  try{siteImages=await api("/api/site-images/logo",{method:"DELETE"});renderLogo();}catch(err){alert(err.message);}
+  try{siteImages=await api("/api/site-images/logo",{method:"DELETE"});IMG_T=Date.now();paintSiteImages();}catch(err){alert(err.message);}
 }
 
 /* ================= SETTINGS ================= */
