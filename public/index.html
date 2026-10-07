@@ -12,9 +12,7 @@ html{overflow-x:clip;scroll-behavior:smooth}
 body{font-family:"Inter",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip;-webkit-tap-highlight-color:transparent}
 img{max-width:100%;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-#shop,#contact,#diamonds{scroll-margin-top:84px}
-
-/* ---------- HEADER + MOBILE MENU ---------- */
+#shop,#contact,#diamonds,#catView{scroll-margin-top:84px}
 .site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
 .header-in{display:flex;align-items:center;gap:16px;height:72px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
@@ -27,8 +25,6 @@ img{max-width:100%;display:block}
 .menu-btn{display:none;background:none;border:1.5px solid var(--ink);border-radius:999px;padding:9px 18px;font:inherit;font-size:.78rem;font-weight:700;cursor:pointer;flex-shrink:0}
 .wa-pill{display:inline-block;text-decoration:none;font-size:.8rem;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:9px 20px;white-space:nowrap;flex-shrink:0}
 .wa-pill:hover{background:var(--ink);color:var(--blush)}
-
-/* ---------- HERO ---------- */
 .hero{position:relative;min-height:540px;display:flex;align-items:center;background:linear-gradient(120deg,#17120F 0%,#3a2c24 55%,#8a6a58 100%);overflow:hidden}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out}
 .hero-bg.show{opacity:.85}
@@ -41,7 +37,6 @@ img{max-width:100%;display:block}
 .btn{display:inline-block;font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;min-height:44px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;text-align:center}
 .btn-dark{background:var(--ink);color:var(--blush)}.btn-dark:hover{background:#000}
 .btn-ghost{border-color:#fff;color:#fff}.btn-ghost:hover{background:#fff;color:var(--ink)}
-
 .section{padding:64px 0}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px}
 .sec-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.8rem);text-transform:uppercase;letter-spacing:.03em}
@@ -52,12 +47,10 @@ img{max-width:100%;display:block}
 .occ-txt{position:relative;z-index:1;color:#fff;padding:24px}
 .occ-txt h3{font-family:var(--serif);font-size:1.9rem;margin:6px 0 4px}
 .occ-cta{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-bottom:2px solid #fff;padding-bottom:3px}
-
-/* ---------- CHIPS ---------- */
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 26px}
-.chip{font:inherit;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:11px 18px;min-height:40px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-70);cursor:pointer}
+.chip{font:inherit;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:11px 18px;min-height:40px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-70);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+a.chip:hover{border-color:var(--ink);color:var(--ink)}
 .chip.active{background:var(--ink);border-color:var(--ink);color:var(--blush)}
-
 .cat-track{display:flex;gap:22px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .cat-track::-webkit-scrollbar{display:none}
 .cat-card{flex:0 0 250px;text-decoration:none;color:inherit}
@@ -66,7 +59,6 @@ img{max-width:100%;display:block}
 .cat-card h3{font-weight:500;font-size:1.15rem;margin-top:12px}
 .dash{width:26px;height:2px;background:var(--ink);margin:8px 0}
 .cat-card p{color:var(--ink-70);font-size:.9rem}
-
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .card{cursor:pointer;display:flex;flex-direction:column}
 .card-img{aspect-ratio:1/1;background:var(--blush-soft);border-radius:6px;overflow:hidden}
@@ -75,8 +67,6 @@ img{max-width:100%;display:block}
 .range{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);margin-top:5px}
 .btn-block{display:block;width:100%;padding:11px 10px;font-size:.66rem;margin-top:auto}
 .empty{color:var(--ink-50);grid-column:1/-1;padding:30px 0}
-
-/* ---------- CONTACT ---------- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--blush-soft)}
 form.panel label{display:flex;flex-direction:column;gap:6px;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70)}
@@ -87,8 +77,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .enq-tab.active{background:var(--ink);border-color:var(--ink);color:var(--blush)}
 .enq-form{display:none}.enq-form.show{display:flex}
 .hint{font-size:.78rem;color:var(--ink-70);font-weight:500;letter-spacing:0;text-transform:none}
-
-/* ---------- BE INSPIRED + REVIEWS ---------- */
 .inspired{background:var(--blush-soft);padding:56px 0}
 .insp-head{text-align:center;margin-bottom:26px}
 .insp-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.6rem);letter-spacing:.12em;text-transform:uppercase}
@@ -120,8 +108,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .starpick button.on{color:var(--gold)}
 .rv-note{display:none;margin-top:10px;font-size:.85rem;font-weight:600;color:#1c7c39}
 .rv-note.show{display:block}
-
-/* ---------- FOOTER ---------- */
 .site-footer{background:var(--ink);color:var(--blush);padding:56px 0 28px}
 .f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1.4fr;gap:34px}
 .f-brand strong{font-family:var(--serif);font-size:1.5rem;display:block}
@@ -144,9 +130,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .f-note.show{display:block}
 .f-bottom{border-top:1px solid rgba(249,234,227,.15);margin-top:38px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.74rem;color:rgba(249,234,227,.55)}
 .f-bottom a{color:inherit;text-decoration:underline}
-
-/* ---------- SEPARATE PAGES ---------- */
-#pageView{padding:32px 0 70px;min-height:62vh}
+#pageView,#catView{padding:32px 0 70px;min-height:62vh}
 .page-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4vw,2.6rem);margin:8px 0 20px;overflow-wrap:break-word}
 .page-body{max-width:780px;color:var(--ink-70);font-size:1rem;line-height:1.85}
 .page-body h2{font-family:var(--serif);color:var(--ink);font-size:1.5rem;margin:26px 0 8px}
@@ -154,8 +138,12 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .page-soon{background:var(--blush-soft);border:1.5px dashed var(--blush);border-radius:14px;padding:40px 22px;text-align:center;max-width:680px}
 .page-soon p{color:var(--ink-70);margin-bottom:18px}
 .rev-page-grid,.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-
-/* ---------- DIAMOND SHOP ---------- */
+.cat-banner{position:relative;min-height:210px;border-radius:10px;overflow:hidden;display:flex;align-items:flex-end;background:linear-gradient(140deg,var(--blush-soft),var(--blush));margin:6px 0 24px}
+.cat-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,15,.05),rgba(23,18,15,.62))}
+.cat-btxt{position:relative;z-index:1;color:#fff;padding:24px}
+.cat-btxt h1{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05}
+.cat-btxt p{opacity:.9;max-width:60ch}
 .dia-head{text-align:center;max-width:780px;margin:0 auto}
 .dia-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4vw,2.9rem);text-transform:uppercase;letter-spacing:.1em}
 .dia-head p{font-family:var(--serif);font-size:1.05rem;color:var(--ink-70);margin-top:8px}
@@ -224,14 +212,12 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 .dia-img{aspect-ratio:1/1;background:#e9edf4;display:grid;place-items:center;flex-shrink:0}
 .dia-grid.list .dia-img{width:180px;aspect-ratio:auto}
 .dia-img img{width:100%;height:100%;object-fit:cover}
-.dia-img svg{max-width:70%;max-height:70%}
+.dia-img svg{max-width:74%;max-height:74%}
 .dia-body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
 .dia-body h3{font-size:1rem;font-weight:600;overflow-wrap:break-word}
 .diaspec{font-size:.84rem;color:var(--ink-70)}
 .diameta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px;flex-wrap:wrap}
 .cert{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--ink-70);overflow-wrap:anywhere}
-
-/* ---------- MODALS ---------- */
 .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:14px;background:rgba(23,18,15,.55)}
 .modal.open{display:grid}
 .modal-card{position:relative;width:100%;max-width:760px;max-height:88vh;max-height:88dvh;overflow-y:auto;background:var(--blush-soft);border-radius:14px;padding:28px;-webkit-overflow-scrolling:touch}
@@ -242,17 +228,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 .detail h2{font-family:var(--serif);font-size:1.8rem;margin:6px 0;overflow-wrap:break-word}
 .muted{color:var(--ink-70)}
 .wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:70;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-
-/* ============================================================
-   TABLETS ≤ 1024
-   ============================================================ */
-@media(max-width:1024px){
-  .grid{grid-template-columns:repeat(3,1fr);gap:18px}
-}
-
-/* ============================================================
-   PHABLETS ≤ 900
-   ============================================================ */
+@media(max-width:1024px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}}
 @media(max-width:900px){
   .menu-btn{display:inline-flex}
   .header-in{height:64px;gap:10px}
@@ -275,7 +251,6 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   .dia-grid{grid-template-columns:repeat(2,1fr);gap:14px}
   .dia-grid.list{grid-template-columns:1fr}
   .dia-grid.list .dia-img{width:120px}
-  .dia-head p{font-size:1rem}
   .results-bar{flex-direction:column;align-items:flex-start;gap:12px}
   .results-bar>span:last-child{width:100%;justify-content:space-between}
   .rev-page-grid,.blog-grid{grid-template-columns:1fr 1fr}
@@ -284,10 +259,6 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   .rev-card{flex-basis:300px}
   .section{padding:52px 0}
 }
-
-/* ============================================================
-   PHONES ≤ 640
-   ============================================================ */
 @media(max-width:640px){
   .wrap{padding:0 16px}
   .header-in{gap:8px}
@@ -306,13 +277,11 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   .occ{min-height:210px}
   .occ-txt{padding:18px}
   .occ-txt h3{font-size:1.5rem}
-  /* chips become one smooth swipe row */
   .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 22px;padding:4px 16px 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:8px}
   .chips::-webkit-scrollbar{display:none}
   .chip{flex:0 0 auto;padding:10px 15px}
   .cat-track{gap:14px}
   .cat-card{flex:0 0 200px}
-  .cat-card p{font-size:.84rem}
   .card h3{font-size:.95rem}
   .btn-block{padding:12px 8px;font-size:.62rem;letter-spacing:.06em}
   .sec-head{margin-bottom:18px}
@@ -322,20 +291,16 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   .gal-btn{display:none}
   .rev-card{flex-basis:84%;padding:18px}
   .rev-title,.rev-text{text-align:left}
-  .rev-text{font-size:.9rem}
   .shape-card{flex-basis:72%}
   .shape-btn{display:none}
   .segbtn{padding:13px 24px}
   .dia-tabs{margin:16px 0 2px}
   .dtabs{padding:11px 18px;font-size:.95rem}
   .dia-bar{gap:18px;padding:16px 0}
-  .dia-group label{font-size:.88rem}
   .segrow button{font-size:.72rem;padding:10px 1px}
   .dia-grid{gap:12px}
   .dia-grid.list .dia-img{width:104px}
   .dia-body{padding:12px}
-  .dia-body h3{font-size:.92rem}
-  .diaspec{font-size:.8rem}
   .modal{padding:10px}
   .modal-card{padding:20px;border-radius:12px;max-height:92dvh}
   .detail{gap:16px}
@@ -347,22 +312,15 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   .f-brand,.f-news{border-top:none;padding-top:0;margin-top:0}
   .f-col a{padding:11px 0}
   .f-news form button{flex:1 1 100%}
-  .f-news input{font-size:16px}
   .f-bottom{flex-direction:column;align-items:flex-start;gap:8px}
-  #pageView{padding:24px 0 60px}
-  .page-soon{padding:32px 18px}
+  #pageView,#catView{padding:24px 0 60px}
   .rev-page-grid,.blog-grid{grid-template-columns:1fr}
+  .cat-banner{min-height:170px}
   .wa-float{right:12px;padding:13px 18px;font-size:.76rem}
-  select{font-size:16px!important}
 }
-
-/* ============================================================
-   SMALL PHONES ≤ 400
-   ============================================================ */
 @media(max-width:400px){
   .grid{gap:10px}
   .card h3{font-size:.9rem}
-  .range{font-size:.55rem;letter-spacing:.14em}
   .btn-block{font-size:.58rem;padding:11px 4px}
   .dia-grid{grid-template-columns:1fr 1fr;gap:10px}
   .dia-grid.list .dia-img{width:92px}
@@ -382,12 +340,12 @@ details.adv[open] summary::after{transform:rotate(180deg)}
       <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
     </a>
     <nav class="main-nav" id="mainNav">
-      <a href="#shop" data-navcat="rings">Rings</a>
+      <a href="#/shop/rings">Rings</a>
       <a href="#/diamonds">Diamonds</a>
-      <a href="#shop" data-navcat="engagement">Engagement</a>
-      <a href="#shop" data-navcat="wedding">Wedding</a>
-      <a href="#shop" data-navcat="pendants">Pendants</a>
-      <a href="#shop" data-navcat="cosmetics">Cosmetics</a>
+      <a href="#/shop/engagement">Engagement</a>
+      <a href="#/shop/wedding">Wedding</a>
+      <a href="#/shop/pendants">Pendants</a>
+      <a href="#/shop/cosmetics">Cosmetics</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="wa-pill" data-wa="general" target="_blank" rel="noopener">WhatsApp</a>
@@ -395,7 +353,6 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   </div>
 </header>
 
-<!-- HERO — up to 3 pictures, cross-fading every 3 seconds -->
 <section class="hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
@@ -403,34 +360,32 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     <h1 id="heroHeading">Rings for your moments. Beauty for your every day.</h1>
     <p id="heroSub">Fine engagement, wedding and everyday pieces — plus our cosmetics line. Enquire or order directly on WhatsApp.</p>
     <div class="hero-actions">
-      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" id="heroCta1" href="#shop">Shop rings</a>
+      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" id="heroCta1" href="#/shop/rings">Shop rings</a>
       <a class="btn btn-ghost" data-wa="general" target="_blank" rel="noopener">Speak to us on WhatsApp</a>
     </div>
   </div>
 </section>
 
 <main>
-  <!-- ============ DIAMOND FLOW ============ -->
   <section class="section wrap" id="diamonds" style="padding-top:44px;min-height:380px"></section>
 
   <section class="section wrap" id="shop" style="padding-top:20px">
     <div class="occ-grid">
-      <button class="occ" id="occEng">
+      <a class="occ" id="occEng" href="#/shop/engagement">
         <img id="occEngImg" alt="" hidden>
         <span class="occ-txt"><span class="eyebrow">Say yes</span><h3>Engagement Rings</h3><span class="occ-cta">Browse engagement →</span></span>
-      </button>
-      <button class="occ" id="occWed">
+      </a>
+      <a class="occ" id="occWed" href="#/shop/wedding">
         <img id="occWedImg" alt="" hidden>
         <span class="occ-txt"><span class="eyebrow">Forever bands</span><h3>Wedding Rings</h3><span class="occ-cta">Browse wedding →</span></span>
-      </button>
+      </a>
     </div>
-    <div class="sec-head"><h2>Shop the Collection</h2><p class="muted">Every piece below was posted from the admin portal.</p></div>
+    <div class="sec-head"><h2>Shop the Collection</h2><p class="muted">Tap a category to open its own page.</p></div>
     <div class="cat-track" id="catTrack"></div>
     <div class="chips" id="chips"></div>
     <div class="grid" id="productGrid"></div>
   </section>
 
-  <!-- ============ BE INSPIRED + REVIEWS ============ -->
   <section class="inspired" id="inspired">
     <div class="wrap">
       <div class="insp-head">
@@ -451,7 +406,6 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     </div>
   </section>
 
-  <!-- ============ CONTACT ============ -->
   <section class="section wrap" id="contact">
     <div class="contact-grid">
       <div>
@@ -487,7 +441,17 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 </main>
 </div><!-- /homeView -->
 
-<!-- ============ SEPARATE PAGES (footer links open here) ============ -->
+<!-- ============ CATEGORY PAGE (Rings, Engagement, Wedding, Cosmetics…) ============ -->
+<div id="catView" hidden>
+  <div class="wrap">
+    <p class="dia-crumb" id="catCrumb"></p>
+    <div id="catBanner"></div>
+    <div class="chips" id="catChips"></div>
+    <div class="grid" id="catGrid"></div>
+  </div>
+</div>
+
+<!-- ============ SEPARATE CONTENT PAGES (footer links) ============ -->
 <div id="pageView" hidden>
   <div class="wrap">
     <p class="dia-crumb"><a href="#/">Home</a> / <span id="pgCrumb"></span></p>
@@ -495,13 +459,12 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   </div>
 </div>
 
-<!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="f-grid">
       <div class="f-brand">
         <strong>ZanJewelry</strong>
-        <p>Jewelry made to celebrate you. Fine rings, loose diamonds and beauty essentials.</p>
+        <p id="fTagline">Jewelry made to celebrate you. Fine rings, loose diamonds and beauty essentials.</p>
         <div class="f-social">
           <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
           <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
@@ -555,7 +518,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
       </div>
     </div>
     <div class="f-bottom">
-      <span>© 2026 ZanJewelry. All Rights Reserved.</span>
+      <span id="fCopy">© 2026 ZanJewelry. All Rights Reserved.</span>
       <span style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
         <span>ZanJewelry Manufacturing · Est. 2021</span>
         <a href="/admin">Admin Portal</a>
@@ -612,11 +575,22 @@ const cap=s=>s?s[0].toUpperCase()+s.slice(1):"";
 const slug=s=>s.toLowerCase();
 const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
 const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
+const bust=u=>u+(u.includes("?")?"&":"?")+"t="+Date.now();
+
+/* shared facet gradients — injected once, referenced by every diamond icon */
+document.body.insertAdjacentHTML('afterbegin','<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'+
+'<linearGradient id="fA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#eef2f8"/><stop offset="1" stop-color="#c7d2e2"/></linearGradient>'+
+'<linearGradient id="fB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset=".55" stop-color="#dde5f0"/><stop offset="1" stop-color="#aebdd4"/></linearGradient>'+
+'<linearGradient id="fC" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#e7edf6"/><stop offset=".5" stop-color="#c3cfe0"/><stop offset="1" stop-color="#93a5c0"/></linearGradient>'+
+'<linearGradient id="fD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d3dce9"/></linearGradient>'+
+'<linearGradient id="fE" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#eff3f9"/><stop offset="1" stop-color="#b6c3d8"/></linearGradient>'+
+'<radialGradient id="fT" cx=".38" cy=".3" r="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#e6ecf5"/><stop offset="1" stop-color="#bcc9dc"/></radialGradient>'+
+'</defs></svg>');
 
 let WA="27703887170", products=[];
 const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
 
-/* ============ WHATSAPP TEMPLATES (single * = bold in WhatsApp) ============ */
+/* ============ WHATSAPP TEMPLATES ============ */
 const MSG_GENERAL="Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\nPlease assist me with my enquiry.\n\nThank you.";
 function productMsg(p){
   const cos=(p.productType||p.type)==="cosmetic";
@@ -660,8 +634,8 @@ function closeMenu(){const n=$("#mainNav");if(n.classList.contains("open")){n.cl
 });
  $$("#mainNav a").forEach(a=>a.addEventListener("click",closeMenu));
 
-/* ============ SHOP — matches your server's category/productType fields ============ */
-let categories=[];
+/* ============ SHOP DATA ============ */
+let categories=[],settings={},siteImages={},content={hero:{},banners:{}};
 const FALLBACK_CATS=[
   {slug:"rings",name:"Rings",parent:"jewellery",active:true},{slug:"engagement",name:"Engagement Rings",parent:"rings",active:true},
   {slug:"wedding",name:"Wedding Rings",parent:"rings",active:true},{slug:"earrings",name:"Earrings",parent:"jewellery",active:true},
@@ -670,32 +644,11 @@ const FALLBACK_CATS=[
   {slug:"lip-products",name:"Lip Products",parent:"makeup",active:true},{slug:"skincare",name:"Skincare",parent:"cosmetics",active:true},
   {slug:"fragrance",name:"Fragrance",parent:"cosmetics",active:true},{slug:"body-care",name:"Body Care",parent:"cosmetics",active:true}
 ];
+const catOf=s=>categories.find(c=>c.slug===s);
 const inPath=(p,sl)=>p.category===sl||(p.path||[]).some(x=>x.slug===sl);
 const MATS={Diamond:"diamond",Gemstones:"gemstone",Gold:"gold",Silver:"silver","Rose Gold":"rose-gold",Platinum:"platinum"};
-let filter="All";
-function matchFilter(p){
-  if(filter==="All")return true;
-  if(filter.startsWith("cat:"))return inPath(p,filter.slice(4));
-  return MATS[filter]?p.material===MATS[filter]:false;
-}
-function setFilter(f){filter=f;renderChips();renderGrid();}
-function renderChips(){
-  if(!$("#chips"))return;
-  const kids=categories.filter(c=>c.parent&&c.active!==false);
-  $("#chips").innerHTML=
-    `<button class="chip ${filter==="All"?"active":""}" data-cf="All">All</button>`+
-    kids.map(c=>`<button class="chip ${filter==="cat:"+c.slug?"active":""}" data-cf="cat:${c.slug}">${esc(c.name)}</button>`).join("")+
-    Object.keys(MATS).map(m=>`<button class="chip ${filter===m?"active":""}" data-cf="${m}">${m}</button>`).join("");
-}
-document.addEventListener("click",e=>{
-  const cf=e.target.closest("[data-cf]");
-  if(cf){setFilter(cf.dataset.cf);return;}
-  const nv=e.target.closest("[data-navcat]");
-  if(nv&&nv.dataset.navcat)setFilter("cat:"+nv.dataset.navcat);
-});
- $("#occEng").addEventListener("click",()=>{setFilter("cat:engagement");$("#shop").scrollIntoView({behavior:"smooth"});});
- $("#occWed").addEventListener("click",()=>{setFilter("cat:wedding");$("#shop").scrollIntoView({behavior:"smooth"});});
-function choiceEngagement(){closeChoice();setFilter("cat:engagement");showHome();$("#shop").scrollIntoView({behavior:"smooth"});}
+const matSlug=m=>m.toLowerCase().replace(/\s+/g,"-");
+const matFromSlug=s=>Object.keys(MATS).find(m=>matSlug(m)===s);
 
 const imgFor=p=>{const s=String(p.image||(p.images&&p.images[0])||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
 function labelFor(p){
@@ -709,24 +662,34 @@ function cardHTML(p){
     <div class="range">${esc(labelFor(p))}</div><h3>${esc(p.name)}</h3>
     <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(productMsg(p))}">Enquire on WhatsApp</a></article>`;
 }
+
+/* homepage chips are LINKS — every selection opens its own page */
+function renderChips(){
+  if(!$("#chips"))return;
+  const list=(categories.length?categories:FALLBACK_CATS).filter(c=>c.active!==false);
+  $("#chips").innerHTML=
+    list.map(c=>`<a class="chip" href="#/shop/${c.slug}">${esc(c.name)}</a>`).join("")+
+    Object.keys(MATS).map(m=>`<a class="chip" href="#/material/${matSlug(m)}">${m}</a>`).join("");
+}
+
 const CATS=[
   {f:"Rings",t:"rings",d:"Fine pieces made to order."},
   {f:"Engagement",t:"engagement",d:"Solitaires, halos and clusters."},
   {f:"Pendants",t:"pendants",d:"Pendants that hold your story."},
-  {f:"Gemstones",m:"gemstone",d:"Amethyst, ruby, sapphire and more."},
-  {f:"Gold",m:"gold",d:"Everyday gold essentials for stacking."}
+  {f:"Gemstones",t:null,m:"gemstone",d:"Amethyst, ruby, sapphire and more."},
+  {f:"Gold",t:null,m:"gold",d:"Everyday gold essentials for stacking."}
 ];
 function renderCatCards(){
   $("#catTrack").innerHTML=CATS.map(c=>{
     const pool=products.filter(p=>c.t?inPath(p,c.t):p.material===c.m);
     const raw=pool.map(imgFor).find(Boolean)||"";
-    return `<a class="cat-card" href="#shop" ${c.t?`data-navcat="${c.t}"`:""}>
+    const href=c.t?`#/shop/${c.t}`:`#/material/${matSlug(c.f)}`;
+    return `<a class="cat-card" href="${href}">
       <div class="cat-img"><img src="${esc(raw||PLACE(c.f[0]))}" data-letter="${esc(c.f[0])}" alt="${esc(c.f)}" onerror="imgFail(this)"></div>
       <h3>${esc(c.f)}</h3><div class="dash"></div><p>${esc(c.d)}</p></a>`;}).join("");
 }
 function renderGrid(){
-  const list=products.filter(matchFilter);
-  $("#productGrid").innerHTML=list.map(cardHTML).join("")||'<p class="empty">Nothing here yet'+(filter!=="All"?" under "+esc(filter.replace("cat:","")):"")+' — post your first piece from the admin portal.</p>';
+  $("#productGrid").innerHTML=products.map(cardHTML).join("")||'<p class="empty">Nothing here yet — post your first piece from the admin portal.</p>';
   renderCatCards();
 }
 function openProduct(id){
@@ -752,6 +715,50 @@ document.addEventListener("click",e=>{
  $("#customForm").addEventListener("submit",e=>{e.preventDefault();window.open(wa(customMsg(e.target)),"_blank");});
  $("#generalForm").addEventListener("submit",e=>{e.preventDefault();window.open(wa(generalMsg(e.target)),"_blank");});
 
+/* ================= CATEGORY PAGES ================= */
+let catPage={slug:null,material:"All"};
+function showCatPage(sl,mat){
+  $("#homeView").style.display="none";$("#pageView").hidden=true;$("#catView").hidden=false;closeMenu();
+  catPage={slug:sl,material:mat||"All"};
+  drawCatPage();
+  window.scrollTo(0,0);
+}
+function drawCatPage(){
+  const sl=catPage.slug;
+  const cat=sl?catOf(sl):null;
+  const crumb=c=>`<a href="#/">Home</a>${c?` / <span>${esc(c)}</span>`:""}`;
+  if(sl&&!cat){ // unknown slug
+    $("#catCrumb").innerHTML=crumb(cap(sl.replace(/-/g," ")));
+    $("#catBanner").innerHTML=`<div class="cat-banner"><div class="cat-btxt"><h1>${esc(cap(sl.replace(/-/g," ")))}</h1></div></div>`;
+    $("#catChips").innerHTML="";
+    $("#catGrid").innerHTML='<p class="empty">This category doesn\'t exist yet — <a href="#/" style="color:var(--ink)">back to home</a>.</p>';
+    return;
+  }
+  /* breadcrumb shows the full category trail */
+  let trail=[];
+  if(cat){let cur=cat,g=0;while(cur&&g++<8){trail.unshift(cur);cur=catOf(cur.parent)||categories.find(x=>x.slug===cur.parent);}}
+  $("#catCrumb").innerHTML=`<a href="#/">Home</a>${trail.map(c=>` / <a href="#/shop/${c.slug}">${esc(c.name)}</a>`).join("")}${!cat&&catPage.material!=="All"?` / <span>${esc(catPage.material)}</span>`:""}`;
+  /* banner from admin (image + title + description) */
+  const bn=sl?((content.banners||{})[sl]||{}):{};
+  const title=bn.title||(cat?cat.name:(catPage.material==="All"?"The Collection":catPage.material));
+  const desc=bn.description||(cat?cat.description||"":"");
+  $("#catBanner").innerHTML=`<div class="cat-banner">${bn.image?`<img src="${esc(bn.image)}" alt="" onerror="this.remove()">`:""}<div class="cat-btxt"><h1>${esc(title)}</h1>${desc?`<p>${esc(desc)}</p>`:""}</div></div>`;
+  /* chips: sub-categories (their own pages) + material filters (this page) */
+  const kids=cat?categories.filter(c=>c.parent===sl&&c.active!==false):[];
+  $("#catChips").innerHTML=
+    kids.map(c=>`<a class="chip" href="#/shop/${c.slug}">${esc(c.name)}</a>`).join("")+
+    Object.keys(MATS).map(m=>`<button class="chip ${catPage.material===m?"active":""}" data-cmat="${m}">${m}</button>`).join("");
+  /* grid */
+  let list=products;
+  if(cat)list=list.filter(p=>inPath(p,sl));
+  if(catPage.material!=="All")list=list.filter(p=>p.material===MATS[catPage.material]);
+  $("#catGrid").innerHTML=list.map(cardHTML).join("")||'<p class="empty">Nothing here yet — check back soon, or enquire on WhatsApp.</p>';
+}
+document.addEventListener("click",e=>{
+  const m=e.target.closest("[data-cmat]");
+  if(m){catPage.material=catPage.material===m.dataset.cmat?"All":m.dataset.cmat;drawCatPage();}
+});
+
 /* ================= DIAMOND FLOW ================= */
 const SHAPES=["Round","Princess","Cushion","Emerald","Oval","Pear","Marquise","Radiant","Asscher","Heart"];
 const DIA_COL=["J","I","H","G","F","E","D"];
@@ -762,10 +769,43 @@ let diamonds=[], rawDiaJSON="[]";
 let dia={type:"natural",shape:"Round",colour:"All",mode:"White",clarity:"All",cut:"All",certOnly:false,sort:"carat-desc",view:"grid",cMin:0,cMax:10};
 const typeLabel=()=>dia.type==="lab"?"Lab-Grown":"Natural";
 
-/* Faceted diamond icons — real brilliant-cut look, silvery, permanent */
-let svgUid=0;
+/* --- realistic faceted diamond icons (photographic silver-blue) --- */
+const P=pts=>pts.map(p=>p.map(n=>+n.toFixed(2)).join(",")).join(" ");
+function ringPts(base,scale,rot){
+  const cx=base.reduce((s,p)=>s+p[0],0)/base.length, cy=base.reduce((s,p)=>s+p[1],0)/base.length;
+  const cos=Math.cos(rot||0),sin=Math.sin(rot||0);
+  return base.map(p=>{const x=(p[0]-cx)*scale,y=(p[1]-cy)*scale;return[cx+x*cos-y*sin,cy+x*sin+y*cos];});
+}
+function brilliantBody(pts){
+  const r1=pts,r2=ringPts(pts,.64,.13),r3=ringPts(pts,.34,.26);
+  const n=r1.length,G=["fA","fB","fC","fD","fE"];
+  let o="";
+  for(let i=0;i<n;i++){
+    const j=(i+1)%n;
+    o+=`<polygon points="${P([r1[i],r1[j],r2[j]])}" fill="url(#${G[i%5]})" stroke="#fff" stroke-width=".8" stroke-linejoin="round"/>`;
+    o+=`<polygon points="${P([r1[i],r2[j],r2[i]])}" fill="url(#${G[(i+2)%5]})" stroke="#fff" stroke-width=".8" stroke-linejoin="round"/>`;
+    o+=`<polygon points="${P([r2[i],r2[j],r3[j]])}" fill="url(#${G[(i+3)%5]})" stroke="#fff" stroke-width=".7" stroke-linejoin="round"/>`;
+    o+=`<polygon points="${P([r2[i],r3[j],r3[i]])}" fill="url(#${G[(i+1)%5]})" stroke="#fff" stroke-width=".7" stroke-linejoin="round"/>`;
+  }
+  o+=`<polygon points="${P(r3)}" fill="url(#fT)" stroke="#fff" stroke-width=".8"/>`;
+  o+=`<polygon points="${P(r1)}" fill="none" stroke="#a9b4c9" stroke-width="1.6" stroke-linejoin="round"/>`;
+  return o;
+}
+function stepBody(pts){
+  const scales=[1,.82,.66,.52,.4,.28];
+  let o="";
+  for(let k=0;k<scales.length-1;k++){
+    const a=ringPts(pts,scales[k],0),b=ringPts(pts,scales[k+1],0),m=a.length;
+    for(let i=0;i<m;i++){
+      const j=(i+1)%m;
+      o+=`<polygon points="${P([a[i],a[j],b[j],b[i]])}" fill="url(#${k%2?"fB":"fD"})" stroke="#fff" stroke-width=".8" stroke-linejoin="round"/>`;
+    }
+  }
+  o+=`<polygon points="${P(ringPts(pts,.28,0))}" fill="url(#fT)" stroke="#fff" stroke-width=".8"/>`;
+  o+=`<polygon points="${P(pts)}" fill="none" stroke="#a9b4c9" stroke-width="1.6" stroke-linejoin="round"/>`;
+  return o;
+}
 function shapeSVG(shape,w=110){
-  const id="dg"+(++svgUid);
   const OUT={
     Round:Array.from({length:24},(_,i)=>{const a=i/24*2*Math.PI;return[50+46*Math.cos(a),50+46*Math.sin(a)];}),
     Oval:Array.from({length:24},(_,i)=>{const a=i/24*2*Math.PI;return[50+33*Math.cos(a),50+46*Math.sin(a)];}),
@@ -779,25 +819,9 @@ function shapeSVG(shape,w=110){
     Heart:[[50,90],[32,74],[15,54],[12,34],[22,15],[38,13],[50,28],[62,13],[78,15],[88,34],[85,54],[68,74]]
   };
   const pts=OUT[shape]||OUT.Round;
-  const cx=pts.reduce((s,p)=>s+p[0],0)/pts.length, cy=pts.reduce((s,p)=>s+p[1],0)/pts.length;
-  const inner=pts.map(p=>[cx+(p[0]-cx)*.45, cy+(p[1]-cy)*.45]);
-  const fills=["gA","gB","gC","gD","gE"];
-  let facets="";
-  for(let i=0;i<pts.length;i++){
-    const j=(i+1)%pts.length;
-    facets+=`<polygon points="${pts[i].join(',')} ${pts[j].join(',')} ${inner[j].join(',')} ${inner[i].join(',')}" fill="url(#${fills[(i*2+pts.length)%fills.length]})" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linejoin="round"/>`;
-  }
-  const table=`<polygon points="${inner.map(p=>p.join(',')).join(' ')}" fill="url(#${id}t)" stroke="rgba(255,255,255,.85)" stroke-width="1"/>`;
-  const sp=(x,y,s)=>`<path d="M${x} ${y-s} L${x+s*.28} ${y-s*.28} L${x+s} ${y} L${x+s*.28} ${y+s*.28} L${x} ${y+s} L${x-s*.28} ${y+s*.28} L${x-s} ${y} L${x-s*.28} ${y-s*.28} Z" fill="#fff" opacity=".95"/>`;
-  const outline=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#aeb4c2" stroke-width="2" stroke-linejoin="round"/>`;
-  return `<svg viewBox="0 0 100 100" width="${w}" height="${w}" aria-hidden="true"><defs>
-      <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe3ec"/></linearGradient>
-      <linearGradient id="gB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f5fa"/><stop offset="1" stop-color="#c3cad8"/></linearGradient>
-      <linearGradient id="gC" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#e9edf4"/><stop offset="1" stop-color="#aab3c6"/></linearGradient>
-      <linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfcfe"/><stop offset="1" stop-color="#cfd6e2"/></linearGradient>
-      <linearGradient id="gE" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#eef1f7"/><stop offset="1" stop-color="#b9c2d4"/></linearGradient>
-      <radialGradient id="${id}t" cx=".38" cy=".32" r=".95"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e8ecf3"/><stop offset="1" stop-color="#c2cad9"/></radialGradient>
-    </defs>${facets}${table}${outline}${sp(33,32,7)}${sp(67,57,5)}${sp(52,21,4)}</svg>`;
+  const body=(shape==="Emerald"||shape==="Asscher")?stepBody(pts):brilliantBody(pts);
+  const sp=(x,y,s)=>`<path d="M${x} ${y-s} L${x+s*.28} ${y-s*.28} L${x+s} ${y} L${x+s*.28} ${y+s*.28} L${x} ${y+s} L${x-s*.28} ${y+s*.28} L${x-s} ${y} L${x-s*.28} ${y-s*.28} Z" fill="#fff" opacity=".92"/>`;
+  return `<svg viewBox="0 0 100 100" width="${w}" height="${w}" aria-hidden="true">${body}${sp(34,31,7)}${sp(66,58,4.5)}${sp(53,20,3.2)}</svg>`;
 }
 function renderDiaShapes(){
   $("#diamonds").innerHTML=`
@@ -820,6 +844,7 @@ function renderDiaShapes(){
 let pickChoice="Round";
 function openChoice(shape){pickChoice=shape;$("#choiceModal").classList.add("open");}
 function closeChoice(){$("#choiceModal").classList.remove("open");}
+function choiceEngagement(){closeChoice();location.hash="#/shop/engagement";}
 function choiceLoose(){
   closeChoice();
   const target="#/diamonds/"+dia.type+"/"+slug(pickChoice);
@@ -971,7 +996,7 @@ function renderReviews(){
     </div>`).join("")||'<p class="muted" style="text-align:center">No reviews yet — be the first to share your experience.</p>';
 }
 async function loadReviews(){
-  try{const r=await fetch("/api/reviews").then(r=>r.json());REVIEWS=Array.isArray(r)?r:[];}
+  try{const r=await fetch(bust("/api/reviews")).then(r=>r.json());REVIEWS=Array.isArray(r)?r:[];}
   catch(_){REVIEWS=DEMO_REVIEWS.slice();}
   renderReviews();
 }
@@ -1009,7 +1034,7 @@ document.addEventListener("click",e=>{
   }
 });
 
-/* ================= SEPARATE PAGES ================= */
+/* ================= CONTENT PAGES ================= */
 const PAGE_TITLES={
   "customer-support":"Customer Support","virtual-appointment":"Book Virtual Appointment",
   "about-us":"About Us","blog":"Blog","help-centre":"Help Centre","reviews":"Customer Reviews",
@@ -1019,7 +1044,7 @@ const PAGE_TITLES={
   "cookies":"Cookie Policy","cookie-preferences":"Cookie Preferences","paia":"PAIA Manual",
   "complaints":"Complaints & Disputes","company":"Company & Legal Information"
 };
-function showHome(){$("#pageView").hidden=true;$("#homeView").style.display="";closeMenu();}
+function showHome(){$("#pageView").hidden=true;$("#catView").hidden=true;$("#homeView").style.display="";closeMenu();}
 function reviewsPageHTML(){
   return `<h1 class="page-title">Customer Reviews</h1>
     <p class="muted">Real feedback from ZanJewelry customers. Photos appear once approved.</p>
@@ -1034,7 +1059,7 @@ function reviewsPageHTML(){
       </div>`).join("")||'<p class="muted">No reviews yet.</p>'}</div>`;
 }
 async function showPage(s){
-  $("#homeView").style.display="none";$("#pageView").hidden=false;closeMenu();
+  $("#homeView").style.display="none";$("#catView").hidden=true;$("#pageView").hidden=false;closeMenu();
   const title=PAGE_TITLES[s]||cap(s.replace(/-/g," "));
   $("#pgCrumb").textContent=title;
   const pc=$("#pageContent");
@@ -1042,7 +1067,7 @@ async function showPage(s){
   if(s==="blog"){
     pc.innerHTML='<h1 class="page-title">Blog</h1><p class="muted">Loading…</p>';
     try{
-      const posts=await fetch("/api/blog").then(r=>r.json());
+      const posts=await fetch(bust("/api/blog")).then(r=>r.json());
       pc.innerHTML=`<h1 class="page-title">Blog</h1><div class="blog-grid">${(Array.isArray(posts)?posts:[]).map(p=>`
         <div class="rev-card" style="flex:none">
           ${p.image?`<img src="${esc(p.image)}" style="border-radius:8px;margin-bottom:12px;aspect-ratio:16/10;object-fit:cover;width:100%" onerror="this.remove()">`:""}
@@ -1054,7 +1079,7 @@ async function showPage(s){
     window.scrollTo(0,0);return;
   }
   try{
-    const r=await fetch("/api/pages/"+s);
+    const r=await fetch(bust("/api/pages/"+s));
     if(!r.ok)throw 0;
     const pg=await r.json();
     pc.innerHTML=`<h1 class="page-title">${esc(pg.title||title)}</h1>${pg.image?`<img src="${esc(pg.image)}" style="border-radius:10px;max-height:340px;object-fit:cover" onerror="this.remove()">`:""}<div class="page-body">${pg.content||""}</div>`;
@@ -1072,11 +1097,13 @@ function route(){
   closeMenu();
   const h=location.hash||"";
   if(h.startsWith("#/page/")){showPage(decodeURIComponent(h.slice(7)));return;}
+  const cm=h.match(/^#\/shop\/([\w-]+)(?:\/([\w-]+))?/);
+  if(cm){showCatPage(decodeURIComponent(cm[1]),cm[2]?(matFromSlug(cm[2])||"All"):"All");return;}
+  const mm=h.match(/^#\/material\/([\w-]+)/);
+  if(mm){showCatPage(null,matFromSlug(mm[1])||"All");return;}
   showHome();closeModal();
   if(h.startsWith("#/diamonds")){
     diaRoute();setTimeout(()=>$("#diamonds").scrollIntoView({behavior:"smooth"}),40);return;}
-  const sm=h.match(/^#\/shop\/([\w-]+)/);
-  if(sm){setFilter("cat:"+sm[1]);const el=$("#shop");if(el)el.scrollIntoView({behavior:"smooth"});return;}
   const pm=h.match(/^#\/product\/([\w-]+)/);
   if(pm&&products.length){const p=products.find(x=>x.id===decodeURIComponent(pm[1]));if(p)openProduct(p.id);return;}
   if(h==="#shop"||h==="#contact"){const el=$(h);if(el)el.scrollIntoView({behavior:"smooth"});}
@@ -1108,80 +1135,92 @@ function initHero(images){
   if(slides.length>1){let i=0;heroTimer=setInterval(()=>{slides[i].classList.remove("show");i=(i+1)%slides.length;slides[i].classList.add("show");},3000);}
 }
 
+/* ============================================================
+   LIVE CHROME — categories, hero, banners, logo, settings
+   ============================================================ */
+let catsJSON="",heroKey="",lastLogo="",lastEng="",lastWed="",setJSON="";
+function setTextIf(id,val){const el=$(id);if(el&&val&&el.textContent!==val)el.textContent=val;}
+function applyChrome(){
+  const h=(content&&content.hero)||{};
+  setTextIf("#heroEyebrow",h.eyebrow);
+  setTextIf("#heroHeading",h.heading);
+  setTextIf("#heroSub",h.sub);
+  if(h.ctaText){const b=$("#heroCta1");if(b.textContent!==h.ctaText)b.textContent=h.ctaText;if(h.ctaLink)b.href=h.ctaLink;}
+  const imgs=(Array.isArray(h.images)&&h.images.length)?h.images:(h.image?[h.image]:[]);
+  const key=JSON.stringify(imgs);
+  if(key!==heroKey){heroKey=key;initHero(imgs);}
+  const logo=siteImages.logo||"";
+  if(logo&&logo!==lastLogo){lastLogo=logo;const l=$("#brandLogo");l.src=logo;l.hidden=false;}
+  const eng=siteImages["bridal-engagement"]||"";
+  if(eng&&eng!==lastEng){lastEng=eng;const i=$("#occEngImg");i.src=eng;i.hidden=false;}
+  const wed=siteImages["bridal-wedding"]||"";
+  if(wed&&wed!==lastWed){lastWed=wed;const i=$("#occWedImg");i.src=wed;i.hidden=false;}
+  const sk=JSON.stringify(settings);
+  if(sk!==setJSON){setJSON=sk;
+    if(settings.tagline)setTextIf("#fTagline",settings.tagline);
+    if(settings.copyright)setTextIf("#fCopy",settings.copyright);
+    if(settings.newsletterHeading)setTextIf("#newsHead",settings.newsletterHeading);
+    if(settings.newsletterText)setTextIf("#newsText",settings.newsletterText);
+    $$(".f-social a").forEach(a=>{
+      const t=a.textContent.trim().toLowerCase();
+      if(t==="instagram"&&settings.instagram)a.href=settings.instagram;
+      if(t==="facebook"&&settings.facebook)a.href=settings.facebook;
+      if(t==="tiktok"&&settings.tiktok)a.href=settings.tiktok;
+    });
+    if(settings.whatsapp&&settings.whatsapp!==WA){WA=settings.whatsapp;$$("[data-wa]").forEach(a=>a.href=wa(MSG_GENERAL));}
+  }
+}
+async function loadChrome(){
+  try{
+    const [ct,si,st,cats]=await Promise.all([
+      fetch(bust("/api/content")).then(r=>r.json()).catch(()=>null),
+      fetch(bust("/api/site-images")).then(r=>r.json()).catch(()=>null),
+      fetch(bust("/api/settings")).then(r=>r.json()).catch(()=>null),
+      fetch(bust("/api/categories")).then(r=>r.json()).catch(()=>null)
+    ]);
+    if(cats&&Array.isArray(cats)&&cats.length){
+      const j=JSON.stringify(cats);
+      if(j!==catsJSON){catsJSON=j;categories=cats;renderChips();
+        if(!$("#catView").hidden)drawCatPage();}
+    }
+    if(ct&&typeof ct==="object")content=ct;
+    if(si&&typeof si==="object")siteImages=si;
+    if(st&&typeof st==="object")settings=st;
+    applyChrome();
+  }catch(_){}
+}
+
 /* ---- LOAD from server ---- */
-let content={hero:{},banners:{}};
 async function loadProducts(){
   try{
-    const [list,cats]=await Promise.all([
-      fetch("/api/products").then(r=>r.json()),
-      fetch("/api/categories").then(r=>r.json()).catch(()=>null)
-    ]);
-    if(Array.isArray(cats)&&cats.length){categories=cats;renderChips();}
+    const list=await fetch(bust("/api/products")).then(r=>r.json());
     if(Array.isArray(list)){products=list;renderGrid();
+      if(!$("#catView").hidden)drawCatPage();
       if((location.hash||"").startsWith("#/product/"))route();}
   }catch(_){}
 }
 async function loadDiamonds(){
   try{
-    const d=await fetch("/api/diamonds").then(r=>r.json());
+    const d=await fetch(bust("/api/diamonds")).then(r=>r.json());
     if(Array.isArray(d)){const j=JSON.stringify(d);
       if(j!==rawDiaJSON){rawDiaJSON=j;diamonds=d;
         if((location.hash||"").startsWith("#/diamonds")){const y=window.scrollY;diaRoute();window.scrollTo(0,y);}}}
   }catch(_){}
 }
 (async()=>{
-  /* 1 · WhatsApp number (admin Settings → /api/config) */
-  try{const cfg=await fetch("/api/config").then(r=>r.json());WA=cfg.whatsapp||WA;}catch(_){}
+  await loadChrome();
+  if(settings.whatsapp)WA=settings.whatsapp;
   $$("[data-wa]").forEach(a=>a.href=wa(MSG_GENERAL));
-  /* 2 · Categories → chips + nav filters */
-  try{
-    const c=await fetch("/api/categories").then(r=>r.json());
-    categories=Array.isArray(c)&&c.length?c:FALLBACK_CATS;
-  }catch(_){categories=FALLBACK_CATS.slice();}
   renderChips();
-  /* 3 · Hero images + text, logo, banners */
-  let heroImgs=[],siteImgs={};
-  try{
-    const [ct,si]=await Promise.all([
-      fetch("/api/content").then(r=>r.json()).catch(()=>null),
-      fetch("/api/site-images").then(r=>r.json()).catch(()=>({}))
-    ]);
-    siteImgs=si||{};
-    if(ct){content=ct;const h=ct.hero||{};
-      heroImgs=(Array.isArray(h.images)&&h.images.length)?h.images:(h.image?[h.image]:[]);
-      if(h.eyebrow)$("#heroEyebrow").textContent=h.eyebrow;
-      if(h.heading)$("#heroHeading").textContent=h.heading;
-      if(h.sub)$("#heroSub").textContent=h.sub;
-      if(h.ctaText){const b=$("#heroCta1");b.textContent=h.ctaText;b.href=h.ctaLink||"#shop";}
-    }
-  }catch(_){}
-  if(!heroImgs.length&&siteImgs.hero)heroImgs=[siteImgs.hero];
-  initHero(heroImgs);
-  if(siteImgs.logo){const l=$("#brandLogo");l.src=siteImgs.logo;l.hidden=false;}
-  if(siteImgs["bridal-engagement"]){const i=$("#occEngImg");i.src=siteImgs["bridal-engagement"];i.hidden=false;}
-  if(siteImgs["bridal-wedding"]){const i=$("#occWedImg");i.src=siteImgs["bridal-wedding"];i.hidden=false;}
-  /* 4 · Settings → footer tagline, socials, copyright, newsletter text */
-  try{
-    const st=await fetch("/api/settings").then(r=>r.json());
-    if(st.tagline){const t=$(".f-brand p");if(t)t.textContent=st.tagline;}
-    if(st.copyright){const c=$(".f-bottom span");if(c)c.textContent=st.copyright;}
-    if(st.newsletterHeading){const h=$("#newsHead");if(h)h.textContent=st.newsletterHeading;}
-    if(st.newsletterText){const p=$("#newsText");if(p)p.textContent=st.newsletterText;}
-    $$(".f-social a").forEach(a=>{
-      const t=a.textContent.trim().toLowerCase();
-      if(t==="instagram"&&st.instagram)a.href=st.instagram;
-      if(t==="facebook"&&st.facebook)a.href=st.facebook;
-      if(t==="tiktok"&&st.tiktok)a.href=st.tiktok;
-    });
-  }catch(_){}
-  /* 5 · First render */
   if(!diaRoute())renderDiaShapes();
   renderReviews();
   await loadProducts();
   await loadReviews();
   await loadDiamonds();
-  setInterval(()=>{loadProducts();loadDiamonds();loadReviews();},20000);
-  window.addEventListener("focus",()=>{loadProducts();loadDiamonds();loadReviews();});
+  route();
+  setInterval(()=>{loadChrome();loadProducts();loadDiamonds();loadReviews();},15000);
+  window.addEventListener("focus",()=>{loadChrome();loadProducts();loadDiamonds();loadReviews();});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadChrome();loadProducts();loadDiamonds();loadReviews();}});
 })();
 </script>
 </body>
