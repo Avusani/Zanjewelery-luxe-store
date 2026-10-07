@@ -595,17 +595,28 @@ app.put('/api/content', requireAuth, upload.any(), (req, res) => {
   writeJSON(FILES.content, content);
   res.json(content);
 });
+
+/* ================= ADMIN: SITE IMAGES =================
+   Fixed slots (logo, story, bridal-engagement, bridal-wedding)
+   PLUS any per-category card slot: cat-rings, cat-pendants, … */
 app.post('/api/site-images/:slot', requireAuth, upload.any(), (req, res) => {
   const f = (req.files || []).find((x) => x.fieldname === 'imageFile');
   if (!f) return res.status(400).json({ error: 'No image received' });
-  if (!SITE_SLOTS.includes(req.params.slot)) return res.status(400).json({ error: 'Unknown slot' });
-  delFile(siteImages[req.params.slot]);
-  siteImages[req.params.slot] = '/uploads/' + f.filename;
+  const slot = String(req.params.slot || '');
+  if (!SITE_SLOTS.includes(slot) && !slot.startsWith('cat-')) {
+    return res.status(400).json({ error: 'Unknown slot' });
+  }
+  delFile(siteImages[slot]);
+  siteImages[slot] = '/uploads/' + f.filename;
   writeJSON(FILES.siteImages, siteImages);
   res.json(siteImages);
 });
 app.delete('/api/site-images/:slot', requireAuth, (req, res) => {
-  delFile(siteImages[req.params.slot]); delete siteImages[req.params.slot];
+  const slot = String(req.params.slot || '');
+  if (!SITE_SLOTS.includes(slot) && !slot.startsWith('cat-')) {
+    return res.status(400).json({ error: 'Unknown slot' });
+  }
+  delFile(siteImages[slot]); delete siteImages[slot];
   writeJSON(FILES.siteImages, siteImages);
   res.json(siteImages);
 });
