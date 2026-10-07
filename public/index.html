@@ -6,7 +6,7 @@
 <title>ZanJewelry Atelier | Rings & Cosmetics</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
-:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--tile:#F7F3F0;--line:#eee2dc;--serif:"Cormorant Garamond",Georgia,serif}
+:root{--blush:#F4DCD2;--blush-soft:#F9EDE7;--ink:#17120F;--ink-70:#4a3f38;--ink-50:#7a6c63;--tile:#F7F3F0;--line:#eee2dc;--serif:"Cormorant Garamond",Georgia,serif;--gold:#c9a227}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Inter",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -23,7 +23,8 @@ img{max-width:100%;display:block}
 .wa-pill{display:inline-block;text-decoration:none;font-size:.8rem;font-weight:600;border:1.5px solid var(--ink);border-radius:999px;padding:9px 20px}
 .wa-pill:hover{background:var(--ink);color:var(--blush)}
 .hero{position:relative;min-height:540px;display:flex;align-items:center;background:linear-gradient(120deg,#17120F 0%,#3a2c24 55%,#8a6a58 100%);overflow:hidden}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease-in-out}
+.hero-bg.show{opacity:.85}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,18,15,.78),rgba(23,18,15,.25))}
 .hero-content{position:relative;z-index:2;padding:96px 0}
 .eyebrow{font-size:.66rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--blush)}
@@ -49,78 +50,225 @@ img{max-width:100%;display:block}
 .cat-track{display:flex;gap:22px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none}
 .cat-track::-webkit-scrollbar{display:none}
 .cat-card{flex:0 0 250px;text-decoration:none;color:inherit}
-.cat-img{aspect-ratio:1/1.05;background:var(--tile);border-radius:6px;overflow:hidden}
+.cat-img{aspect-ratio:1/1.05;background:var(--blush-soft);border-radius:6px;overflow:hidden}
 .cat-img img{width:100%;height:100%;object-fit:cover}
 .cat-card h3{font-weight:500;font-size:1.15rem;margin-top:12px}
 .dash{width:26px;height:2px;background:var(--ink);margin:8px 0}
 .cat-card p{color:var(--ink-70);font-size:.9rem}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .card{cursor:pointer;display:flex;flex-direction:column}
-.card-img{aspect-ratio:1/1;background:var(--tile);border-radius:6px;overflow:hidden}
+.card-img{aspect-ratio:1/1;background:var(--blush-soft);border-radius:6px;overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover}
 .card h3{font-weight:500;font-size:1.02rem;margin-top:12px}
 .range{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);margin-top:5px}
-.price{font-size:.9rem;font-weight:600;color:var(--ink-70);margin:4px 0 10px}
 .btn-block{display:block;width:100%;padding:11px 10px;font-size:.66rem;margin-top:auto}
 .empty{color:var(--ink-50);grid-column:1/-1;padding:30px 0}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--tile)}
+form.panel{display:flex;flex-direction:column;gap:14px;border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--blush-soft)}
 form.panel label{display:flex;flex-direction:column;gap:6px;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70)}
-input,textarea{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
-input:focus,textarea:focus{outline:none;border-color:var(--ink)}
-.site-footer{background:var(--ink);color:var(--blush);padding:40px 0;margin-top:40px}
-.site-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-.site-footer strong{font-family:var(--serif);font-size:1.3rem}
-.site-footer a{color:var(--blush);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;opacity:.85}
+input,textarea,select{font:inherit;font-size:16px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
+.enq-tabs{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.enq-tab{font:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
+.enq-tab.active{background:var(--ink);border-color:var(--ink);color:var(--blush)}
+.enq-form{display:none}.enq-form.show{display:flex}
+.hint{font-size:.78rem;color:var(--ink-70);font-weight:500;letter-spacing:0;text-transform:none}
+
+/* ---------- BE INSPIRED + REVIEWS ---------- */
+.inspired{background:var(--blush-soft);padding:56px 0}
+.insp-head{text-align:center;margin-bottom:26px}
+.insp-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:.12em;text-transform:uppercase}
+.insp-head p{color:var(--ink-70);font-size:.95rem;margin-top:6px}
+.gal-wrap{position:relative}
+.gal-strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:none}
+.gal-strip::-webkit-scrollbar{display:none}
+.gal-item{flex:0 0 235px;scroll-snap-align:start}
+.gal-item .ph{aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--blush);display:grid;place-items:center}
+.gal-item img{width:100%;height:100%;object-fit:cover}
+.gal-btn{position:absolute;top:42%;width:44px;height:44px;border-radius:50%;border:none;background:#fff;box-shadow:0 4px 16px rgba(23,18,15,.2);font-size:1.3rem;cursor:pointer;z-index:5}
+.gal-btn.prev{left:-12px}.gal-btn.next{right:-12px}
+@media(max-width:640px){.gal-item{flex-basis:62%}.gal-btn{display:none}}
+.reviews-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:22px 0 14px}
+.stars{color:var(--gold);letter-spacing:3px;font-size:1.05rem}
+.stars.big{font-size:1.4rem}
+.rev-count{font-size:.95rem;color:var(--ink-70);margin-left:10px}
+.seeall{font-size:.85rem;color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:2px}
+.rev-strip{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.rev-strip::-webkit-scrollbar{display:none}
+.rev-card{flex:0 0 360px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.rev-top{display:flex;justify-content:space-between;gap:10px;font-size:.92rem}
+.rev-top b{font-weight:600}
+.rev-date{color:var(--ink-50);font-size:.8rem}
+.rev-title{font-weight:600;font-size:1rem;margin:8px 0 6px;text-align:center}
+.rev-text{font-size:.92rem;color:var(--ink-70);text-align:center}
+.rev-write{margin-top:18px;text-align:center}
+.starpick{display:flex;gap:4px;justify-content:flex-start}
+.starpick button{background:none;border:none;font-size:1.7rem;color:#ddd2c6;cursor:pointer;padding:0 2px;line-height:1}
+.starpick button.on{color:var(--gold)}
+.rv-note{display:none;margin-top:10px;font-size:.85rem;font-weight:600;color:#1c7c39}
+.rv-note.show{display:block}
+
+/* ---------- FOOTER ---------- */
+.site-footer{background:var(--ink);color:var(--blush);padding:56px 0 28px;margin-top:0}
+.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1.4fr;gap:34px}
+.f-brand strong{font-family:var(--serif);font-size:1.5rem;display:block}
+.f-brand p{color:rgba(249,234,227,.65);font-size:.86rem;margin-top:8px;max-width:24ch}
+.f-social{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+.f-social a{color:var(--blush);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.85}
+.f-social a:hover{opacity:1;text-decoration:underline}
+.f-col h4{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blush);margin-bottom:14px}
+.f-col a{display:block;color:rgba(249,234,227,.78);font-size:.82rem;text-decoration:none;padding:5px 0}
+.f-col a:hover{color:#fff;text-decoration:underline}
+.f-news h4{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+.f-news p{color:rgba(249,234,227,.65);font-size:.84rem;margin-bottom:12px}
+.f-news form{display:flex;gap:8px}
+.f-news input{flex:1;background:rgba(255,255,255,.08);border:1.5px solid rgba(249,234,227,.3);color:#fff;border-radius:999px;padding:11px 18px;font-size:.9rem}
+.f-news input::placeholder{color:rgba(249,234,227,.5)}
+.f-news button{background:var(--blush);color:var(--ink);border:none;border-radius:999px;padding:11px 22px;font:inherit;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.f-news button:hover{background:#fff}
+.f-note{display:none;margin-top:10px;font-size:.8rem;color:var(--blush)}
+.f-note.show{display:block}
+.f-bottom{border-top:1px solid rgba(249,234,227,.15);margin-top:38px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.74rem;color:rgba(249,234,227,.55)}
+@media(max-width:900px){.f-grid{grid-template-columns:1fr 1fr}.f-brand,.f-news{grid-column:1/-1}}
+
+/* ---------- SEPARATE PAGES (footer links) ---------- */
+#pageView{padding:40px 0 70px;min-height:62vh}
+.page-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4vw,2.6rem);margin:8px 0 20px}
+.page-body{max-width:780px;color:var(--ink-70);font-size:1rem;line-height:1.85}
+.page-body h2{font-family:var(--serif);color:var(--ink);font-size:1.5rem;margin:26px 0 8px}
+.page-body img{border-radius:10px;margin:16px 0}
+.page-soon{background:var(--blush-soft);border:1.5px dashed var(--blush);border-radius:14px;padding:48px 30px;text-align:center;max-width:680px}
+.page-soon p{color:var(--ink-70);margin-bottom:18px}
+.rev-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media(max-width:900px){.rev-page-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.rev-page-grid{grid-template-columns:1fr}}
+
+/* ---------- DIAMOND SHOP ---------- */
+.dia-head{text-align:center;max-width:780px;margin:0 auto}
+.dia-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,2.9rem);text-transform:uppercase;letter-spacing:.1em}
+.dia-head p{font-family:var(--serif);font-size:1.05rem;color:var(--ink-70);margin-top:8px}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden;margin:20px 0 4px}
+.segbtn{font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:14px 38px;border:none;background:#fff;color:var(--ink);cursor:pointer}
+.segbtn.active{background:var(--ink);color:var(--blush)}
+.shape-wrap{position:relative;max-width:920px;margin:26px auto 0;padding:0 6px}
+.shape-row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.shape-row::-webkit-scrollbar{display:none}
+.shape-card{flex:0 0 calc((100% - 32px)/3);scroll-snap-align:start;font:inherit;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 10px 16px;text-align:center;cursor:pointer;transition:.15s}
+.shape-card:hover{border-color:var(--ink);box-shadow:0 6px 18px rgba(23,18,15,.08)}
+.shape-card svg{margin:0 auto 12px;display:block}
+.shape-card span{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.shape-btn{position:absolute;top:38%;width:46px;height:46px;border-radius:50%;border:none;background:#fff;box-shadow:0 4px 18px rgba(23,18,15,.2);font-size:1.4rem;cursor:pointer;z-index:5}
+.shape-btn.prev{left:-14px}.shape-btn.next{right:-14px}
+@media(max-width:900px){.shape-card{flex-basis:calc((100% - 16px)/2)}}
+@media(max-width:640px){.shape-card{flex-basis:72%}.shape-btn{display:none}}
+.dia-crumb{font-size:.78rem;color:var(--ink-50);margin-bottom:14px}
+.dia-crumb a{color:var(--ink-70);text-decoration:none}
+.dia-crumb a:hover{text-decoration:underline}
+.choice{position:fixed;inset:0;z-index:120;display:none;place-items:center;background:rgba(23,18,15,.45);padding:18px}
+.choice.open{display:grid}
+.choice-card{position:relative;background:#fff;border-radius:12px;padding:30px 34px;width:100%;max-width:440px;box-shadow:0 24px 60px rgba(23,18,15,.3)}
+.choice-card h3{font-family:var(--serif);font-size:1.3rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.choice-btn{display:block;width:100%;font:inherit;font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:16px 10px;margin-top:14px;border:1.5px solid var(--ink);border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}
+.choice-btn:hover{background:var(--ink);color:var(--blush)}
+.choice-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;background:none;font-size:1.2rem;cursor:pointer;color:var(--ink-70)}
+.dia-tabs{display:flex;justify-content:center;border-bottom:1px solid var(--line);margin:22px 0 6px}
+.dtabs{font:inherit;font-size:1rem;padding:12px 26px;border:none;background:none;cursor:pointer;border-bottom:2.5px solid transparent;color:var(--ink-70)}
+.dtabs.on{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}
+.dia-bar{display:grid;grid-template-columns:1fr 1fr;gap:22px 40px;padding:20px 0;border-bottom:1px solid var(--line)}
+.dia-group label{display:block;font-size:.92rem;margin-bottom:10px}
+.dia-group select{padding:10px 12px;font-size:14px;width:100%}
+.segrow{display:flex;border:1.5px solid #2f6b5e;border-radius:8px;overflow:hidden}
+.segrow button{flex:1;font:inherit;font-size:.82rem;padding:11px 2px;border:none;background:#fff;cursor:pointer;border-right:1px solid #2f6b5e;white-space:nowrap}
+.segrow button:last-child{border-right:none}
+.segrow button.on{background:var(--blush);font-weight:700}
+.shape-sel{border:1px solid var(--line);border-radius:10px;padding:14px;display:inline-flex;flex-direction:column;align-items:center;gap:8px;min-width:130px;background:#fff}
+.shape-sel span{font-size:.78rem;font-weight:600}
+.range-wrap{position:relative;height:30px;margin:4px 2px 10px}
+.range-track{position:absolute;top:13px;left:0;right:0;height:4px;border-radius:4px;background:#2f6b5e}
+.range-fill{position:absolute;top:13px;height:4px;background:#2f6b5e}
+.range-wrap input[type=range]{position:absolute;left:0;right:0;top:0;width:100%;-webkit-appearance:none;appearance:none;background:none;pointer-events:none;height:30px;margin:0}
+.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:22px;height:22px;border-radius:50%;background:#fff;border:1.5px solid #2f6b5e;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.range-wrap input[type=range]::-moz-range-thumb{pointer-events:auto;width:20px;height:20px;border-radius:50%;background:#fff;border:1.5px solid #2f6b5e;cursor:pointer}
+.ct-inputs{display:flex;gap:12px;align-items:center}
+.ct-inputs .ctbox{flex:1;display:flex;align-items:center;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;gap:6px}
+.ct-inputs input{border:none;padding:0;width:100%;font-size:14px;background:none}
+.ct-inputs small{color:var(--ink-50)}
+.wf{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;vertical-align:middle}
+.wf button{font:inherit;font-size:.85rem;padding:9px 20px;border:none;background:#fff;cursor:pointer}
+.wf button.on{background:var(--blush);font-weight:700}
+details.adv{border-top:none;border-bottom:none;padding:14px 0}
+details.adv summary{cursor:pointer;font-size:1rem;list-style:none;display:flex;align-items:center;gap:8px}
+details.adv summary::-webkit-details-marker{display:none}
+details.adv summary::after{content:"⌄";transition:.2s}
+details.adv[open] summary::after{transform:rotate(180deg)}
+.results-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0}
+.results-bar .cnt{font-family:var(--serif);font-size:1.05rem}
+.viewtgl{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.viewtgl button{font:inherit;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 18px;border:none;background:#fff;cursor:pointer}
+.viewtgl button.on{background:var(--ink);color:var(--blush)}
+.dia-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:8px}
+.dia-grid.list{grid-template-columns:1fr}
+.diacard{border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;background:#fff}
+.dia-grid.list .diacard{flex-direction:row;align-items:stretch}
+.dia-img{aspect-ratio:1/1;background:#e6e6e6;display:grid;place-items:center;flex-shrink:0}
+.dia-grid.list .dia-img{width:180px;aspect-ratio:auto}
+.dia-img img{width:100%;height:100%;object-fit:cover}
+.dia-body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.dia-body h3{font-size:1rem;font-weight:600}
+.diaspec{font-size:.84rem;color:var(--ink-70)}
+.diameta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px;flex-wrap:wrap}
+.cert{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--ink-70)}
 .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(23,18,15,.55)}
 .modal.open{display:grid}
-.modal-card{position:relative;width:100%;max-width:760px;max-height:88vh;overflow-y:auto;background:var(--tile);border-radius:14px;padding:28px}
+.modal-card{position:relative;width:100%;max-width:760px;max-height:88vh;overflow-y:auto;background:var(--blush-soft);border-radius:14px;padding:28px}
+.modal-card.narrow{max-width:520px}
 .close-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700;cursor:pointer}
 .detail{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.detail img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--tile)}
+.detail img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--blush-soft)}
 .detail h2{font-family:var(--serif);font-size:1.8rem;margin:6px 0}
-.detail .price{font-weight:600;margin-bottom:12px}
 .muted{color:var(--ink-70)}
 .wa-float{position:fixed;right:16px;bottom:16px;z-index:70;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.occ-grid,.contact-grid,.detail{grid-template-columns:1fr}.main-nav{display:none}.header-in{justify-content:space-between}}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.occ-grid,.contact-grid,.detail{grid-template-columns:1fr}.main-nav{display:none}.header-in{justify-content:space-between}.dia-bar{grid-template-columns:1fr}.dia-grid{grid-template-columns:repeat(2,1fr);gap:14px}.dia-grid.list{grid-template-columns:1fr}.dia-grid.list .dia-img{width:120px}.segbtn{padding:12px 22px}.rev-card{flex-basis:290px}}
 </style>
 </head>
 <body>
 
+<div id="homeView">
 <header class="site-header">
   <div class="wrap header-in">
-    <a class="brand" href="/">
+    <a class="brand" href="#/">
       <img id="brandLogo" alt="" hidden onerror="this.hidden=true">
       <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
     </a>
     <nav class="main-nav">
-      <a href="#shop" onclick="setFilter('Rings')">Rings</a>
+      <a href="#shop" data-anchor="shop">Rings</a>
+      <a href="#/diamonds">Diamonds</a>
       <a href="#shop" onclick="setFilter('Engagement')">Engagement</a>
       <a href="#shop" onclick="setFilter('Wedding')">Wedding</a>
       <a href="#shop" onclick="setFilter('Cosmetics')">Cosmetics</a>
-      <a href="#shop" onclick="setFilter('All')">All</a>
-      <a href="#contact">Contact</a>
+      <a href="#contact" data-anchor="contact">Contact</a>
     </nav>
-    <a class="wa-pill" data-wa="Hi ZanJewelry! I'd like to enquire." target="_blank" rel="noopener">WhatsApp</a>
+    <a class="wa-pill" data-wa="general" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
 
-<section class="hero">
-  <img class="hero-bg" id="heroBg" alt="" hidden>
+<section class="hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
     <p class="eyebrow">ZanJewelry Manufacturing · Est. 2021</p>
     <h1>Rings for your moments. Beauty for your every day.</h1>
     <p>Fine engagement, wedding and everyday pieces — plus our cosmetics line. Enquire or order directly on WhatsApp.</p>
     <div class="hero-actions">
-      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" href="#shop" onclick="setFilter('Rings')">Shop rings</a>
-      <a class="btn btn-ghost" data-wa="Hi ZanJewelry! I'd like to place an order." target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" href="#shop" data-anchor="shop">Shop rings</a>
+      <a class="btn btn-ghost" data-wa="general" target="_blank" rel="noopener">Speak to us on WhatsApp</a>
     </div>
   </div>
 </section>
 
 <main>
-  <section class="section wrap" id="shop">
+  <section class="section wrap" id="diamonds" style="padding-top:44px;min-height:430px"></section>
+
+  <section class="section wrap" id="shop" style="padding-top:20px">
     <div class="occ-grid">
       <button class="occ" id="occEng">
         <img id="occEngImg" alt="" hidden>
@@ -131,14 +279,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)}
         <span class="occ-txt"><span class="eyebrow">Forever bands</span><h3>Wedding Rings</h3><span class="occ-cta">Browse wedding →</span></span>
       </button>
     </div>
-
-    <div class="sec-head">
-      <h2>Shop the Collection</h2>
-      <p class="muted">Every piece below was posted from the admin portal.</p>
-    </div>
-
+    <div class="sec-head"><h2>Shop the Collection</h2><p class="muted">Every piece below was posted from the admin portal.</p></div>
     <div class="cat-track" id="catTrack"></div>
-
     <div class="chips" id="chips">
       <button class="chip active" data-filter="All">All</button>
       <button class="chip" data-filter="Rings">Rings</button>
@@ -152,8 +294,28 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)}
       <button class="chip" data-filter="Rose Gold">Rose Gold</button>
       <button class="chip" data-filter="Platinum">Platinum</button>
     </div>
-
     <div class="grid" id="productGrid"></div>
+  </section>
+
+  <!-- ============ BE INSPIRED + REVIEWS ============ -->
+  <section class="inspired" id="inspired">
+    <div class="wrap">
+      <div class="insp-head">
+        <h2>Be Inspired</h2>
+        <p>Real moments from our customers — share yours with a photo and a review.</p>
+      </div>
+      <div class="gal-wrap" id="galWrap" hidden>
+        <button class="gal-btn prev" aria-label="Scroll back">‹</button>
+        <div class="gal-strip" id="galStrip"></div>
+        <button class="gal-btn next" aria-label="Scroll forward">›</button>
+      </div>
+      <div class="reviews-top">
+        <div><span class="stars big" id="avgStars">★★★★★</span><span class="rev-count" id="revCount"></span></div>
+        <a class="seeall" href="#/page/reviews">See all reviews</a>
+      </div>
+      <div class="rev-strip" id="revStrip"></div>
+      <div class="rev-write"><button class="btn btn-dark" data-open-review>★ Write a review</button></div>
+    </div>
   </section>
 
   <section class="section wrap" id="contact">
@@ -161,31 +323,143 @@ input:focus,textarea:focus{outline:none;border-color:var(--ink)}
       <div>
         <p class="eyebrow" style="color:var(--ink-50)">Contact</p>
         <h2 class="sec-head" style="margin:0"><span style="font-family:var(--serif);font-size:2rem;text-transform:none">Enquiries & orders</span></h2>
-        <p class="muted">Send the form and it opens WhatsApp with your message ready.</p>
+        <p class="muted">Choose an option below — WhatsApp opens with your message ready to send. You can attach photos or design sketches directly in the chat afterwards.</p>
       </div>
-      <form class="panel" id="contactForm">
-        <label>Name <input name="name" required placeholder="Your name"></label>
-        <label>Email <input name="email" type="email" required placeholder="you@example.com"></label>
-        <label>Message <textarea name="message" rows="4" required placeholder="What would you like help with?"></textarea></label>
-        <button class="btn btn-dark" type="submit">Send via WhatsApp</button>
-      </form>
+      <div>
+        <div class="enq-tabs">
+          <button class="enq-tab active" data-enq="custom">✨ Custom Jewellery</button>
+          <button class="enq-tab" data-enq="general">💬 General Enquiry</button>
+        </div>
+        <form class="panel enq-form show" id="customForm">
+          <label>Jewelry type <select name="jtype"><option>Ring</option><option>Necklace</option><option>Bracelet</option><option>Earrings</option><option>Other</option></select></label>
+          <label>Material / style <select name="material"><option>Not sure yet</option><option>Gold</option><option>Silver</option><option>Rose Gold</option><option>Platinum</option><option>Diamond</option><option>Gemstone</option></select></label>
+          <label>Size <input name="size" placeholder="e.g. US 7 · 45cm chain · Not sure"></label>
+          <label>Personalization <select name="pers"><option>None</option><option>Name</option><option>Initials</option><option>Engraving</option><option>Other</option></select></label>
+          <label>Personalization details <span class="hint">(optional)</span> <input name="persText" placeholder='e.g. engrave "Forever" inside the band'></label>
+          <label>My design / request <textarea name="design" rows="3" required placeholder="Describe the piece you'd like made…"></textarea></label>
+          <label>Estimated budget <span class="hint">(optional)</span> <input name="budget" placeholder="e.g. R10,000"></label>
+          <label>Design / reference link <span class="hint">(optional — or attach the image in WhatsApp)</span> <input name="refLink" placeholder="Paste a link to your design"></label>
+          <button class="btn btn-dark" type="submit">Send via WhatsApp</button>
+        </form>
+        <form class="panel enq-form" id="generalForm">
+          <label>Name <input name="name" required placeholder="Your name"></label>
+          <label>Email <input name="email" type="email" required placeholder="you@example.com"></label>
+          <label>Message <textarea name="message" rows="4" required placeholder="How can we help?"></textarea></label>
+          <button class="btn btn-dark" type="submit">Send via WhatsApp</button>
+        </form>
+      </div>
     </div>
   </section>
 </main>
+</div><!-- /homeView -->
+
+<!-- ============ SEPARATE PAGES (footer links open here) ============ -->
+<div id="pageView" hidden>
+  <div class="wrap">
+    <p class="dia-crumb"><a href="#/">Home</a> / <span id="pgCrumb"></span></p>
+    <div id="pageContent"></div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
-    <div><strong>ZanJewelry Atelier</strong><p style="opacity:.65;font-size:.86rem">Fine rings and cosmetics · Est. 2021</p></div>
-    <a href="/admin">Admin Portal</a>
+    <div class="f-grid">
+      <div class="f-brand">
+        <strong>ZanJewelry</strong>
+        <p>Jewelry made to celebrate you. Fine rings, loose diamonds and beauty essentials.</p>
+        <div class="f-social">
+          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+          <a data-wa="general" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Need Help?</h4>
+        <a href="#/page/customer-support">Customer Support</a>
+        <a href="#contact" data-anchor="contact">Contact Us</a>
+        <a href="#/page/virtual-appointment">Book Virtual Appointment</a>
+      </div>
+      <div class="f-col">
+        <h4>About Us</h4>
+        <a href="#/page/about-us">About Us</a>
+        <a href="#/page/blog">Blog</a>
+        <a href="#/page/help-centre">Help Centre</a>
+        <a href="#/page/reviews">Customer Reviews</a>
+      </div>
+      <div class="f-col">
+        <h4>Orders</h4>
+        <a href="#/page/orders">View Your Orders</a>
+        <a href="#/page/repairs-sizing">Repairs & Sizing</a>
+        <a href="#/page/returns-exchange">Returns or Exchange</a>
+      </div>
+      <div class="f-col">
+        <h4>Policies</h4>
+        <a href="#/page/terms">Terms & Conditions of Sale</a>
+        <a href="#/page/returns-refunds">Returns, Refunds & Exchanges</a>
+        <a href="#/page/shipping">Shipping & Delivery</a>
+        <a href="#/page/warranty">Warranty & Care</a>
+        <a href="#/page/privacy">Privacy Notice</a>
+        <a href="#/page/cookies">Cookie Policy</a>
+        <a href="#/page/paia">PAIA Manual</a>
+        <a href="#/page/complaints">Complaints & Disputes</a>
+        <a href="#/page/company">Company & Legal Information</a>
+      </div>
+    </div>
+    <div class="f-grid" style="margin-top:38px">
+      <div class="f-news" style="grid-column:2/-1">
+        <h4>Stay Connected</h4>
+        <p>Join our list for new collections, quiet launches and member-only offers.</p>
+        <form id="newsForm">
+          <input type="email" required placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="f-note" id="newsNote"></p>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 ZanJewelry. All Rights Reserved.</span>
+      <span>ZanJewelry Manufacturing · Est. 2021</span>
+    </div>
   </div>
 </footer>
 
-<a class="wa-float" data-wa="Hi ZanJewelry! I'd like to enquire." target="_blank" rel="noopener">WhatsApp us</a>
+<a class="wa-float" data-wa="general" target="_blank" rel="noopener">WhatsApp us</a>
 
 <div class="modal" id="productModal">
   <div class="modal-card">
     <button class="close-x" data-close>✕</button>
     <div id="productDetail"></div>
+  </div>
+</div>
+
+<!-- Write a review modal -->
+<div class="modal" id="reviewModal">
+  <div class="modal-card narrow">
+    <button class="close-x" data-close-review>✕</button>
+    <h2 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:4px">Write a review</h2>
+    <p class="muted" style="font-size:.9rem;margin-bottom:16px">Share your experience and a photo if you'd like — reviews appear once approved.</p>
+    <form class="panel" id="reviewForm" style="background:#fff">
+      <label>Your name <input name="name" required placeholder="e.g. Thandi K."></label>
+      <label>Your rating <span class="starpick" id="starPick">
+        <button type="button" data-star="1">★</button><button type="button" data-star="2">★</button><button type="button" data-star="3">★</button><button type="button" data-star="4">★</button><button type="button" data-star="5">★</button>
+      </span></label>
+      <label>Review title <input name="title" required placeholder="e.g. Excellent service"></label>
+      <label>Your review <textarea name="text" rows="4" required placeholder="Tell us about your piece and your experience…"></textarea></label>
+      <label>Add a photo <span class="hint">(optional — shown after approval)</span> <input type="file" name="imageFile" id="revFile" accept="image/*"></label>
+      <button class="btn btn-dark" type="submit">Submit review</button>
+      <p class="rv-note" id="rvNote">✓ Thank you! Your review will appear once it's approved.</p>
+    </form>
+  </div>
+</div>
+
+<!-- VIEW OUR popup (after picking a shape) -->
+<div class="choice" id="choiceModal">
+  <div class="choice-card">
+    <button class="choice-x" onclick="closeChoice()">✕</button>
+    <h3>View our</h3>
+    <button class="choice-btn" onclick="choiceEngagement()">Engagement Rings</button>
+    <button class="choice-btn" onclick="choiceLoose()">Loose Diamonds</button>
   </div>
 </div>
 
@@ -200,115 +474,479 @@ function imgFail(im){im.onerror=null;im.src=PLACE(im.dataset.letter||"Z");}
 
 let WA="27703887170", products=[], filter="All";
 const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
-const money=p=>(p==null||p==="")?"Price on request":"R "+Number(p).toLocaleString("en-ZA");
 
-/* Category filters — these match the exact type/material values your server stores */
-const FILTERS={
-  All:()=>true,
-  Rings:p=>p.type==="ring",
-  Engagement:p=>p.type==="engagement",
-  Wedding:p=>p.type==="wedding",
-  Cosmetics:p=>p.type==="cosmetic",
-  Diamond:p=>p.material==="diamond",
-  Gemstones:p=>p.material==="gemstone",
-  Gold:p=>p.material==="gold",
-  Silver:p=>p.material==="silver",
-  "Rose Gold":p=>p.material==="rose-gold",
-  Platinum:p=>p.material==="platinum"
-};
-
-function imgFor(p){
-  const s=String(p.image||"");
-  if(/^https?:\/\//.test(s)||s.startsWith("/"))return s;      // uploaded photo (/uploads/...)
-  if(s)return "images/"+s.replace(/^\//,"");                  // manual filename fallback
-  return "";
+/* ============ WHATSAPP TEMPLATES ============ */
+const MSG_GENERAL="Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\nPlease assist me with my enquiry.\n\nThank you.";
+function productMsg(p){
+  const cos=p.type==="cosmetic";
+  const price=(p.price!=null&&p.price!=="")?("R "+Number(p.price).toLocaleString("en-ZA")):"Price on request";
+  const link=location.origin+location.pathname+"#/product/"+p.id;
+  let m="Good day ZanJewelry 👋\n\n"+(cos?"I would like to enquire about this cosmetic product:\n\n":"I would like to enquire about this product:\n\n");
+  m+=(cos?"💄":"💎")+" *Product:* "+p.name+"\n💰 *Price:* "+price+"\n";
+  if(p.description)m+="📝 *Description:* "+p.description+"\n";
+  m+="\n🖼️ *"+(cos?"View Product/Image":"View Product")+":* "+link+"\n\n";
+  m+=cos?"Please assist me with more information about this product, including availability, how to order and delivery options.\n\nThank you."
+        :"Please assist me with more information about this product, including availability, ordering and delivery options.\n\nThank you.";
+  return m;
+}
+function diamondMsg(d){
+  const title=Number(d.carat).toFixed(2)+"ct "+d.shape+" "+(d.type==="lab"?"Lab-Grown":"Natural")+" Diamond";
+  let m="Good day ZanJewelry 👋\n\nI would like to enquire about this loose diamond:\n\n💎 *Diamond:* "+title+
+    "\n✨ *Colour:* "+d.colour+" · *Clarity:* "+d.clarity+" · *Cut:* "+d.cut+"\n";
+  if(d.cert)m+="💠 *Certificate:* "+d.cert+"\n";
+  return m+"🔖 *Ref:* "+(d.ref||"")+"\n\nPlease assist me with availability and the next steps.\n\nThank you.";
+}
+function customMsg(f){
+  const g=n=>f.elements[n].value.trim();
+  const pers=g("pers")==="None"?"None":g("pers")+(g("persText")?" — "+g("persText"):"");
+  let m="Good day ZanJewelry 👋\n\nI would like to enquire about creating/customizing my own jewelry.\n\n"+
+    "💎 *Jewelry Type:* "+g("jtype")+"\n🎨 *My Design/Request:* "+g("design")+"\n💎 *Material/Style:* "+g("material")+
+    "\n📏 *Size:* "+(g("size")||"Not sure yet")+"\n✨ *Personalization:* "+pers+"\n";
+  if(g("budget"))m+="💰 *Estimated Price:* "+g("budget")+"\n";
+  return m+"\n🖼️ *My Design/Reference:* "+(g("refLink")||"I will attach my image in this chat")+"\n\nPlease assist me with my custom jewelry request and let me know the next steps.\n\nThank you.";
+}
+function generalMsg(f){
+  const g=n=>f.elements[n].value.trim();
+  return "Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\n*Name:* "+g("name")+"\n*Email:* "+g("email")+"\n*Message:* "+g("message")+"\n\nPlease assist me with my enquiry.\n\nThank you.";
 }
 
+const FILTERS={All:()=>true,Rings:p=>p.type==="ring",Engagement:p=>p.type==="engagement",Wedding:p=>p.type==="wedding",
+  Cosmetics:p=>p.type==="cosmetic",Diamond:p=>p.material==="diamond",Gemstones:p=>p.material==="gemstone",
+  Gold:p=>p.material==="gold",Silver:p=>p.material==="silver","Rose Gold":p=>p.material==="rose-gold",Platinum:p=>p.material==="platinum"};
+const imgFor=p=>{const s=String(p.image||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
+
+/* NO prices on the public site */
 function cardHTML(p){
   const label=[TYPE[p.type]||"",p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
   return `<article class="card" data-id="${esc(p.id)}">
     <div class="card-img"><img src="${esc(imgFor(p)||PLACE((p.name||"Z")[0]))}" data-letter="${esc((p.name||"Z")[0])}" loading="lazy" alt="${esc(p.name)}" onerror="imgFail(this)"></div>
-    <div class="range">${esc(label)}</div>
-    <h3>${esc(p.name)}</h3>
-    <div class="price">${money(p.price)}</div>
-    <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(`Hi ZanJewelry! I'm interested in the ${p.name} (${money(p.price)}). Is it available?`)}">Enquire on WhatsApp</a>
-  </article>`;
+    <div class="range">${esc(label)}</div><h3>${esc(p.name)}</h3>
+    <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(productMsg(p))}">Enquire on WhatsApp</a></article>`;
 }
-
 const CATS=[
   {f:"Rings",t:"ring",d:"Fine pieces made to order."},
   {f:"Diamond",m:"diamond",d:"Close-set stones that catch the light."},
   {f:"Gemstones",m:"gemstone",d:"Amethyst, ruby, sapphire and more."},
-  {f:"Gold",m:"gold",d:"Everyday gold essentials for stacking."}
-];
+  {f:"Gold",m:"gold",d:"Everyday gold essentials for stacking."}];
 function renderCatCards(){
   $("#catTrack").innerHTML=CATS.map(c=>{
     const pool=products.filter(p=>c.t?p.type===c.t:p.material===c.m);
     const raw=pool.map(p=>p.image).find(Boolean)||"";
     const src=raw?(/^https?:/.test(raw)||raw.startsWith("/")?raw:"images/"+raw):"";
-    return `<a class="cat-card" href="#shop" onclick="setFilter('${c.f}')">
+    return `<a class="cat-card" href="#shop" data-anchor="shop">
       <div class="cat-img"><img src="${esc(src||PLACE(c.f[0]))}" data-letter="${esc(c.f[0])}" alt="${esc(c.f)}" onerror="imgFail(this)"></div>
-      <h3>${esc(c.f)}</h3><div class="dash"></div><p>${esc(c.d)}</p></a>`;
-  }).join("");
+      <h3>${esc(c.f)}</h3><div class="dash"></div><p>${esc(c.d)}</p></a>`;}).join("");
 }
-
 function setFilter(f){filter=FILTERS[f]?f:"All";$$("#chips .chip").forEach(c=>c.classList.toggle("active",c.dataset.filter===filter));renderGrid();}
  $$("#chips .chip").forEach(c=>c.addEventListener("click",()=>setFilter(c.dataset.filter)));
-
 function renderGrid(){
   const list=products.filter(FILTERS[filter]);
   $("#productGrid").innerHTML=list.map(cardHTML).join("")||'<p class="empty">Nothing here yet'+(filter!=="All"?" under "+esc(filter):"")+' — post your first piece from the admin portal.</p>';
   renderCatCards();
 }
-
 function openProduct(id){
   const p=products.find(x=>x.id===id);if(!p)return;
   const label=[TYPE[p.type]||"",p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
   $("#productDetail").innerHTML=`<div class="detail">
     <img src="${esc(imgFor(p)||PLACE((p.name||"Z")[0]))}" data-letter="${esc((p.name||"Z")[0])}" alt="${esc(p.name)}" onerror="imgFail(this)">
     <div><div class="range">${esc(label)}</div><h2>${esc(p.name)}</h2>
-    <div class="price">${money(p.price)} · ${Number(p.stock)||0} in stock</div>
+    <div class="range" style="margin:6px 0 14px">${Number(p.stock)>0?"In stock":"Enquire for availability"}</div>
     <p class="muted" style="margin-bottom:18px">${esc(p.description||"")}</p>
-    <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(`Hi ZanJewelry! I'd like more details on the ${p.name}.`)}">Enquire on WhatsApp</a></div></div>`;
+    <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(productMsg(p))}">Enquire on WhatsApp</a></div></div>`;
   $("#productModal").classList.add("open");document.body.style.overflow="hidden";
 }
 function closeModal(){$("#productModal").classList.remove("open");document.body.style.overflow="";}
 document.addEventListener("click",e=>{
   const card=e.target.closest(".card");
-  if(card&&!e.target.closest("a")){openProduct(card.dataset.id);return;}
+  if(card&&card.dataset.id&&!e.target.closest("a")){openProduct(card.dataset.id);return;}
   if(e.target.id==="productModal"||e.target.closest("[data-close]"))closeModal();
 });
-
  $("#occEng").addEventListener("click",()=>{setFilter("Engagement");$("#shop").scrollIntoView({behavior:"smooth"});});
  $("#occWed").addEventListener("click",()=>{setFilter("Wedding");$("#shop").scrollIntoView({behavior:"smooth"});});
+ $$(".enq-tab").forEach(t=>t.addEventListener("click",()=>{
+  $$(".enq-tab").forEach(x=>x.classList.toggle("active",x===t));
+  $$(".enq-form").forEach(f=>f.classList.toggle("show",f.id===t.dataset.enq+"Form"));
+}));
+ $("#customForm").addEventListener("submit",e=>{e.preventDefault();window.open(wa(customMsg(e.target)),"_blank");});
+ $("#generalForm").addEventListener("submit",e=>{e.preventDefault();window.open(wa(generalMsg(e.target)),"_blank");});
 
- $("#contactForm").addEventListener("submit",e=>{
+/* ================= DIAMOND FLOW ================= */
+const SHAPES=["Round","Princess","Cushion","Emerald","Oval","Pear","Marquise","Radiant","Asscher","Heart"];
+const DIA_COL=["J","I","H","G","F","E","D"];
+const DIA_CLA=["VS2","VS1","VVS2","VVS1","IF","FL"];
+const DIA_CUT=["Very Good","Excellent","Ideal"];
+const CUT_AB={"Excellent":"EX","Ideal":"ID","Very Good":"VG","Good":"G"};
+let diamonds=[], rawDiaJSON="[]";
+let dia={type:"natural",shape:"Round",colour:"All",mode:"White",clarity:"All",cut:"All",certOnly:false,sort:"carat-desc",view:"grid",cMin:0,cMax:10};
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):"";
+const slug=s=>s.toLowerCase();
+const typeLabel=()=>dia.type==="lab"?"Lab-Grown":"Natural";
+
+/* permanent faceted diamond icons — no uploads ever needed */
+let svgUid=0;
+function shapeSVG(shape,w=110){
+  const id="dg"+(++svgUid);
+  const st=`fill="url(#${id})" stroke="#a9aeb8" stroke-width="1.5" stroke-linejoin="round"`;
+  const f=`stroke="rgba(255,255,255,.92)" stroke-width="1.3" fill="none" stroke-linejoin="round"`;
+  const c=w/2;let o="",fc="";
+  if(shape==="Round"){o=`<circle cx="${c}" cy="${c}" r="${w*.4}" ${st}/>`;fc=`<circle cx="${c}" cy="${c}" r="${w*.21}" ${f}/>`;
+    for(let a=0;a<360;a+=45){const r=a*Math.PI/180;fc+=`<line x1="${c+w*.21*Math.cos(r)}" y1="${c+w*.21*Math.sin(r)}" x2="${c+w*.4*Math.cos(r)}" y2="${c+w*.4*Math.sin(r)}" ${f}/>`;}}
+  else if(shape==="Oval"){o=`<ellipse cx="${c}" cy="${c}" rx="${w*.27}" ry="${w*.4}" ${st}/>`;fc=`<ellipse cx="${c}" cy="${c}" rx="${w*.13}" ry="${w*.22}" ${f}/>`;
+    [[0,-1],[0,1],[-1,0],[1,0]].forEach(v=>{fc+=`<line x1="${c+w*.13*v[0]}" y1="${c+w*.22*v[1]}" x2="${c+w*.27*v[0]}" y2="${c+w*.4*v[1]}" ${f}/>`;});}
+  else if(shape==="Princess"){o=`<rect x="${w*.18}" y="${w*.18}" width="${w*.64}" height="${w*.64}" ${st}/>`;
+    fc=`<rect x="${w*.36}" y="${w*.36}" width="${w*.28}" height="${w*.28}" ${f}/><line x1="${w*.18}" y1="${w*.18}" x2="${w*.36}" y2="${w*.36}" ${f}/><line x1="${w*.82}" y1="${w*.18}" x2="${w*.64}" y2="${w*.36}" ${f}/><line x1="${w*.18}" y1="${w*.82}" x2="${w*.36}" y2="${w*.64}" ${f}/><line x1="${w*.82}" y1="${w*.82}" x2="${w*.64}" y2="${w*.64}" ${f}/>`;}
+  else if(shape==="Cushion"){o=`<rect x="${w*.16}" y="${w*.16}" width="${w*.68}" height="${w*.68}" rx="${w*.16}" ${st}/>`;
+    fc=`<rect x="${w*.35}" y="${w*.35}" width="${w*.3}" height="${w*.3}" rx="${w*.08}" ${f}/><line x1="${c}" y1="${w*.16}" x2="${c}" y2="${w*.35}" ${f}/><line x1="${c}" y1="${w*.84}" x2="${c}" y2="${w*.65}" ${f}/><line x1="${w*.16}" y1="${c}" x2="${w*.35}" y2="${c}" ${f}/><line x1="${w*.84}" y1="${c}" x2="${w*.65}" y2="${c}" ${f}/>`;}
+  else if(shape==="Emerald"){o=`<path d="M${w*.3} ${w*.14} H${w*.7} L${w*.86} ${w*.3} V${w*.7} L${w*.7} ${w*.86} H${w*.3} L${w*.14} ${w*.7} V${w*.3} Z" ${st}/>`;
+    fc=`<path d="M${w*.36} ${w*.26} H${w*.64} L${w*.74} ${w*.36} V${w*.64} L${w*.64} ${w*.74} H${w*.36} L${w*.26} ${w*.64} V${w*.36} Z" ${f}/><rect x="${w*.42}" y="${w*.42}" width="${w*.16}" height="${w*.16}" ${f}/>`;}
+  else if(shape==="Radiant"){o=`<path d="M${w*.3} ${w*.14} H${w*.7} L${w*.86} ${w*.3} V${w*.7} L${w*.7} ${w*.86} H${w*.3} L${w*.14} ${w*.7} V${w*.3} Z" ${st}/>`;
+    fc=`<rect x="${w*.38}" y="${w*.38}" width="${w*.24}" height="${w*.24}" ${f}/><line x1="${w*.38}" y1="${w*.38}" x2="${w*.3}" y2="${w*.3}" ${f}/><line x1="${w*.62}" y1="${w*.38}" x2="${w*.7}" y2="${w*.3}" ${f}/><line x1="${w*.38}" y1="${w*.62}" x2="${w*.3}" y2="${w*.7}" ${f}/><line x1="${w*.62}" y1="${w*.62}" x2="${w*.7}" y2="${w*.7}" ${f}/>`;}
+  else if(shape==="Asscher"){o=`<path d="M${w*.32} ${w*.16} H${w*.68} L${w*.84} ${w*.32} V${w*.68} L${w*.68} ${w*.84} H${w*.32} L${w*.16} ${w*.68} V${w*.32} Z" ${st}/>`;
+    fc=`<rect x="${w*.36}" y="${w*.36}" width="${w*.28}" height="${w*.28}" ${f}/><rect x="${w*.44}" y="${w*.44}" width="${w*.12}" height="${w*.12}" ${f}/>`;}
+  else if(shape==="Pear"){o=`<path d="M${c} ${w*.1} C${w*.84} ${w*.32} ${w*.78} ${w*.9} ${c} ${w*.9} C${w*.22} ${w*.9} ${w*.16} ${w*.32} ${c} ${w*.1} Z" ${st}/>`;
+    fc=`<line x1="${c}" y1="${w*.2}" x2="${c}" y2="${w*.82}" ${f}/><path d="M${w*.38} ${w*.4} Q${c} ${w*.55} ${w*.62} ${w*.4}" ${f}/>`;}
+  else if(shape==="Marquise"){o=`<path d="M${c} ${w*.08} C${w*.88} ${w*.34} ${w*.88} ${w*.66} ${c} ${w*.92} C${w*.12} ${w*.66} ${w*.12} ${w*.34} ${c} ${w*.08} Z" ${st}/>`;
+    fc=`<line x1="${c}" y1="${w*.14}" x2="${c}" y2="${w*.86}" ${f}/><path d="M${w*.32} ${w*.36} Q${c} ${w*.5} ${w*.68} ${w*.36}" ${f}/><path d="M${w*.32} ${w*.64} Q${c} ${w*.5} ${w*.68} ${w*.64}" ${f}/>`;}
+  else{o=`<path d="M${c} ${w*.88} C${w*.04} ${w*.44} ${w*.2} ${w*.08} ${c} ${w*.32} C${w*.8} ${w*.08} ${w*.96} ${w*.44} ${c} ${w*.88} Z" ${st}/>`;
+    fc=`<line x1="${c}" y1="${w*.32}" x2="${c}" y2="${w*.82}" ${f}/><path d="M${w*.34} ${w*.4} Q${c} ${w*.6} ${w*.66} ${w*.4}" ${f}/>`;}
+  return `<svg viewBox="0 0 ${w} ${w}" width="${w}" height="${w}" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#eceef2"/><stop offset=".72" stop-color="#c9cdd6"/><stop offset="1" stop-color="#e2e5ea"/></linearGradient></defs>${o}${fc}</svg>`;
+}
+function renderDiaShapes(){
+  $("#diamonds").innerHTML=`
+    <div class="dia-head"><h2>Shop by Diamond Shape</h2>
+      <p>Select your preferred diamond type and explore our collection of shapes</p></div>
+    <div style="text-align:center"><div class="seg">
+      <button class="segbtn ${dia.type==="natural"?"active":""}" data-dtype="natural">Natural</button>
+      <button class="segbtn ${dia.type==="lab"?"active":""}" data-dtype="lab">Lab Grown</button>
+    </div></div>
+    <div class="shape-wrap">
+      <button class="shape-btn prev" aria-label="Scroll back">‹</button>
+      <div class="shape-row" id="shapeRow">${SHAPES.map(s=>`
+        <button class="shape-card" data-pick="${esc(s)}">${shapeSVG(s,86)}<span>${esc(s)}</span></button>`).join("")}</div>
+      <button class="shape-btn next" aria-label="Scroll forward">›</button>
+    </div>`;
+  const row=$("#shapeRow");
+  $("#diamonds .shape-btn.prev").addEventListener("click",()=>row.scrollBy({left:-row.clientWidth*.9,behavior:"smooth"}));
+  $("#diamonds .shape-btn.next").addEventListener("click",()=>row.scrollBy({left:row.clientWidth*.9,behavior:"smooth"}));
+}
+let pickChoice="Round";
+function openChoice(shape){pickChoice=shape;$("#choiceModal").classList.add("open");}
+function closeChoice(){$("#choiceModal").classList.remove("open");}
+function choiceEngagement(){closeChoice();setFilter("Engagement");showHome();$("#shop").scrollIntoView({behavior:"smooth"});}
+function choiceLoose(){closeChoice();location.hash="#/diamonds/"+dia.type+"/"+slug(pickChoice);}
+function renderDiaShop(){
+  const T=typeLabel();
+  $("#diamonds").innerHTML=`
+    <p class="dia-crumb"><a href="#/">Home</a> / <a href="#/diamonds">Shop Diamonds</a> / ${esc(dia.shape)} ${T}</p>
+    <div class="dia-tabs">
+      <button class="dtabs ${dia.type==="natural"?"on":""}" data-dtab="natural">Natural</button>
+      <button class="dtabs ${dia.type==="lab"?"on":""}" data-dtab="lab">Lab-Grown</button>
+    </div>
+    <div class="dia-bar">
+      <div class="dia-group"><label>Shape</label><div class="shape-sel">${shapeSVG(dia.shape,58)}<span>${esc(dia.shape)}</span></div></div>
+      <div class="dia-group"><label>Carats</label>
+        <div class="range-wrap"><div class="range-track"></div><div class="range-fill" id="ctFill"></div>
+          <input type="range" data-lo min="0" max="10" step="0.01" value="${dia.cMin}">
+          <input type="range" data-hi min="0" max="10" step="0.01" value="${dia.cMax}"></div>
+        <div class="ct-inputs">
+          <div class="ctbox"><input id="ctMinL" value="${dia.cMin}" readonly><small>ct</small></div><span>–</span>
+          <div class="ctbox"><input id="ctMaxL" value="${dia.cMax}" readonly><small>ct</small></div></div></div>
+      <div class="dia-group"><label>Colour
+        <span class="wf" style="margin-left:10px">
+          <button class="${dia.mode==="White"?"on":""}" data-wf="White">White</button>
+          <button class="${dia.mode==="Fancy"?"on":""}" data-wf="Fancy">Fancy</button></span></label>
+        <div id="colArea"></div></div>
+      <div class="dia-group"><label>Clarity</label><div class="segrow" id="claRow"></div></div>
+      <div class="dia-group"><label>Cut</label><div class="segrow" id="cutRow"></div></div>
+      <div class="dia-group"><label>&nbsp;</label>
+        <details class="adv"><summary>Advanced Filters</summary>
+          <label class="diaspec" style="display:flex;gap:8px;align-items:center;margin-top:12px">
+            <input type="checkbox" id="certOnly" ${dia.certOnly?"checked":""} style="width:auto"> GIA certified only</label>
+        </details></div>
+    </div>
+    <div class="results-bar">
+      <span class="cnt" id="diaCount"></span>
+      <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <span class="viewtgl">
+          <button class="${dia.view==="list"?"on":""}" data-view="list">List</button>
+          <button class="${dia.view==="grid"?"on":""}" data-view="grid">Grid</button></span>
+        <label class="diaspec">Sort:
+          <select id="diaSort" style="width:auto;padding:9px 12px;font-size:14px">
+            <option value="carat-desc">Carat: high to low</option>
+            <option value="carat-asc">Carat: low to high</option></select></label>
+      </span>
+    </div>
+    <div class="dia-grid ${dia.view==="list"?"list":""}" id="diaGrid"></div>`;
+  $("#diaSort").value=dia.sort;bindCarats();
+  renderColArea();segRow("claRow",DIA_CLA,dia.clarity,"clarity");segRow("cutRow",DIA_CUT,dia.cut,"cut");
+  $("#certOnly").addEventListener("change",e=>{dia.certOnly=e.target.checked;drawDiaResults();});
+  $("#diaSort").addEventListener("change",e=>{dia.sort=e.target.value;drawDiaResults();});
+  drawDiaResults();
+}
+function segRow(id,values,cur,fn){
+  const el=$("#"+id);if(!el)return;
+  el.innerHTML=["All",...values].map(v=>`<button class="${cur===v?"on":""}" data-dia="${fn}" data-val="${esc(v)}">${esc(v)}</button>`).join("");
+}
+function renderColArea(){
+  const el=$("#colArea");if(!el)return;
+  if(dia.mode==="Fancy"){el.innerHTML='<p class="diaspec">Fancy coloured diamonds are available on request — tap enquire on any stone or WhatsApp us.</p>';return;}
+  el.innerHTML='<div class="segrow" id="wcRow"></div>';
+  $("#wcRow").innerHTML=["All",...DIA_COL].map(v=>`<button class="${dia.colour===v?"on":""}" data-dia="colour" data-val="${esc(v)}">${esc(v)}</button>`).join("");
+}
+function bindCarats(){
+  const wrap=$(".range-wrap");if(!wrap)return;
+  const lo=wrap.querySelector("[data-lo]"),hi=wrap.querySelector("[data-hi]"),fill=$("#ctFill");
+  const upd=()=>{let a=parseFloat(lo.value),b=parseFloat(hi.value);if(a>b)[a,b]=[b,a];
+    dia.cMin=a;dia.cMax=b;$("#ctMinL").value=a;$("#ctMaxL").value=b;
+    fill.style.left=(a/10*100)+"%";fill.style.width=((b-a)/10*100)+"%";drawDiaResults();};
+  lo.addEventListener("input",upd);hi.addEventListener("input",upd);upd();
+}
+function diaCard(d){
+  const title=`${Number(d.carat).toFixed(2)}ct ${esc(d.shape)} ${d.type==="lab"?"Lab-Grown":"Natural"} Diamond`;
+  const badge=d.cert?esc(d.cert):(d.certified?"GIA Certified":"");
+  return `<article class="diacard">
+    <div class="dia-img">${d.image?`<img src="${esc(d.image)}" alt="${title}" onerror="this.remove()">`:shapeSVG(d.shape,130)}</div>
+    <div class="dia-body"><h3>${title}</h3>
+      <p class="diaspec">Colour: <b>${esc(d.colour)}</b>, Clarity: <b>${esc(d.clarity)}</b>, Cut: <b>${esc(CUT_AB[d.cut]||d.cut)}</b></p>
+      ${badge?`<div class="diameta"><span class="cert">💠 ${badge}</span></div>`:""}
+      <a class="btn btn-dark btn-block" target="_blank" rel="noopener" href="${wa(diamondMsg(d))}">Enquire on WhatsApp</a></div></article>`;
+}
+function drawDiaResults(){
+  const grid=$("#diaGrid"),count=$("#diaCount");if(!grid)return;
+  let list=diamonds.filter(d=>(d.type||"natural")===dia.type&&!d.sold&&d.shape===dia.shape);
+  if(dia.mode==="White"&&dia.colour!=="All")list=list.filter(d=>d.colour===dia.colour);
+  if(dia.clarity!=="All")list=list.filter(d=>d.clarity===dia.clarity);
+  if(dia.cut!=="All")list=list.filter(d=>d.cut===dia.cut);
+  if(dia.certOnly)list=list.filter(d=>d.certified||d.cert);
+  list=list.filter(d=>Number(d.carat)>=dia.cMin&&Number(d.carat)<=dia.cMax);
+  list.sort((a,b)=>dia.sort==="carat-asc"?a.carat-b.carat:b.carat-a.carat);
+  count.textContent=`Results — ${list.length} Diamond${list.length===1?"":"s"}`;
+  grid.innerHTML=list.map(diaCard).join("")||'<p class="empty">No diamonds match these filters — widen your search or enquire on WhatsApp.</p>';
+}
+document.addEventListener("click",e=>{
+  const pick=e.target.closest("[data-pick]");
+  if(pick){openChoice(pick.dataset.pick);return;}
+  const seg=e.target.closest("[data-dtype]");
+  if(seg){dia.type=seg.dataset.dtype;$$("#diamonds [data-dtype]").forEach(b=>b.classList.toggle("active",b===seg));return;}
+  const tab=e.target.closest("[data-dtab]");
+  if(tab){dia.type=tab.dataset.dtab;location.hash="#/diamonds/"+dia.type+"/"+slug(dia.shape);return;}
+  const wf=e.target.closest("[data-wf]");
+  if(wf){dia.mode=wf.dataset.wf;$$("#diamonds [data-wf]").forEach(b=>b.classList.toggle("on",b===wf));renderColArea();drawDiaResults();return;}
+  const vw=e.target.closest("[data-view]");
+  if(vw){dia.view=vw.dataset.view;$$("[data-view]").forEach(b=>b.classList.toggle("on",b===vw));$("#diaGrid").classList.toggle("list",dia.view==="list");return;}
+  const f=e.target.closest("[data-dia]");
+  if(f){dia[f.dataset.dia]=f.dataset.val;renderColArea();segRow("claRow",DIA_CLA,dia.clarity,"clarity");segRow("cutRow",DIA_CUT,dia.cut,"cut");drawDiaResults();}
+});
+ $("#choiceModal").addEventListener("click",e=>{if(e.target.id==="choiceModal")closeChoice();});
+function diaRoute(){
+  const h=location.hash||"";
+  if(!h.startsWith("#/diamonds"))return false;
+  const m=h.match(/^#\/diamonds(?:\/(natural|lab))?(?:\/([\w-]+))?/);
+  if(m&&m[1])dia.type=m[1];
+  if(m&&m[2])dia.shape=cap(m[2]);
+  if(m&&m[2])renderDiaShop();else renderDiaShapes();
+  return true;
+}
+
+/* ================= BE INSPIRED + REVIEWS ================= */
+let REVIEWS=[];
+const DEMO_REVIEWS=[
+  {name:"Tawana",date:"2026-09-15",rating:5,title:"Excellent Service",text:"ZanJewelry was amazing! Helpful every step of the way and always available to assist and communicate. Highly recommend.",image:""},
+  {name:"Caleb B.",date:"2026-09-14",rating:5,title:"Excellent service",text:"Extremely efficient and meticulous work. Thank you so much for such great service.",image:""},
+  {name:"Luis A.",date:"2026-09-08",rating:5,title:"Nothing short of amazing!",text:"From when I first contacted the team, I've had nothing but peace of mind. They will guide you all the way.",image:""}
+];
+const starStr=r=>"★".repeat(r)+"☆".repeat(5-r);
+const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
+function renderReviews(){
+  const list=REVIEWS;
+  const avg=list.length?Math.round(list.reduce((a,r)=>a+(Number(r.rating)||5),0)/list.length):5;
+  $("#avgStars").textContent=starStr(avg);
+  $("#revCount").textContent=list.length?list.length+" reviews":"Be the first to review us";
+  const withPhotos=list.filter(r=>r.image);
+  if(withPhotos.length){
+    $("#galWrap").hidden=false;
+    $("#galStrip").innerHTML=withPhotos.map(r=>`
+      <div class="gal-item"><div class="ph"><img src="${esc(r.image)}" alt="Customer photo by ${esc(r.name)}" loading="lazy" onerror="this.parentElement.innerHTML='💍'"></div></div>`).join("");
+    const gw=$("#galWrap");
+    gw.querySelector(".gal-btn.prev").onclick=()=>$("#galStrip").scrollBy({left:-$("#galStrip").clientWidth*.8,behavior:"smooth"});
+    gw.querySelector(".gal-btn.next").onclick=()=>$("#galStrip").scrollBy({left:$("#galStrip").clientWidth*.8,behavior:"smooth"});
+  }else $("#galWrap").hidden=true;
+  $("#revStrip").innerHTML=list.slice(0,10).map(r=>`
+    <div class="rev-card">
+      <div class="rev-top"><b>${esc(r.name)}</b><span class="rev-date">${esc(fmtDate(r.date||r.createdAt))}</span></div>
+      <div class="stars">${starStr(Number(r.rating)||5)}</div>
+      <div class="rev-title">${esc(r.title||"")}</div>
+      <div class="rev-text">${esc(r.text||r.review||"")}</div>
+    </div>`).join("")||'<p class="muted" style="text-align:center">No reviews yet — be the first to share your experience.</p>';
+}
+async function loadReviews(){
+  try{
+    const r=await fetch("/api/reviews").then(r=>r.json());
+    REVIEWS=Array.isArray(r)?r:[];
+  }catch(_){REVIEWS=DEMO_REVIEWS.slice();}
+  renderReviews();
+}
+/* star picker */
+ $("#starPick").addEventListener("click",e=>{
+  const b=e.target.closest("[data-star]");if(!b)return;
+  const v=Number(b.dataset.star);
+  $$("#starPick button").forEach(x=>x.classList.toggle("on",Number(x.dataset.star)<=v));
+  $("#starPick").dataset.value=v;
+});
+ $("#starPick").dataset.value=5;
+ $$("#starPick button").forEach(b=>{if(Number(b.dataset.star)<=5)b.classList.add("on");});
+/* open/close review modal */
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-open-review]")||e.target.closest(".seeall")&&e.target.closest(".seeall").getAttribute("href")==="#write"){
+    $("#reviewModal").classList.add("open");document.body.style.overflow="hidden";return;}
+  if(e.target.id==="reviewModal"||e.target.closest("[data-close-review]")){
+    $("#reviewModal").classList.remove("open");document.body.style.overflow="";}
+});
+ $("#reviewForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const g=n=>e.target.elements[n].value.trim();
-  window.open(wa(`Hi ZanJewelry! My name is ${g("name")}. ${g("message")} (Reply to: ${g("email")})`),"_blank");
+  const f=e.target,g=n=>f.elements[n].value.trim();
+  const rating=Number($("#starPick").dataset.value)||5;
+  const fd=new FormData();
+  fd.append("name",g("name"));fd.append("rating",rating);
+  fd.append("title",g("title"));fd.append("text",g("text"));
+  const file=f.elements.imageFile.files[0];if(file)fd.append("imageFile",file);
+  try{
+    const r=await fetch("/api/reviews",{method:"POST",body:fd});
+    if(!r.ok)throw new Error();
+    $("#rvNote").classList.add("show");f.reset();
+    $$("#starPick button").forEach(x=>x.classList.add("on"));$("#starPick").dataset.value=5;
+    setTimeout(()=>{$("#rvNote").classList.remove("show");$("#reviewModal").classList.remove("open");document.body.style.overflow="";},2600);
+  }catch(_){
+    /* server not ready yet → send the review via WhatsApp instead */
+    const msg="Good day ZanJewelry 👋\n\nI would like to submit a review:\n\n"+
+      "⭐ Rating: "+"★".repeat(rating)+"\n👤 Name: "+g("name")+"\n📌 Title: "+g("title")+
+      "\n💬 Review: "+g("text")+"\n🖼️ Photo: I will attach it in this chat";
+    window.open(wa(msg),"_blank");
+  }
 });
 
-/* ---- LOAD from YOUR server ---- */
+/* ================= SEPARATE PAGES (footer links) ================= */
+const PAGE_TITLES={
+  "customer-support":"Customer Support","virtual-appointment":"Book Virtual Appointment",
+  "about-us":"About Us","blog":"Blog","help-centre":"Help Centre","reviews":"Customer Reviews",
+  "orders":"View Your Orders","repairs-sizing":"Repairs & Sizing","returns-exchange":"Returns or Exchange",
+  "terms":"Terms & Conditions of Sale","returns-refunds":"Returns, Refunds & Exchanges",
+  "shipping":"Shipping & Delivery","warranty":"Warranty & Care","privacy":"Privacy Notice",
+  "cookies":"Cookie Policy","paia":"PAIA Manual","complaints":"Complaints & Disputes","company":"Company & Legal Information"
+};
+function showHome(){
+  $("#pageView").hidden=true;$("#homeView").style.display="";
+}
+function reviewsPageHTML(){
+  return `<h1 class="page-title">Customer Reviews</h1>
+    <p class="muted">Real feedback from ZanJewelry customers. Photos appear once approved.</p>
+    <div style="margin:18px 0"><button class="btn btn-dark" data-open-review>★ Write a review</button></div>
+    <div class="rev-page-grid">${REVIEWS.map(r=>`
+      <div class="rev-card" style="flex:none">
+        ${r.image?`<img src="${esc(r.image)}" style="border-radius:8px;margin-bottom:12px;aspect-ratio:4/3;object-fit:cover;width:100%" onerror="this.remove()">`:""}
+        <div class="rev-top"><b>${esc(r.name)}</b><span class="rev-date">${esc(fmtDate(r.date||r.createdAt))}</span></div>
+        <div class="stars">${starStr(Number(r.rating)||5)}</div>
+        <div class="rev-title" style="text-align:left">${esc(r.title||"")}</div>
+        <div class="rev-text" style="text-align:left">${esc(r.text||r.review||"")}</div>
+      </div>`).join("")||'<p class="muted">No reviews yet.</p>'}</div>`;
+}
+async function showPage(slug){
+  $("#homeView").style.display="none";$("#pageView").hidden=false;
+  const title=PAGE_TITLES[slug]||cap(slug.replace(/-/g," "));
+  $("#pgCrumb").textContent=title;
+  const pc=$("#pageContent");
+  if(slug==="reviews"){pc.innerHTML=reviewsPageHTML();window.scrollTo(0,0);return;}
+  try{
+    const r=await fetch("/api/pages/"+slug);
+    if(!r.ok)throw 0;
+    const pg=await r.json();
+    pc.innerHTML=`<h1 class="page-title">${esc(pg.title||title)}</h1><div class="page-body">${pg.content||""}</div>`;
+  }catch(_){
+    pc.innerHTML=`<h1 class="page-title">${esc(title)}</h1>
+      <div class="page-soon"><p>This page is being prepared — full content is coming soon.</p>
+      <p style="font-size:.9rem">Have a question in the meantime? We're one message away.</p>
+      <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(MSG_GENERAL)}">Ask us on WhatsApp</a></div>`;
+  }
+  window.scrollTo(0,0);
+}
+/* ================= ROUTER ================= */
+function route(){
+  const h=location.hash||"";
+  if(h.startsWith("#/page/")){showPage(decodeURIComponent(h.slice(7)));return;}
+  showHome();closeModal();
+  if(h.startsWith("#/diamonds")){
+    diaRoute();setTimeout(()=>$("#diamonds").scrollIntoView({behavior:"smooth"}),40);return;}
+  const pm=h.match(/^#\/product\/([\w-]+)/);
+  if(pm){const p=products.find(x=>x.id===decodeURIComponent(pm[1]));if(p)openProduct(p.id);return;}
+  if(h==="#shop"||h==="#contact"){const el=$(h);if(el)el.scrollIntoView({behavior:"smooth"});}
+}
+window.addEventListener("hashchange",route);
+
+/* ================= NEWSLETTER ================= */
+ $("#newsForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const em=e.target.elements[0].value.trim();
+  const note=$("#newsNote");
+  fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em})})
+    .then(()=>{note.textContent="✓ You're on the list — welcome!";note.classList.add("show");e.target.reset();})
+    .catch(()=>{
+      window.open(wa("Good day ZanJewelry 👋\n\nPlease add me to your newsletter list.\n📧 *Email:* "+em),"_blank");
+      note.textContent="Opening WhatsApp to complete your subscription…";note.classList.add("show");e.target.reset();
+    });
+  setTimeout(()=>note.classList.remove("show"),4000);
+});
+
+/* ================= HERO SLIDESHOW — 3 seconds each ================= */
+let heroTimer=null;
+function initHero(images){
+  clearInterval(heroTimer);$$(".hero-bg").forEach(b=>b.remove());
+  const hero=$("#hero"),imgs=(images||[]).filter(Boolean);
+  if(!imgs.length)return;
+  imgs.forEach((s,i)=>{const im=document.createElement("img");im.className="hero-bg"+(i===0?" show":"");im.alt="";im.src=s;im.onerror=()=>im.remove();hero.insertBefore(im,hero.firstChild);});
+  const slides=$$(".hero-bg");
+  if(slides.length>1){let i=0;heroTimer=setInterval(()=>{slides[i].classList.remove("show");i=(i+1)%slides.length;slides[i].classList.add("show");},3000);}
+}
+
+/* ---- LOAD from server ---- */
 async function loadProducts(){
   try{
     const list=await fetch("/api/products").then(r=>r.json());
-    if(Array.isArray(list)){products=list;renderGrid();}
+    if(Array.isArray(list)){products=list;renderGrid();
+      if((location.hash||"").startsWith("#/product/"))route();}
+  }catch(_){}
+}
+async function loadDiamonds(){
+  try{
+    const d=await fetch("/api/diamonds").then(r=>r.json());
+    if(Array.isArray(d)){const j=JSON.stringify(d);
+      if(j!==rawDiaJSON){rawDiaJSON=j;diamonds=d;
+        if((location.hash||"").startsWith("#/diamonds")){const y=window.scrollY;diaRoute();window.scrollTo(0,y);}}}
   }catch(_){}
 }
 (async()=>{
   try{const cfg=await fetch("/api/config").then(r=>r.json());WA=cfg.whatsapp||WA;}catch(_){}
-  $$("[data-wa]").forEach(a=>a.href=wa(a.dataset.wa));
-  /* optional: hero/logo/banner photos uploaded via admin (needs the site-images patch; silently skips if absent) */
+  $$("[data-wa]").forEach(a=>a.href=wa(MSG_GENERAL));
+  let heroImgs=[],siteImgs={};
   try{
-    const imgs=await fetch("/api/site-images").then(r=>r.json());
-    if(imgs.hero){const h=$("#heroBg");h.src=imgs.hero;h.hidden=false;}
-    if(imgs.logo){const l=$("#brandLogo");l.src=imgs.logo;l.hidden=false;}
-    if(imgs["bridal-engagement"]){const i=$("#occEngImg");i.src=imgs["bridal-engagement"];i.hidden=false;}
-    if(imgs["bridal-wedding"]){const i=$("#occWedImg");i.src=imgs["bridal-wedding"];i.hidden=false;}
+    const [ct,si]=await Promise.all([
+      fetch("/api/content").then(r=>r.json()).catch(()=>null),
+      fetch("/api/site-images").then(r=>r.json()).catch(()=>({}))
+    ]);
+    siteImgs=si||{};
+    if(ct&&ct.hero)heroImgs=ct.hero.images&&ct.hero.images.length?ct.hero.images:(ct.hero.image?[ct.hero.image]:[]);
   }catch(_){}
+  if(!heroImgs.length&&siteImgs.hero)heroImgs=[siteImgs.hero];
+  initHero(heroImgs);
+  if(siteImgs.logo){const l=$("#brandLogo");l.src=siteImgs.logo;l.hidden=false;}
+  if(siteImgs["bridal-engagement"]){const i=$("#occEngImg");i.src=siteImgs["bridal-engagement"];i.hidden=false;}
+  if(siteImgs["bridal-wedding"]){const i=$("#occWedImg");i.src=siteImgs["bridal-wedding"];i.hidden=false;}
+  if(!diaRoute())renderDiaShapes();
+  renderReviews();
   await loadProducts();
-  setInterval(loadProducts,20000);          /* shop auto-refreshes — new uploads appear live */
-  window.addEventListener("focus",loadProducts);
+  await loadReviews();
+  await loadDiamonds();
+  setInterval(()=>{loadProducts();loadDiamonds();loadReviews();},20000);
+  window.addEventListener("focus",()=>{loadProducts();loadDiamonds();loadReviews();});
 })();
 </script>
 </body>
