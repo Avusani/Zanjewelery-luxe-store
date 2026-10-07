@@ -140,8 +140,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .page-body img{border-radius:10px;margin:16px 0}
 .page-soon{background:var(--blush-soft);border:1.5px dashed var(--blush);border-radius:14px;padding:48px 30px;text-align:center;max-width:680px}
 .page-soon p{color:var(--ink-70);margin-bottom:18px}
-.rev-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.rev-page-grid,.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
 @media(max-width:900px){.rev-page-grid,.blog-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.rev-page-grid,.blog-grid{grid-template-columns:1fr}}
 
@@ -242,11 +241,12 @@ details.adv[open] summary::after{transform:rotate(180deg)}
       <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
     </a>
     <nav class="main-nav">
-      <a href="#shop">Rings</a>
+      <a href="#shop" data-navcat="rings">Rings</a>
       <a href="#/diamonds">Diamonds</a>
-      <a href="#shop" onclick="setFilter('Engagement')">Engagement</a>
-      <a href="#shop" onclick="setFilter('Wedding')">Wedding</a>
-      <a href="#shop" onclick="setFilter('Cosmetics')">Cosmetics</a>
+      <a href="#shop" data-navcat="engagement">Engagement</a>
+      <a href="#shop" data-navcat="wedding">Wedding</a>
+      <a href="#shop" data-navcat="pendants">Pendants</a>
+      <a href="#shop" data-navcat="cosmetics">Cosmetics</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="wa-pill" data-wa="general" target="_blank" rel="noopener">WhatsApp</a>
@@ -284,19 +284,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     </div>
     <div class="sec-head"><h2>Shop the Collection</h2><p class="muted">Every piece below was posted from the admin portal.</p></div>
     <div class="cat-track" id="catTrack"></div>
-    <div class="chips" id="chips">
-      <button class="chip active" data-filter="All">All</button>
-      <button class="chip" data-filter="Rings">Rings</button>
-      <button class="chip" data-filter="Engagement">Engagement</button>
-      <button class="chip" data-filter="Wedding">Wedding</button>
-      <button class="chip" data-filter="Cosmetics">Cosmetics</button>
-      <button class="chip" data-filter="Diamond">Diamond</button>
-      <button class="chip" data-filter="Gemstones">Gemstones</button>
-      <button class="chip" data-filter="Gold">Gold</button>
-      <button class="chip" data-filter="Silver">Silver</button>
-      <button class="chip" data-filter="Rose Gold">Rose Gold</button>
-      <button class="chip" data-filter="Platinum">Platinum</button>
-    </div>
+    <div class="chips" id="chips"></div>
     <div class="grid" id="productGrid"></div>
   </section>
 
@@ -475,18 +463,21 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const TYPE={ring:"Ring",engagement:"Engagement",wedding:"Wedding",cosmetic:"Cosmetic"};
 const MAT={silver:"Silver",gold:"Gold","rose-gold":"Rose Gold",platinum:"Platinum",gemstone:"Gemstone",diamond:"Diamond"};
 const PLACE=l=>"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#F4DCD2"/><text x="50%" y="54%" font-family="Georgia,serif" font-size="180" fill="#17120F" text-anchor="middle" dominant-baseline="middle">'+esc(l||"Z")+'</text></svg>');
 function imgFail(im){im.onerror=null;im.src=PLACE(im.dataset.letter||"Z");}
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):"";
+const slug=s=>s.toLowerCase();
+const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
+const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
 
-let WA="27703887170", products=[], filter="All";
+let WA="27703887170", products=[];
 const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
 
 /* ============ WHATSAPP TEMPLATES (single * = bold in WhatsApp) ============ */
 const MSG_GENERAL="Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\nPlease assist me with my enquiry.\n\nThank you.";
 function productMsg(p){
-  const cos=p.type==="cosmetic";
+  const cos=(p.productType||p.type)==="cosmetic";
   const price=(p.price!=null&&p.price!=="")?("R "+Number(p.price).toLocaleString("en-ZA")):"Price on request";
   const link=location.origin+location.pathname+"#/product/"+p.id;
   let m="Good day ZanJewelry 👋\n\n"+(cos?"I would like to enquire about this cosmetic product:\n\n":"I would like to enquire about this product:\n\n");
@@ -518,46 +509,81 @@ function generalMsg(f){
   return "Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\n*Name:* "+g("name")+"\n*Email:* "+g("email")+"\n*Message:* "+g("message")+"\n\nPlease assist me with my enquiry.\n\nThank you.";
 }
 
-/* ============ SHOP ============ */
-const FILTERS={All:()=>true,Rings:p=>p.type==="ring",Engagement:p=>p.type==="engagement",Wedding:p=>p.type==="wedding",
-  Cosmetics:p=>p.type==="cosmetic",Diamond:p=>p.material==="diamond",Gemstones:p=>p.material==="gemstone",
-  Gold:p=>p.material==="gold",Silver:p=>p.material==="silver","Rose Gold":p=>p.material==="rose-gold",Platinum:p=>p.material==="platinum"};
-const imgFor=p=>{const s=String(p.image||(p.images&&p.images[0])||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
+/* ============ SHOP — matches your server's category/productType fields ============ */
+let categories=[];
+const FALLBACK_CATS=[
+  {slug:"rings",name:"Rings",parent:"jewellery",active:true},{slug:"engagement",name:"Engagement Rings",parent:"rings",active:true},
+  {slug:"wedding",name:"Wedding Rings",parent:"rings",active:true},{slug:"earrings",name:"Earrings",parent:"jewellery",active:true},
+  {slug:"necklaces",name:"Necklaces",parent:"jewellery",active:true},{slug:"pendants",name:"Pendants",parent:"jewellery",active:true},
+  {slug:"bracelets",name:"Bracelets",parent:"jewellery",active:true},{slug:"makeup",name:"Makeup",parent:"cosmetics",active:true},
+  {slug:"lip-products",name:"Lip Products",parent:"makeup",active:true},{slug:"skincare",name:"Skincare",parent:"cosmetics",active:true},
+  {slug:"fragrance",name:"Fragrance",parent:"cosmetics",active:true},{slug:"body-care",name:"Body Care",parent:"cosmetics",active:true}
+];
+const inPath=(p,sl)=>p.category===sl||(p.path||[]).some(x=>x.slug===sl);
+const MATS={Diamond:"diamond",Gemstones:"gemstone",Gold:"gold",Silver:"silver","Rose Gold":"rose-gold",Platinum:"platinum"};
+let filter="All";
+function matchFilter(p){
+  if(filter==="All")return true;
+  if(filter.startsWith("cat:"))return inPath(p,filter.slice(4));
+  return MATS[filter]?p.material===MATS[filter]:false;
+}
+function setFilter(f){filter=f;renderChips();renderGrid();}
+function renderChips(){
+  if(!$("#chips"))return;
+  const kids=categories.filter(c=>c.parent&&c.active!==false);
+  $("#chips").innerHTML=
+    `<button class="chip ${filter==="All"?"active":""}" data-cf="All">All</button>`+
+    kids.map(c=>`<button class="chip ${filter==="cat:"+c.slug?"active":""}" data-cf="cat:${c.slug}">${esc(c.name)}</button>`).join("")+
+    Object.keys(MATS).map(m=>`<button class="chip ${filter===m?"active":""}" data-cf="${m}">${m}</button>`).join("");
+}
+document.addEventListener("click",e=>{
+  const cf=e.target.closest("[data-cf]");
+  if(cf){setFilter(cf.dataset.cf);return;}
+  const nv=e.target.closest("[data-navcat]");
+  if(nv&&nv.dataset.navcat)setFilter("cat:"+nv.dataset.navcat);
+});
+ $("#occEng").addEventListener("click",()=>{setFilter("cat:engagement");$("#shop").scrollIntoView({behavior:"smooth"});});
+ $("#occWed").addEventListener("click",()=>{setFilter("cat:wedding");$("#shop").scrollIntoView({behavior:"smooth"});});
+function choiceEngagement(){closeChoice();setFilter("cat:engagement");showHome();$("#shop").scrollIntoView({behavior:"smooth"});}
 
+const imgFor=p=>{const s=String(p.image||(p.images&&p.images[0])||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
+function labelFor(p){
+  const path=p.path||[];
+  const leaf=path.length?path[path.length-1].name:(p.category||"");
+  return [leaf,p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
+}
 function cardHTML(p){
-  const label=[TYPE[p.type]||"",p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
   return `<article class="card" data-id="${esc(p.id)}">
     <div class="card-img"><img src="${esc(imgFor(p)||PLACE((p.name||"Z")[0]))}" data-letter="${esc((p.name||"Z")[0])}" loading="lazy" alt="${esc(p.name)}" onerror="imgFail(this)"></div>
-    <div class="range">${esc(label)}</div><h3>${esc(p.name)}</h3>
+    <div class="range">${esc(labelFor(p))}</div><h3>${esc(p.name)}</h3>
     <a class="btn btn-dark btn-block" target="_blank" rel="noopener" onclick="event.stopPropagation()" href="${wa(productMsg(p))}">Enquire on WhatsApp</a></article>`;
 }
 const CATS=[
-  {f:"Rings",t:"ring",d:"Fine pieces made to order."},
-  {f:"Diamond",m:"diamond",d:"Close-set stones that catch the light."},
+  {f:"Rings",t:"rings",d:"Fine pieces made to order."},
+  {f:"Engagement",t:"engagement",d:"Solitaires, halos and clusters."},
+  {f:"Pendants",t:"pendants",d:"Pendants that hold your story."},
   {f:"Gemstones",m:"gemstone",d:"Amethyst, ruby, sapphire and more."},
-  {f:"Gold",m:"gold",d:"Everyday gold essentials for stacking."}];
+  {f:"Gold",m:"gold",d:"Everyday gold essentials for stacking."}
+];
 function renderCatCards(){
   $("#catTrack").innerHTML=CATS.map(c=>{
-    const pool=products.filter(p=>c.t?p.type===c.t:p.material===c.m);
+    const pool=products.filter(p=>c.t?inPath(p,c.t):p.material===c.m);
     const raw=pool.map(imgFor).find(Boolean)||"";
-    return `<a class="cat-card" href="#shop">
+    return `<a class="cat-card" href="#shop" ${c.t?`data-navcat="${c.t}"`:""}>
       <div class="cat-img"><img src="${esc(raw||PLACE(c.f[0]))}" data-letter="${esc(c.f[0])}" alt="${esc(c.f)}" onerror="imgFail(this)"></div>
       <h3>${esc(c.f)}</h3><div class="dash"></div><p>${esc(c.d)}</p></a>`;}).join("");
 }
-function setFilter(f){filter=FILTERS[f]?f:"All";$$("#chips .chip").forEach(c=>c.classList.toggle("active",c.dataset.filter===filter));renderGrid();}
- $$("#chips .chip").forEach(c=>c.addEventListener("click",()=>setFilter(c.dataset.filter)));
 function renderGrid(){
-  const list=products.filter(FILTERS[filter]);
-  $("#productGrid").innerHTML=list.map(cardHTML).join("")||'<p class="empty">Nothing here yet'+(filter!=="All"?" under "+esc(filter):"")+' — post your first piece from the admin portal.</p>';
+  const list=products.filter(matchFilter);
+  $("#productGrid").innerHTML=list.map(cardHTML).join("")||'<p class="empty">Nothing here yet'+(filter!=="All"?" under "+esc(filter.replace("cat:","")):"")+' — post your first piece from the admin portal.</p>';
   renderCatCards();
 }
 function openProduct(id){
   const p=products.find(x=>x.id===id);if(!p)return;
-  const label=[TYPE[p.type]||"",p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
   $("#productDetail").innerHTML=`<div class="detail">
     <img src="${esc(imgFor(p)||PLACE((p.name||"Z")[0]))}" data-letter="${esc((p.name||"Z")[0])}" alt="${esc(p.name)}" onerror="imgFail(this)">
-    <div><div class="range">${esc(label)}</div><h2>${esc(p.name)}</h2>
-    <div class="range" style="margin:6px 0 14px">${Number(p.stock)>0?"In stock":"Enquire for availability"}</div>
+    <div><div class="range">${esc(labelFor(p))}</div><h2>${esc(p.name)}</h2>
+    <div class="range" style="margin:6px 0 14px">${(p.stockStatus||"in-stock")==="in-stock"?"In stock":"Enquire for availability"}</div>
     <p class="muted" style="margin-bottom:18px">${esc(p.description||"")}</p>
     <a class="btn btn-dark" target="_blank" rel="noopener" href="${wa(productMsg(p))}">Enquire on WhatsApp</a></div></div>`;
   $("#productModal").classList.add("open");document.body.style.overflow="hidden";
@@ -568,8 +594,6 @@ document.addEventListener("click",e=>{
   if(card&&card.dataset.id&&!e.target.closest("a")){openProduct(card.dataset.id);return;}
   if(e.target.id==="productModal"||e.target.closest("[data-close]"))closeModal();
 });
- $("#occEng").addEventListener("click",()=>{setFilter("Engagement");$("#shop").scrollIntoView({behavior:"smooth"});});
- $("#occWed").addEventListener("click",()=>{setFilter("Wedding");$("#shop").scrollIntoView({behavior:"smooth"});});
  $$(".enq-tab").forEach(t=>t.addEventListener("click",()=>{
   $$(".enq-tab").forEach(x=>x.classList.toggle("active",x===t));
   $$(".enq-form").forEach(f=>f.classList.toggle("show",f.id===t.dataset.enq+"Form"));
@@ -585,8 +609,6 @@ const DIA_CUT=["Very Good","Excellent","Ideal"];
 const CUT_AB={"Excellent":"EX","Ideal":"ID","Very Good":"VG","Good":"G"};
 let diamonds=[], rawDiaJSON="[]";
 let dia={type:"natural",shape:"Round",colour:"All",mode:"White",clarity:"All",cut:"All",certOnly:false,sort:"carat-desc",view:"grid",cMin:0,cMax:10};
-const cap=s=>s?s[0].toUpperCase()+s.slice(1):"";
-const slug=s=>s.toLowerCase();
 const typeLabel=()=>dia.type==="lab"?"Lab-Grown":"Natural";
 
 /* Faceted diamond icons — real brilliant-cut look, silvery, permanent */
@@ -626,8 +648,6 @@ function shapeSVG(shape,w=110){
       <radialGradient id="${id}t" cx=".38" cy=".32" r=".95"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e8ecf3"/><stop offset="1" stop-color="#c2cad9"/></radialGradient>
     </defs>${facets}${table}${outline}${sp(33,32,7)}${sp(67,57,5)}${sp(52,21,4)}</svg>`;
 }
-
-/* STEP 1 — shapes page: Natural/Lab toggle + carousel (3 visible, slide for more) */
 function renderDiaShapes(){
   $("#diamonds").innerHTML=`
     <div class="dia-head"><h2>Shop by Diamond Shape</h2>
@@ -649,14 +669,11 @@ function renderDiaShapes(){
 let pickChoice="Round";
 function openChoice(shape){pickChoice=shape;$("#choiceModal").classList.add("open");}
 function closeChoice(){$("#choiceModal").classList.remove("open");}
-function choiceEngagement(){closeChoice();setFilter("Engagement");showHome();$("#shop").scrollIntoView({behavior:"smooth"});}
 function choiceLoose(){
   closeChoice();
   const target="#/diamonds/"+dia.type+"/"+slug(pickChoice);
   if(location.hash===target)diaRoute();else location.hash=target;
 }
-
-/* STEP 2 — loose diamonds page: filters + results (no prices) */
 function renderDiaShop(){
   const T=typeLabel();
   $("#diamonds").innerHTML=`
@@ -781,8 +798,6 @@ const DEMO_REVIEWS=[
   {name:"Caleb B.",date:"2026-09-14",rating:5,title:"Excellent service",text:"Extremely efficient and meticulous work. Thank you so much for such great service.",image:""},
   {name:"Luis A.",date:"2026-09-08",rating:5,title:"Nothing short of amazing!",text:"From when I first contacted the team, I've had nothing but peace of mind. They will guide you all the way.",image:""}
 ];
-const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
-const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
 function renderReviews(){
   const list=REVIEWS;
   const avg=list.length?Math.round(list.reduce((a,r)=>a+(Number(r.rating)||5),0)/list.length):5;
@@ -874,7 +889,7 @@ async function showPage(s){
   const pc=$("#pageContent");
   if(s==="reviews"){pc.innerHTML=reviewsPageHTML();window.scrollTo(0,0);return;}
   if(s==="blog"){
-    pc.innerHTML='<h1 class="page-title">Blog</h1><p class="muted" id="blogLoad">Loading…</p>';
+    pc.innerHTML='<h1 class="page-title">Blog</h1><p class="muted">Loading…</p>';
     try{
       const posts=await fetch("/api/blog").then(r=>r.json());
       pc.innerHTML=`<h1 class="page-title">Blog</h1><div class="blog-grid">${(Array.isArray(posts)?posts:[]).map(p=>`
@@ -908,6 +923,8 @@ function route(){
   showHome();closeModal();
   if(h.startsWith("#/diamonds")){
     diaRoute();setTimeout(()=>$("#diamonds").scrollIntoView({behavior:"smooth"}),40);return;}
+  const sm=h.match(/^#\/shop\/([\w-]+)/);
+  if(sm){setFilter("cat:"+sm[1]);const el=$("#shop");if(el)el.scrollIntoView({behavior:"smooth"});return;}
   const pm=h.match(/^#\/product\/([\w-]+)/);
   if(pm&&products.length){const p=products.find(x=>x.id===decodeURIComponent(pm[1]));if(p)openProduct(p.id);return;}
   if(h==="#shop"||h==="#contact"){const el=$(h);if(el)el.scrollIntoView({behavior:"smooth"});}
@@ -960,7 +977,13 @@ async function loadDiamonds(){
   /* 1 · WhatsApp number (admin Settings → /api/config) */
   try{const cfg=await fetch("/api/config").then(r=>r.json());WA=cfg.whatsapp||WA;}catch(_){}
   $$("[data-wa]").forEach(a=>a.href=wa(MSG_GENERAL));
-  /* 2 · Hero images + text, logo, banners */
+  /* 2 · Categories → chips + nav filters */
+  try{
+    const c=await fetch("/api/categories").then(r=>r.json());
+    categories=Array.isArray(c)&&c.length?c:FALLBACK_CATS;
+  }catch(_){categories=FALLBACK_CATS.slice();}
+  renderChips();
+  /* 3 · Hero images + text, logo, banners */
   let heroImgs=[],siteImgs={};
   try{
     const [ct,si]=await Promise.all([
@@ -981,7 +1004,7 @@ async function loadDiamonds(){
   if(siteImgs.logo){const l=$("#brandLogo");l.src=siteImgs.logo;l.hidden=false;}
   if(siteImgs["bridal-engagement"]){const i=$("#occEngImg");i.src=siteImgs["bridal-engagement"];i.hidden=false;}
   if(siteImgs["bridal-wedding"]){const i=$("#occWedImg");i.src=siteImgs["bridal-wedding"];i.hidden=false;}
-  /* 3 · Settings → footer tagline, socials, copyright, newsletter text */
+  /* 4 · Settings → footer tagline, socials, copyright, newsletter text */
   try{
     const st=await fetch("/api/settings").then(r=>r.json());
     if(st.tagline){const t=$(".f-brand p");if(t)t.textContent=st.tagline;}
@@ -995,7 +1018,7 @@ async function loadDiamonds(){
       if(t==="tiktok"&&st.tiktok)a.href=st.tiktok;
     });
   }catch(_){}
-  /* 4 · First render */
+  /* 5 · First render */
   if(!diaRoute())renderDiaShapes();
   renderReviews();
   await loadProducts();
