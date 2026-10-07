@@ -1,5 +1,5 @@
 /* ============================================================
-   ZanJewelry CMS server — complete backend (v2, cache-safe)
+   ZanJewelry CMS server — complete backend (final)
    Users · Products · Diamonds · Categories · Reviews · Pages
    Blog · Settings · Subscribers · Multi-hero · Site images
    ============================================================ */
@@ -206,7 +206,12 @@ function tokenUser(token) {
   if (sig !== crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('hex')) return null;
   const parts = payload.split(':');
   if (Date.now() - parseInt(parts[0], 10) >= 7 * 24 * 60 * 60 * 1000) return null;
-  try { return Buffer.from(parts[1] || '', 'base64url').toString() || 'admin'; } catch { return 'admin'; }
+  let name = 'admin';
+  try { name = Buffer.from(parts[1] || '', 'base64url').toString('utf8') || 'admin'; } catch { return null; }
+  /* reject old-format/garbage tokens and deleted users → forces one clean re-login */
+  if (!/^[A-Za-z0-9][A-Za-z0-9 ._-]{0,39}$/.test(name)) return null;
+  if (name !== 'admin' && !findUser(name)) return null;
+  return name;
 }
 function getCookie(req, name) {
   for (const part of (req.headers.cookie || '').split(';')) {
@@ -221,8 +226,6 @@ const requireAuth = (req, res, next) => isAuthed(req) ? next() : res.status(401)
 
 /* ================= MIDDLEWARE + UPLOADS ================= */
 app.set('trust proxy', 1);
-/* FIX 2: never let browsers/proxies cache the API or the HTML —
-   admin changes and fresh deploys appear immediately everywhere */
 app.use('/api', (_q, res, next) => { res.setHeader('Cache-Control', 'no-store, max-age=0'); next(); });
 app.use(express.json({ limit: '4mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -241,7 +244,14 @@ const upload = multer({
 });
 
 /* ================= PUBLIC API ================= */
-app.get('/healthz', (_q, res) => res.json({ ok: true }));
+app.get('/healthz', (_q, res) => res.json({
+  ok: true,
+  dataDir: DATA_DIR,
+  uploads: fs.existsSync(UPLOAD_DIR) ? fs.readdirSync(UPLOAD_DIR).length : 0,
+  products: products.length,
+  users: users.length,
+  siteImages: Object.keys(siteImages)
+}));
 app.get('/api/config', (_q, res) => res.json({ whatsapp: settings.whatsapp || WHATSAPP }));
 app.get('/api/settings', (_q, res) => res.json(settings));
 app.get('/api/categories', (_q, res) => res.json(categories.slice().sort((a, b) => (a.order || 99) - (b.order || 99))));
@@ -364,7 +374,7 @@ const saveProduct = (req, res) => {
   const existing = b.id ? products.find((p) => p.id === b.id) : null;
   const files = (req.files || []).filter((f) => f.fieldname === 'imageFiles' || f.fieldname === 'imageFile');
   const product = normalizeProduct(b, existing, files);
-  /* FIX 1: only delete old photo files that are NO LONGER on the product —
+  /* only delete photo files that were REMOVED from the product —
      photos the admin kept must survive an edit */
   const keep = new Set(product.images);
   if (existing?.images) existing.images.forEach((old) => { if (!keep.has(old)) delFile(old); });
