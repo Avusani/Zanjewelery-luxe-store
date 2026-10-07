@@ -1,5 +1,5 @@
 /* ============================================================
-   ZanJewelry CMS server — full backend
+   ZanJewelry CMS server — complete backend
    Users · Products · Diamonds · Categories · Reviews · Pages
    Blog · Settings · Subscribers · Multi-hero · Site images
    ============================================================ */
@@ -12,7 +12,7 @@ const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ChangeMeNow!'; // legacy fallback login
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ChangeMeNow!'; // legacy fallback
 const WHATSAPP = process.env.WHATSAPP_NUMBER || '27703887170';
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
@@ -49,7 +49,7 @@ const checkPw = (pw, stored) => {
   } catch { return false; }
 };
 
-/* ================= USERS (username + password) ================= */
+/* ================= USERS ================= */
 let users = readJSON(FILES.users, []);
 if (!Array.isArray(users)) users = [];
 if (!users.length) {
@@ -58,7 +58,6 @@ if (!users.length) {
   console.log('✓ Seeded admin user: Awonke');
 }
 const findUser = (name) => users.find((u) => (u.username || '').toLowerCase() === String(name || '').toLowerCase());
-const saveUsers = () => writeJSON(FILES.users, users.map(({ password, ...rest }) => rest).length ? users : users); // keep hashes internal
 
 /* ================= CATEGORY TREE ================= */
 const SEED_CATEGORIES = [
@@ -68,7 +67,8 @@ const SEED_CATEGORIES = [
   { slug: 'wedding', name: 'Wedding Rings', parent: 'rings', productType: 'jewellery', order: 3, description: 'Classic bands, eternity styles and matching sets.' },
   { slug: 'earrings', name: 'Earrings', parent: 'jewellery', productType: 'jewellery', order: 4, description: 'Studs, hoops and drops for every day.' },
   { slug: 'necklaces', name: 'Necklaces', parent: 'jewellery', productType: 'jewellery', order: 5, description: 'Chains, pendants and name pieces.' },
-  { slug: 'bracelets', name: 'Bracelets', parent: 'jewellery', productType: 'jewellery', order: 6, description: 'Bangles and chains, layered or alone.' },
+  { slug: 'pendants', name: 'Pendants', parent: 'jewellery', productType: 'jewellery', order: 6, description: 'Pendants that hold your story.' },
+  { slug: 'bracelets', name: 'Bracelets', parent: 'jewellery', productType: 'jewellery', order: 7, description: 'Bangles and chains, layered or alone.' },
   { slug: 'cosmetics', name: 'Cosmetics', parent: null, productType: 'cosmetic', order: 10, description: 'Beauty for your every day.' },
   { slug: 'makeup', name: 'Makeup', parent: 'cosmetics', productType: 'cosmetic', order: 11, description: 'Colour for lips, face and eyes.' },
   { slug: 'lip-products', name: 'Lip Products', parent: 'makeup', productType: 'cosmetic', order: 12, description: 'Gloss, lipstick, liner and oil.' },
@@ -78,6 +78,7 @@ const SEED_CATEGORIES = [
 ];
 let categories = readJSON(FILES.categories, null);
 if (!Array.isArray(categories) || !categories.length) { categories = SEED_CATEGORIES.map((c) => ({ active: true, ...c })); writeJSON(FILES.categories, categories); }
+else if (!categories.some((c) => c.slug === 'pendants')) { categories.push({ active: true, slug: 'pendants', name: 'Pendants', parent: 'jewellery', productType: 'jewellery', order: 6, description: 'Pendants that hold your story.' }); writeJSON(FILES.categories, categories); }
 const catBySlug = (s) => categories.find((c) => c.slug === s);
 const ancestorsOf = (slug) => { const out = []; let c = catBySlug(slug), g = 0; while (c && c.parent && g++ < 10) { out.push(c.parent); c = catBySlug(c.parent); } return out; };
 const childrenOf = (slug) => categories.filter((c) => c.parent === slug).sort((a, b) => (a.order || 99) - (b.order || 99));
@@ -87,7 +88,7 @@ const catPath = (slug) => { const out = []; let c = catBySlug(slug), g = 0; whil
 /* ================= PRODUCTS ================= */
 const MATERIALS = ['none', 'gold', 'silver', 'rose-gold', 'platinum', 'diamond', 'gemstone'];
 const GEMSTONES = ['amethyst', 'ruby', 'sapphire', 'emerald', 'topaz', 'other'];
-const OLD_TYPE_MAP = { ring: 'rings', rings: 'rings', engagement: 'engagement', wedding: 'wedding', cosmetic: 'makeup', cosmetics: 'makeup' };
+const OLD_TYPE_MAP = { ring: 'rings', rings: 'rings', engagement: 'engagement', wedding: 'wedding', pendant: 'pendants', pendants: 'pendants', cosmetic: 'makeup', cosmetics: 'makeup' };
 let refCounter = 0;
 const nextRef = () => 'ZJ-' + String(++refCounter).padStart(4, '0');
 
@@ -125,6 +126,7 @@ if (products.length === 0) {
     { name: 'Classic Gold Wedding Bands (Pair)', category: 'wedding', material: 'gold', images: ['gold-1.jpg'], description: 'A pair of polished gold bands — hers with a single diamond, his a classic comfort fit.' },
     { name: 'Sterling Silver Pavé Band', category: 'rings', material: 'silver', price: 450, images: ['diamond-1.jpg'], description: 'Sterling silver band with pavé-style detailing. Perfect for stacking.' },
     { name: 'Amethyst Halo Ring', category: 'rings', material: 'gemstone', gemstone: 'amethyst', images: ['gemstone-1.jpg'], description: 'A centre amethyst framed by a fine halo — a rich splash of colour.' },
+    { name: 'Gold Snowflake Pendant', category: 'pendants', material: 'gold', images: ['gold-1.jpg'], description: 'A delicate gold pendant with a snowflake silhouette on a fine chain.' },
     { name: 'Glow Lip Gloss Trio', category: 'lip-products', subcategory: 'Lip Gloss', price: 220, images: ['cosmetics-1.jpg'], description: 'Three shades of high-shine gloss in one gift-ready set — nude, rose and berry.' },
     { name: 'Rosewater Face Mist', category: 'skincare', subcategory: 'Face Mist', price: 180, images: ['cosmetics-1.jpg'], description: 'A light hydrating mist with rosewater to refresh skin any time of day.' },
     { name: 'Shea Whip Body Butter', category: 'body-care', subcategory: 'Body Butter', price: 195, images: ['cosmetics-1.jpg'], description: 'Whipped shea butter that melts into skin — rich moisture, no grease.' },
@@ -163,7 +165,7 @@ function normalizeProduct(b = {}, existing = null, files = []) {
   };
 }
 
-/* ================= HOMEPAGE CONTENT + SITE IMAGES ================= */
+/* ================= CONTENT + SITE IMAGES ================= */
 let content = readJSON(FILES.content, null) || {
   hero: { image: '', images: [], eyebrow: 'ZanJewelry Manufacturing · Est. 2021', heading: 'Rings for your moments. Beauty for your every day.', sub: 'Fine engagement, wedding and everyday pieces — plus our cosmetics line. Enquire directly on WhatsApp.', ctaText: 'Shop rings', ctaLink: '#/shop/rings', cta2Text: 'Shop cosmetics', cta2Link: '#/shop/cosmetics' },
   banners: {}
@@ -174,7 +176,7 @@ const SITE_SLOTS = ['logo', 'story', 'bridal-engagement', 'bridal-wedding'];
 /* ================= DIAMONDS ================= */
 let diamonds = readJSON(FILES.diamonds, null);
 if (!Array.isArray(diamonds) || !diamonds.length) {
-  const S = ['Round','Princess','Cushion','Emerald','Oval','Pear','Marquise'], C = ['D','E','F','G','H','I','J'], CL = ['VVS1','VVS2','VS1','VS2'], CU = ['Excellent','Very Good'];
+  const S = ['Round', 'Princess', 'Cushion', 'Emerald', 'Oval', 'Pear', 'Marquise'], C = ['D', 'E', 'F', 'G', 'H', 'I', 'J'], CL = ['VVS1', 'VVS2', 'VS1', 'VS2'], CU = ['Excellent', 'Very Good'];
   diamonds = []; let n = 0;
   ['natural', 'lab'].forEach((t) => { for (let i = 0; i < 14; i++) {
     const carat = [0.30, 0.50, 0.70, 1.00, 1.20, 1.50, 2.00][i % 7];
@@ -192,7 +194,7 @@ let posts = readJSON(FILES.blog, []); if (!Array.isArray(posts)) posts = [];
 let settings = readJSON(FILES.settings, {}); if (typeof settings !== 'object' || !settings) settings = {};
 let subscribers = readJSON(FILES.subscribers, []); if (!Array.isArray(subscribers)) subscribers = [];
 
-/* ================= AUTH (cookie AND Bearer, with username) ================= */
+/* ================= AUTH ================= */
 function makeToken(username) {
   const payload = `${Date.now()}:${Buffer.from(String(username || 'admin')).toString('base64url')}:${crypto.randomBytes(8).toString('hex')}`;
   return `${payload}.${crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('hex')}`;
@@ -297,7 +299,7 @@ app.post('/api/login', (req, res) => {
     const u = findUser(uname);
     if (u && checkPw(b.password, u.password)) user = u;
   } else if (b.password === ADMIN_PASSWORD) {
-    user = { username: 'admin' }; // legacy password-only fallback
+    user = { username: 'admin' };
   }
   if (!user) return res.status(401).json({ error: 'Invalid username or password' });
   const token = makeToken(user.username);
@@ -441,7 +443,7 @@ app.delete('/api/categories/:slug', requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
-/* ================= ADMIN: REVIEWS MODERATION ================= */
+/* ================= ADMIN: REVIEWS ================= */
 app.get('/api/admin/reviews', requireAuth, (_q, res) => res.json(reviews));
 app.put('/api/reviews/:id', requireAuth, (req, res) => {
   const r = reviews.find((x) => x.id === req.params.id);
@@ -542,7 +544,7 @@ app.delete('/api/subscribers/:id', requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
-/* ================= ADMIN: HOMEPAGE CONTENT (multi-hero + banners) ================= */
+/* ================= ADMIN: CONTENT (multi-hero + banners) ================= */
 app.put('/api/content', requireAuth, upload.any(), (req, res) => {
   let data = {};
   try { data = typeof req.body.data === 'string' ? JSON.parse(req.body.data) : (req.body.data || {}); } catch {}
