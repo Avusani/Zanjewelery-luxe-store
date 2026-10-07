@@ -83,11 +83,10 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .gal-strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:none}
 .gal-strip::-webkit-scrollbar{display:none}
 .gal-item{flex:0 0 235px;scroll-snap-align:start}
-.gal-item .ph{aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--blush);display:grid;place-items:center}
+.gal-item .ph{aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--blush);display:grid;place-items:center;font-size:2rem}
 .gal-item img{width:100%;height:100%;object-fit:cover}
 .gal-btn{position:absolute;top:42%;width:44px;height:44px;border-radius:50%;border:none;background:#fff;box-shadow:0 4px 16px rgba(23,18,15,.2);font-size:1.3rem;cursor:pointer;z-index:5}
 .gal-btn.prev{left:-12px}.gal-btn.next{right:-12px}
-@media(max-width:640px){.gal-item{flex-basis:62%}.gal-btn{display:none}}
 .reviews-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:22px 0 14px}
 .stars{color:var(--gold);letter-spacing:3px;font-size:1.05rem}
 .stars.big{font-size:1.4rem}
@@ -102,20 +101,21 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .rev-title{font-weight:600;font-size:1rem;margin:8px 0 6px;text-align:center}
 .rev-text{font-size:.92rem;color:var(--ink-70);text-align:center}
 .rev-write{margin-top:18px;text-align:center}
-.starpick{display:flex;gap:4px;justify-content:flex-start}
+.starpick{display:flex;gap:4px}
 .starpick button{background:none;border:none;font-size:1.7rem;color:#ddd2c6;cursor:pointer;padding:0 2px;line-height:1}
 .starpick button.on{color:var(--gold)}
 .rv-note{display:none;margin-top:10px;font-size:.85rem;font-weight:600;color:#1c7c39}
 .rv-note.show{display:block}
 
 /* ---------- FOOTER ---------- */
-.site-footer{background:var(--ink);color:var(--blush);padding:56px 0 28px;margin-top:0}
+.site-footer{background:var(--ink);color:var(--blush);padding:56px 0 28px}
 .f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1.4fr;gap:34px}
 .f-brand strong{font-family:var(--serif);font-size:1.5rem;display:block}
 .f-brand p{color:rgba(249,234,227,.65);font-size:.86rem;margin-top:8px;max-width:24ch}
-.f-social{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+.f-social{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;align-items:center}
 .f-social a{color:var(--blush);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.85}
 .f-social a:hover{opacity:1;text-decoration:underline}
+.f-social .adm{border:1px solid rgba(249,234,227,.4);border-radius:999px;padding:5px 14px}
 .f-col h4{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blush);margin-bottom:14px}
 .f-col a{display:block;color:rgba(249,234,227,.78);font-size:.82rem;text-decoration:none;padding:5px 0}
 .f-col a:hover{color:#fff;text-decoration:underline}
@@ -129,9 +129,10 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .f-note{display:none;margin-top:10px;font-size:.8rem;color:var(--blush)}
 .f-note.show{display:block}
 .f-bottom{border-top:1px solid rgba(249,234,227,.15);margin-top:38px;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.74rem;color:rgba(249,234,227,.55)}
+.f-bottom a{color:inherit;text-decoration:underline}
 @media(max-width:900px){.f-grid{grid-template-columns:1fr 1fr}.f-brand,.f-news{grid-column:1/-1}}
 
-/* ---------- SEPARATE PAGES (footer links) ---------- */
+/* ---------- SEPARATE PAGES ---------- */
 #pageView{padding:40px 0 70px;min-height:62vh}
 .page-title{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4vw,2.6rem);margin:8px 0 20px}
 .page-body{max-width:780px;color:var(--ink-70);font-size:1rem;line-height:1.85}
@@ -140,8 +141,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .page-soon{background:var(--blush-soft);border:1.5px dashed var(--blush);border-radius:14px;padding:48px 30px;text-align:center;max-width:680px}
 .page-soon p{color:var(--ink-70);margin-bottom:18px}
 .rev-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-@media(max-width:900px){.rev-page-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.rev-page-grid{grid-template-columns:1fr}}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media(max-width:900px){.rev-page-grid,.blog-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.rev-page-grid,.blog-grid{grid-template-columns:1fr}}
 
 /* ---------- DIAMOND SHOP ---------- */
 .dia-head{text-align:center;max-width:780px;margin:0 auto}
@@ -159,8 +161,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .shape-card span{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .shape-btn{position:absolute;top:38%;width:46px;height:46px;border-radius:50%;border:none;background:#fff;box-shadow:0 4px 18px rgba(23,18,15,.2);font-size:1.4rem;cursor:pointer;z-index:5}
 .shape-btn.prev{left:-14px}.shape-btn.next{right:-14px}
-@media(max-width:900px){.shape-card{flex-basis:calc((100% - 16px)/2)}}
-@media(max-width:640px){.shape-card{flex-basis:72%}.shape-btn{display:none}}
 .dia-crumb{font-size:.78rem;color:var(--ink-50);margin-bottom:14px}
 .dia-crumb a{color:var(--ink-70);text-decoration:none}
 .dia-crumb a:hover{text-decoration:underline}
@@ -196,7 +196,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--ink)}
 .wf{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;vertical-align:middle}
 .wf button{font:inherit;font-size:.85rem;padding:9px 20px;border:none;background:#fff;cursor:pointer}
 .wf button.on{background:var(--blush);font-weight:700}
-details.adv{border-top:none;border-bottom:none;padding:14px 0}
+details.adv{padding:14px 0}
 details.adv summary{cursor:pointer;font-size:1rem;list-style:none;display:flex;align-items:center;gap:8px}
 details.adv summary::-webkit-details-marker{display:none}
 details.adv summary::after{content:"⌄";transition:.2s}
@@ -210,7 +210,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 .dia-grid.list{grid-template-columns:1fr}
 .diacard{border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;background:#fff}
 .dia-grid.list .diacard{flex-direction:row;align-items:stretch}
-.dia-img{aspect-ratio:1/1;background:#e6e6e6;display:grid;place-items:center;flex-shrink:0}
+.dia-img{aspect-ratio:1/1;background:#e9edf4;display:grid;place-items:center;flex-shrink:0}
 .dia-grid.list .dia-img{width:180px;aspect-ratio:auto}
 .dia-img img{width:100%;height:100%;object-fit:cover}
 .dia-body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
@@ -222,13 +222,14 @@ details.adv[open] summary::after{transform:rotate(180deg)}
 .modal.open{display:grid}
 .modal-card{position:relative;width:100%;max-width:760px;max-height:88vh;overflow-y:auto;background:var(--blush-soft);border-radius:14px;padding:28px}
 .modal-card.narrow{max-width:520px}
-.close-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700;cursor:pointer}
+.close-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700;cursor:pointer;z-index:2}
 .detail{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
 .detail img{aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--blush-soft)}
 .detail h2{font-family:var(--serif);font-size:1.8rem;margin:6px 0}
 .muted{color:var(--ink-70)}
 .wa-float{position:fixed;right:16px;bottom:16px;z-index:70;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;padding:14px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.occ-grid,.contact-grid,.detail{grid-template-columns:1fr}.main-nav{display:none}.header-in{justify-content:space-between}.dia-bar{grid-template-columns:1fr}.dia-grid{grid-template-columns:repeat(2,1fr);gap:14px}.dia-grid.list{grid-template-columns:1fr}.dia-grid.list .dia-img{width:120px}.segbtn{padding:12px 22px}.rev-card{flex-basis:290px}}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}.occ-grid,.contact-grid,.detail{grid-template-columns:1fr}.main-nav{display:none}.header-in{justify-content:space-between}.dia-bar{grid-template-columns:1fr}.dia-grid{grid-template-columns:repeat(2,1fr);gap:14px}.dia-grid.list{grid-template-columns:1fr}.dia-grid.list .dia-img{width:120px}.segbtn{padding:12px 22px}.shape-card{flex-basis:calc((100% - 16px)/2)}.shape-btn{display:none}.rev-card{flex-basis:290px}}
+@media(max-width:640px){.shape-card{flex-basis:72%}}
 </style>
 </head>
 <body>
@@ -241,31 +242,33 @@ details.adv[open] summary::after{transform:rotate(180deg)}
       <span class="brand-name">ZanJewelry<small>Manufacturing · Est. 2021</small></span>
     </a>
     <nav class="main-nav">
-      <a href="#shop" data-anchor="shop">Rings</a>
+      <a href="#shop">Rings</a>
       <a href="#/diamonds">Diamonds</a>
       <a href="#shop" onclick="setFilter('Engagement')">Engagement</a>
       <a href="#shop" onclick="setFilter('Wedding')">Wedding</a>
       <a href="#shop" onclick="setFilter('Cosmetics')">Cosmetics</a>
-      <a href="#contact" data-anchor="contact">Contact</a>
+      <a href="#contact">Contact</a>
     </nav>
     <a class="wa-pill" data-wa="general" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
 
+<!-- HERO — up to 3 pictures, cross-fading every 3 seconds -->
 <section class="hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
-    <p class="eyebrow">ZanJewelry Manufacturing · Est. 2021</p>
-    <h1>Rings for your moments. Beauty for your every day.</h1>
-    <p>Fine engagement, wedding and everyday pieces — plus our cosmetics line. Enquire or order directly on WhatsApp.</p>
+    <p class="eyebrow" id="heroEyebrow">ZanJewelry Manufacturing · Est. 2021</p>
+    <h1 id="heroHeading">Rings for your moments. Beauty for your every day.</h1>
+    <p id="heroSub">Fine engagement, wedding and everyday pieces — plus our cosmetics line. Enquire or order directly on WhatsApp.</p>
     <div class="hero-actions">
-      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" href="#shop" data-anchor="shop">Shop rings</a>
+      <a class="btn btn-dark" style="background:#fff;color:var(--ink)" id="heroCta1" href="#shop">Shop rings</a>
       <a class="btn btn-ghost" data-wa="general" target="_blank" rel="noopener">Speak to us on WhatsApp</a>
     </div>
   </div>
 </section>
 
 <main>
+  <!-- ============ DIAMOND FLOW ============ -->
   <section class="section wrap" id="diamonds" style="padding-top:44px;min-height:430px"></section>
 
   <section class="section wrap" id="shop" style="padding-top:20px">
@@ -318,6 +321,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     </div>
   </section>
 
+  <!-- ============ CONTACT ============ -->
   <section class="section wrap" id="contact">
     <div class="contact-grid">
       <div>
@@ -361,6 +365,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   </div>
 </div>
 
+<!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="f-grid">
@@ -372,12 +377,13 @@ details.adv[open] summary::after{transform:rotate(180deg)}
           <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
           <a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
           <a data-wa="general" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="adm" href="/admin">Admin Portal</a>
         </div>
       </div>
       <div class="f-col">
         <h4>Need Help?</h4>
         <a href="#/page/customer-support">Customer Support</a>
-        <a href="#contact" data-anchor="contact">Contact Us</a>
+        <a href="#contact">Contact Us</a>
         <a href="#/page/virtual-appointment">Book Virtual Appointment</a>
       </div>
       <div class="f-col">
@@ -401,6 +407,7 @@ details.adv[open] summary::after{transform:rotate(180deg)}
         <a href="#/page/warranty">Warranty & Care</a>
         <a href="#/page/privacy">Privacy Notice</a>
         <a href="#/page/cookies">Cookie Policy</a>
+        <a href="#/page/cookie-preferences">Cookie Preferences</a>
         <a href="#/page/paia">PAIA Manual</a>
         <a href="#/page/complaints">Complaints & Disputes</a>
         <a href="#/page/company">Company & Legal Information</a>
@@ -408,8 +415,8 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     </div>
     <div class="f-grid" style="margin-top:38px">
       <div class="f-news" style="grid-column:2/-1">
-        <h4>Stay Connected</h4>
-        <p>Join our list for new collections, quiet launches and member-only offers.</p>
+        <h4 id="newsHead">Stay Connected</h4>
+        <p id="newsText">Join our list for new collections, quiet launches and member-only offers.</p>
         <form id="newsForm">
           <input type="email" required placeholder="Your email address">
           <button type="submit">Subscribe</button>
@@ -419,7 +426,10 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     </div>
     <div class="f-bottom">
       <span>© 2026 ZanJewelry. All Rights Reserved.</span>
-      <span>ZanJewelry Manufacturing · Est. 2021</span>
+      <span style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+        <span>ZanJewelry Manufacturing · Est. 2021</span>
+        <a href="/admin">Admin Portal</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -433,7 +443,6 @@ details.adv[open] summary::after{transform:rotate(180deg)}
   </div>
 </div>
 
-<!-- Write a review modal -->
 <div class="modal" id="reviewModal">
   <div class="modal-card narrow">
     <button class="close-x" data-close-review>✕</button>
@@ -441,19 +450,18 @@ details.adv[open] summary::after{transform:rotate(180deg)}
     <p class="muted" style="font-size:.9rem;margin-bottom:16px">Share your experience and a photo if you'd like — reviews appear once approved.</p>
     <form class="panel" id="reviewForm" style="background:#fff">
       <label>Your name <input name="name" required placeholder="e.g. Thandi K."></label>
-      <label>Your rating <span class="starpick" id="starPick">
-        <button type="button" data-star="1">★</button><button type="button" data-star="2">★</button><button type="button" data-star="3">★</button><button type="button" data-star="4">★</button><button type="button" data-star="5">★</button>
+      <label>Your rating <span class="starpick" id="starPick" data-value="5">
+        <button type="button" data-star="1" class="on">★</button><button type="button" data-star="2" class="on">★</button><button type="button" data-star="3" class="on">★</button><button type="button" data-star="4" class="on">★</button><button type="button" data-star="5" class="on">★</button>
       </span></label>
       <label>Review title <input name="title" required placeholder="e.g. Excellent service"></label>
       <label>Your review <textarea name="text" rows="4" required placeholder="Tell us about your piece and your experience…"></textarea></label>
-      <label>Add a photo <span class="hint">(optional — shown after approval)</span> <input type="file" name="imageFile" id="revFile" accept="image/*"></label>
+      <label>Add a photo <span class="hint">(optional — shown after approval)</span> <input type="file" name="imageFile" accept="image/*"></label>
       <button class="btn btn-dark" type="submit">Submit review</button>
       <p class="rv-note" id="rvNote">✓ Thank you! Your review will appear once it's approved.</p>
     </form>
   </div>
 </div>
 
-<!-- VIEW OUR popup (after picking a shape) -->
 <div class="choice" id="choiceModal">
   <div class="choice-card">
     <button class="choice-x" onclick="closeChoice()">✕</button>
@@ -475,7 +483,7 @@ function imgFail(im){im.onerror=null;im.src=PLACE(im.dataset.letter||"Z");}
 let WA="27703887170", products=[], filter="All";
 const wa=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
 
-/* ============ WHATSAPP TEMPLATES ============ */
+/* ============ WHATSAPP TEMPLATES (single * = bold in WhatsApp) ============ */
 const MSG_GENERAL="Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\nPlease assist me with my enquiry.\n\nThank you.";
 function productMsg(p){
   const cos=p.type==="cosmetic";
@@ -510,12 +518,12 @@ function generalMsg(f){
   return "Good day ZanJewelry 👋\n\nI would like to speak to an admin/customer representative.\n\n*Name:* "+g("name")+"\n*Email:* "+g("email")+"\n*Message:* "+g("message")+"\n\nPlease assist me with my enquiry.\n\nThank you.";
 }
 
+/* ============ SHOP ============ */
 const FILTERS={All:()=>true,Rings:p=>p.type==="ring",Engagement:p=>p.type==="engagement",Wedding:p=>p.type==="wedding",
   Cosmetics:p=>p.type==="cosmetic",Diamond:p=>p.material==="diamond",Gemstones:p=>p.material==="gemstone",
   Gold:p=>p.material==="gold",Silver:p=>p.material==="silver","Rose Gold":p=>p.material==="rose-gold",Platinum:p=>p.material==="platinum"};
-const imgFor=p=>{const s=String(p.image||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
+const imgFor=p=>{const s=String(p.image||(p.images&&p.images[0])||"");return (/^https?:\/\//.test(s)||s.startsWith("/"))?s:(s?"images/"+s.replace(/^\//,""):"");};
 
-/* NO prices on the public site */
 function cardHTML(p){
   const label=[TYPE[p.type]||"",p.material&&p.material!=="none"?(MAT[p.material]||""):""].filter(Boolean).join(" · ");
   return `<article class="card" data-id="${esc(p.id)}">
@@ -531,10 +539,9 @@ const CATS=[
 function renderCatCards(){
   $("#catTrack").innerHTML=CATS.map(c=>{
     const pool=products.filter(p=>c.t?p.type===c.t:p.material===c.m);
-    const raw=pool.map(p=>p.image).find(Boolean)||"";
-    const src=raw?(/^https?:/.test(raw)||raw.startsWith("/")?raw:"images/"+raw):"";
-    return `<a class="cat-card" href="#shop" data-anchor="shop">
-      <div class="cat-img"><img src="${esc(src||PLACE(c.f[0]))}" data-letter="${esc(c.f[0])}" alt="${esc(c.f)}" onerror="imgFail(this)"></div>
+    const raw=pool.map(imgFor).find(Boolean)||"";
+    return `<a class="cat-card" href="#shop">
+      <div class="cat-img"><img src="${esc(raw||PLACE(c.f[0]))}" data-letter="${esc(c.f[0])}" alt="${esc(c.f)}" onerror="imgFail(this)"></div>
       <h3>${esc(c.f)}</h3><div class="dash"></div><p>${esc(c.d)}</p></a>`;}).join("");
 }
 function setFilter(f){filter=FILTERS[f]?f:"All";$$("#chips .chip").forEach(c=>c.classList.toggle("active",c.dataset.filter===filter));renderGrid();}
@@ -582,35 +589,45 @@ const cap=s=>s?s[0].toUpperCase()+s.slice(1):"";
 const slug=s=>s.toLowerCase();
 const typeLabel=()=>dia.type==="lab"?"Lab-Grown":"Natural";
 
-/* permanent faceted diamond icons — no uploads ever needed */
+/* Faceted diamond icons — real brilliant-cut look, silvery, permanent */
 let svgUid=0;
 function shapeSVG(shape,w=110){
   const id="dg"+(++svgUid);
-  const st=`fill="url(#${id})" stroke="#a9aeb8" stroke-width="1.5" stroke-linejoin="round"`;
-  const f=`stroke="rgba(255,255,255,.92)" stroke-width="1.3" fill="none" stroke-linejoin="round"`;
-  const c=w/2;let o="",fc="";
-  if(shape==="Round"){o=`<circle cx="${c}" cy="${c}" r="${w*.4}" ${st}/>`;fc=`<circle cx="${c}" cy="${c}" r="${w*.21}" ${f}/>`;
-    for(let a=0;a<360;a+=45){const r=a*Math.PI/180;fc+=`<line x1="${c+w*.21*Math.cos(r)}" y1="${c+w*.21*Math.sin(r)}" x2="${c+w*.4*Math.cos(r)}" y2="${c+w*.4*Math.sin(r)}" ${f}/>`;}}
-  else if(shape==="Oval"){o=`<ellipse cx="${c}" cy="${c}" rx="${w*.27}" ry="${w*.4}" ${st}/>`;fc=`<ellipse cx="${c}" cy="${c}" rx="${w*.13}" ry="${w*.22}" ${f}/>`;
-    [[0,-1],[0,1],[-1,0],[1,0]].forEach(v=>{fc+=`<line x1="${c+w*.13*v[0]}" y1="${c+w*.22*v[1]}" x2="${c+w*.27*v[0]}" y2="${c+w*.4*v[1]}" ${f}/>`;});}
-  else if(shape==="Princess"){o=`<rect x="${w*.18}" y="${w*.18}" width="${w*.64}" height="${w*.64}" ${st}/>`;
-    fc=`<rect x="${w*.36}" y="${w*.36}" width="${w*.28}" height="${w*.28}" ${f}/><line x1="${w*.18}" y1="${w*.18}" x2="${w*.36}" y2="${w*.36}" ${f}/><line x1="${w*.82}" y1="${w*.18}" x2="${w*.64}" y2="${w*.36}" ${f}/><line x1="${w*.18}" y1="${w*.82}" x2="${w*.36}" y2="${w*.64}" ${f}/><line x1="${w*.82}" y1="${w*.82}" x2="${w*.64}" y2="${w*.64}" ${f}/>`;}
-  else if(shape==="Cushion"){o=`<rect x="${w*.16}" y="${w*.16}" width="${w*.68}" height="${w*.68}" rx="${w*.16}" ${st}/>`;
-    fc=`<rect x="${w*.35}" y="${w*.35}" width="${w*.3}" height="${w*.3}" rx="${w*.08}" ${f}/><line x1="${c}" y1="${w*.16}" x2="${c}" y2="${w*.35}" ${f}/><line x1="${c}" y1="${w*.84}" x2="${c}" y2="${w*.65}" ${f}/><line x1="${w*.16}" y1="${c}" x2="${w*.35}" y2="${c}" ${f}/><line x1="${w*.84}" y1="${c}" x2="${w*.65}" y2="${c}" ${f}/>`;}
-  else if(shape==="Emerald"){o=`<path d="M${w*.3} ${w*.14} H${w*.7} L${w*.86} ${w*.3} V${w*.7} L${w*.7} ${w*.86} H${w*.3} L${w*.14} ${w*.7} V${w*.3} Z" ${st}/>`;
-    fc=`<path d="M${w*.36} ${w*.26} H${w*.64} L${w*.74} ${w*.36} V${w*.64} L${w*.64} ${w*.74} H${w*.36} L${w*.26} ${w*.64} V${w*.36} Z" ${f}/><rect x="${w*.42}" y="${w*.42}" width="${w*.16}" height="${w*.16}" ${f}/>`;}
-  else if(shape==="Radiant"){o=`<path d="M${w*.3} ${w*.14} H${w*.7} L${w*.86} ${w*.3} V${w*.7} L${w*.7} ${w*.86} H${w*.3} L${w*.14} ${w*.7} V${w*.3} Z" ${st}/>`;
-    fc=`<rect x="${w*.38}" y="${w*.38}" width="${w*.24}" height="${w*.24}" ${f}/><line x1="${w*.38}" y1="${w*.38}" x2="${w*.3}" y2="${w*.3}" ${f}/><line x1="${w*.62}" y1="${w*.38}" x2="${w*.7}" y2="${w*.3}" ${f}/><line x1="${w*.38}" y1="${w*.62}" x2="${w*.3}" y2="${w*.7}" ${f}/><line x1="${w*.62}" y1="${w*.62}" x2="${w*.7}" y2="${w*.7}" ${f}/>`;}
-  else if(shape==="Asscher"){o=`<path d="M${w*.32} ${w*.16} H${w*.68} L${w*.84} ${w*.32} V${w*.68} L${w*.68} ${w*.84} H${w*.32} L${w*.16} ${w*.68} V${w*.32} Z" ${st}/>`;
-    fc=`<rect x="${w*.36}" y="${w*.36}" width="${w*.28}" height="${w*.28}" ${f}/><rect x="${w*.44}" y="${w*.44}" width="${w*.12}" height="${w*.12}" ${f}/>`;}
-  else if(shape==="Pear"){o=`<path d="M${c} ${w*.1} C${w*.84} ${w*.32} ${w*.78} ${w*.9} ${c} ${w*.9} C${w*.22} ${w*.9} ${w*.16} ${w*.32} ${c} ${w*.1} Z" ${st}/>`;
-    fc=`<line x1="${c}" y1="${w*.2}" x2="${c}" y2="${w*.82}" ${f}/><path d="M${w*.38} ${w*.4} Q${c} ${w*.55} ${w*.62} ${w*.4}" ${f}/>`;}
-  else if(shape==="Marquise"){o=`<path d="M${c} ${w*.08} C${w*.88} ${w*.34} ${w*.88} ${w*.66} ${c} ${w*.92} C${w*.12} ${w*.66} ${w*.12} ${w*.34} ${c} ${w*.08} Z" ${st}/>`;
-    fc=`<line x1="${c}" y1="${w*.14}" x2="${c}" y2="${w*.86}" ${f}/><path d="M${w*.32} ${w*.36} Q${c} ${w*.5} ${w*.68} ${w*.36}" ${f}/><path d="M${w*.32} ${w*.64} Q${c} ${w*.5} ${w*.68} ${w*.64}" ${f}/>`;}
-  else{o=`<path d="M${c} ${w*.88} C${w*.04} ${w*.44} ${w*.2} ${w*.08} ${c} ${w*.32} C${w*.8} ${w*.08} ${w*.96} ${w*.44} ${c} ${w*.88} Z" ${st}/>`;
-    fc=`<line x1="${c}" y1="${w*.32}" x2="${c}" y2="${w*.82}" ${f}/><path d="M${w*.34} ${w*.4} Q${c} ${w*.6} ${w*.66} ${w*.4}" ${f}/>`;}
-  return `<svg viewBox="0 0 ${w} ${w}" width="${w}" height="${w}" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#eceef2"/><stop offset=".72" stop-color="#c9cdd6"/><stop offset="1" stop-color="#e2e5ea"/></linearGradient></defs>${o}${fc}</svg>`;
+  const OUT={
+    Round:Array.from({length:24},(_,i)=>{const a=i/24*2*Math.PI;return[50+46*Math.cos(a),50+46*Math.sin(a)];}),
+    Oval:Array.from({length:24},(_,i)=>{const a=i/24*2*Math.PI;return[50+33*Math.cos(a),50+46*Math.sin(a)];}),
+    Princess:[[14,14],[50,8],[86,14],[92,50],[86,86],[50,92],[14,86],[8,50]],
+    Emerald:[[34,4],[66,4],[88,20],[88,80],[66,96],[34,96],[12,80],[12,18]],
+    Cushion:[[35,9],[65,9],[85,20],[91,35],[91,65],[85,80],[65,91],[35,91],[15,80],[9,65],[9,35],[15,20]],
+    Pear:[[50,5],[62,16],[73,31],[80,50],[81,66],[74,80],[62,89],[50,92],[38,89],[26,80],[19,66],[20,50],[27,31],[38,16]],
+    Marquise:[[50,4],[65,13],[77,28],[85,50],[77,72],[65,87],[50,96],[35,87],[23,72],[15,50],[23,28],[35,13]],
+    Radiant:[[32,10],[68,10],[90,30],[90,70],[68,90],[32,90],[10,70],[10,30]],
+    Asscher:[[32,10],[68,10],[90,32],[90,68],[68,90],[32,90],[10,68],[10,32]],
+    Heart:[[50,90],[32,74],[15,54],[12,34],[22,15],[38,13],[50,28],[62,13],[78,15],[88,34],[85,54],[68,74]]
+  };
+  const pts=OUT[shape]||OUT.Round;
+  const cx=pts.reduce((s,p)=>s+p[0],0)/pts.length, cy=pts.reduce((s,p)=>s+p[1],0)/pts.length;
+  const inner=pts.map(p=>[cx+(p[0]-cx)*.45, cy+(p[1]-cy)*.45]);
+  const fills=["gA","gB","gC","gD","gE"];
+  let facets="";
+  for(let i=0;i<pts.length;i++){
+    const j=(i+1)%pts.length;
+    facets+=`<polygon points="${pts[i].join(',')} ${pts[j].join(',')} ${inner[j].join(',')} ${inner[i].join(',')}" fill="url(#${fills[(i*2+pts.length)%fills.length]})" stroke="rgba(255,255,255,.7)" stroke-width="1" stroke-linejoin="round"/>`;
+  }
+  const table=`<polygon points="${inner.map(p=>p.join(',')).join(' ')}" fill="url(#${id}t)" stroke="rgba(255,255,255,.85)" stroke-width="1"/>`;
+  const sp=(x,y,s)=>`<path d="M${x} ${y-s} L${x+s*.28} ${y-s*.28} L${x+s} ${y} L${x+s*.28} ${y+s*.28} L${x} ${y+s} L${x-s*.28} ${y+s*.28} L${x-s} ${y} L${x-s*.28} ${y-s*.28} Z" fill="#fff" opacity=".95"/>`;
+  const outline=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#aeb4c2" stroke-width="2" stroke-linejoin="round"/>`;
+  return `<svg viewBox="0 0 100 100" width="${w}" height="${w}" aria-hidden="true"><defs>
+      <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe3ec"/></linearGradient>
+      <linearGradient id="gB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f5fa"/><stop offset="1" stop-color="#c3cad8"/></linearGradient>
+      <linearGradient id="gC" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#e9edf4"/><stop offset="1" stop-color="#aab3c6"/></linearGradient>
+      <linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfcfe"/><stop offset="1" stop-color="#cfd6e2"/></linearGradient>
+      <linearGradient id="gE" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#eef1f7"/><stop offset="1" stop-color="#b9c2d4"/></linearGradient>
+      <radialGradient id="${id}t" cx=".38" cy=".32" r=".95"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e8ecf3"/><stop offset="1" stop-color="#c2cad9"/></radialGradient>
+    </defs>${facets}${table}${outline}${sp(33,32,7)}${sp(67,57,5)}${sp(52,21,4)}</svg>`;
 }
+
+/* STEP 1 — shapes page: Natural/Lab toggle + carousel (3 visible, slide for more) */
 function renderDiaShapes(){
   $("#diamonds").innerHTML=`
     <div class="dia-head"><h2>Shop by Diamond Shape</h2>
@@ -633,7 +650,13 @@ let pickChoice="Round";
 function openChoice(shape){pickChoice=shape;$("#choiceModal").classList.add("open");}
 function closeChoice(){$("#choiceModal").classList.remove("open");}
 function choiceEngagement(){closeChoice();setFilter("Engagement");showHome();$("#shop").scrollIntoView({behavior:"smooth"});}
-function choiceLoose(){closeChoice();location.hash="#/diamonds/"+dia.type+"/"+slug(pickChoice);}
+function choiceLoose(){
+  closeChoice();
+  const target="#/diamonds/"+dia.type+"/"+slug(pickChoice);
+  if(location.hash===target)diaRoute();else location.hash=target;
+}
+
+/* STEP 2 — loose diamonds page: filters + results (no prices) */
 function renderDiaShop(){
   const T=typeLabel();
   $("#diamonds").innerHTML=`
@@ -729,7 +752,10 @@ document.addEventListener("click",e=>{
   const seg=e.target.closest("[data-dtype]");
   if(seg){dia.type=seg.dataset.dtype;$$("#diamonds [data-dtype]").forEach(b=>b.classList.toggle("active",b===seg));return;}
   const tab=e.target.closest("[data-dtab]");
-  if(tab){dia.type=tab.dataset.dtab;location.hash="#/diamonds/"+dia.type+"/"+slug(dia.shape);return;}
+  if(tab){dia.type=tab.dataset.dtab;
+    const target="#/diamonds/"+dia.type+"/"+slug(dia.shape);
+    if(location.hash===target)diaRoute();else location.hash=target;
+    return;}
   const wf=e.target.closest("[data-wf]");
   if(wf){dia.mode=wf.dataset.wf;$$("#diamonds [data-wf]").forEach(b=>b.classList.toggle("on",b===wf));renderColArea();drawDiaResults();return;}
   const vw=e.target.closest("[data-view]");
@@ -755,7 +781,7 @@ const DEMO_REVIEWS=[
   {name:"Caleb B.",date:"2026-09-14",rating:5,title:"Excellent service",text:"Extremely efficient and meticulous work. Thank you so much for such great service.",image:""},
   {name:"Luis A.",date:"2026-09-08",rating:5,title:"Nothing short of amazing!",text:"From when I first contacted the team, I've had nothing but peace of mind. They will guide you all the way.",image:""}
 ];
-const starStr=r=>"★".repeat(r)+"☆".repeat(5-r);
+const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
 const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
 function renderReviews(){
   const list=REVIEWS;
@@ -767,9 +793,8 @@ function renderReviews(){
     $("#galWrap").hidden=false;
     $("#galStrip").innerHTML=withPhotos.map(r=>`
       <div class="gal-item"><div class="ph"><img src="${esc(r.image)}" alt="Customer photo by ${esc(r.name)}" loading="lazy" onerror="this.parentElement.innerHTML='💍'"></div></div>`).join("");
-    const gw=$("#galWrap");
-    gw.querySelector(".gal-btn.prev").onclick=()=>$("#galStrip").scrollBy({left:-$("#galStrip").clientWidth*.8,behavior:"smooth"});
-    gw.querySelector(".gal-btn.next").onclick=()=>$("#galStrip").scrollBy({left:$("#galStrip").clientWidth*.8,behavior:"smooth"});
+    $("#galWrap .gal-btn.prev").onclick=()=>$("#galStrip").scrollBy({left:-$("#galStrip").clientWidth*.8,behavior:"smooth"});
+    $("#galWrap .gal-btn.next").onclick=()=>$("#galStrip").scrollBy({left:$("#galStrip").clientWidth*.8,behavior:"smooth"});
   }else $("#galWrap").hidden=true;
   $("#revStrip").innerHTML=list.slice(0,10).map(r=>`
     <div class="rev-card">
@@ -780,24 +805,18 @@ function renderReviews(){
     </div>`).join("")||'<p class="muted" style="text-align:center">No reviews yet — be the first to share your experience.</p>';
 }
 async function loadReviews(){
-  try{
-    const r=await fetch("/api/reviews").then(r=>r.json());
-    REVIEWS=Array.isArray(r)?r:[];
-  }catch(_){REVIEWS=DEMO_REVIEWS.slice();}
+  try{const r=await fetch("/api/reviews").then(r=>r.json());REVIEWS=Array.isArray(r)?r:[];}
+  catch(_){REVIEWS=DEMO_REVIEWS.slice();}
   renderReviews();
 }
-/* star picker */
  $("#starPick").addEventListener("click",e=>{
   const b=e.target.closest("[data-star]");if(!b)return;
   const v=Number(b.dataset.star);
   $$("#starPick button").forEach(x=>x.classList.toggle("on",Number(x.dataset.star)<=v));
   $("#starPick").dataset.value=v;
 });
- $("#starPick").dataset.value=5;
- $$("#starPick button").forEach(b=>{if(Number(b.dataset.star)<=5)b.classList.add("on");});
-/* open/close review modal */
 document.addEventListener("click",e=>{
-  if(e.target.closest("[data-open-review]")||e.target.closest(".seeall")&&e.target.closest(".seeall").getAttribute("href")==="#write"){
+  if(e.target.closest("[data-open-review]")){
     $("#reviewModal").classList.add("open");document.body.style.overflow="hidden";return;}
   if(e.target.id==="reviewModal"||e.target.closest("[data-close-review]")){
     $("#reviewModal").classList.remove("open");document.body.style.overflow="";}
@@ -817,26 +836,24 @@ document.addEventListener("click",e=>{
     $$("#starPick button").forEach(x=>x.classList.add("on"));$("#starPick").dataset.value=5;
     setTimeout(()=>{$("#rvNote").classList.remove("show");$("#reviewModal").classList.remove("open");document.body.style.overflow="";},2600);
   }catch(_){
-    /* server not ready yet → send the review via WhatsApp instead */
     const msg="Good day ZanJewelry 👋\n\nI would like to submit a review:\n\n"+
-      "⭐ Rating: "+"★".repeat(rating)+"\n👤 Name: "+g("name")+"\n📌 Title: "+g("title")+
-      "\n💬 Review: "+g("text")+"\n🖼️ Photo: I will attach it in this chat";
+      "⭐ *Rating:* "+"★".repeat(rating)+"\n👤 *Name:* "+g("name")+"\n📌 *Title:* "+g("title")+
+      "\n💬 *Review:* "+g("text")+"\n🖼️ *Photo:* I will attach it in this chat";
     window.open(wa(msg),"_blank");
   }
 });
 
-/* ================= SEPARATE PAGES (footer links) ================= */
+/* ================= SEPARATE PAGES ================= */
 const PAGE_TITLES={
   "customer-support":"Customer Support","virtual-appointment":"Book Virtual Appointment",
   "about-us":"About Us","blog":"Blog","help-centre":"Help Centre","reviews":"Customer Reviews",
   "orders":"View Your Orders","repairs-sizing":"Repairs & Sizing","returns-exchange":"Returns or Exchange",
   "terms":"Terms & Conditions of Sale","returns-refunds":"Returns, Refunds & Exchanges",
   "shipping":"Shipping & Delivery","warranty":"Warranty & Care","privacy":"Privacy Notice",
-  "cookies":"Cookie Policy","paia":"PAIA Manual","complaints":"Complaints & Disputes","company":"Company & Legal Information"
+  "cookies":"Cookie Policy","cookie-preferences":"Cookie Preferences","paia":"PAIA Manual",
+  "complaints":"Complaints & Disputes","company":"Company & Legal Information"
 };
-function showHome(){
-  $("#pageView").hidden=true;$("#homeView").style.display="";
-}
+function showHome(){$("#pageView").hidden=true;$("#homeView").style.display="";}
 function reviewsPageHTML(){
   return `<h1 class="page-title">Customer Reviews</h1>
     <p class="muted">Real feedback from ZanJewelry customers. Photos appear once approved.</p>
@@ -850,17 +867,31 @@ function reviewsPageHTML(){
         <div class="rev-text" style="text-align:left">${esc(r.text||r.review||"")}</div>
       </div>`).join("")||'<p class="muted">No reviews yet.</p>'}</div>`;
 }
-async function showPage(slug){
+async function showPage(s){
   $("#homeView").style.display="none";$("#pageView").hidden=false;
-  const title=PAGE_TITLES[slug]||cap(slug.replace(/-/g," "));
+  const title=PAGE_TITLES[s]||cap(s.replace(/-/g," "));
   $("#pgCrumb").textContent=title;
   const pc=$("#pageContent");
-  if(slug==="reviews"){pc.innerHTML=reviewsPageHTML();window.scrollTo(0,0);return;}
+  if(s==="reviews"){pc.innerHTML=reviewsPageHTML();window.scrollTo(0,0);return;}
+  if(s==="blog"){
+    pc.innerHTML='<h1 class="page-title">Blog</h1><p class="muted" id="blogLoad">Loading…</p>';
+    try{
+      const posts=await fetch("/api/blog").then(r=>r.json());
+      pc.innerHTML=`<h1 class="page-title">Blog</h1><div class="blog-grid">${(Array.isArray(posts)?posts:[]).map(p=>`
+        <div class="rev-card" style="flex:none">
+          ${p.image?`<img src="${esc(p.image)}" style="border-radius:8px;margin-bottom:12px;aspect-ratio:16/10;object-fit:cover;width:100%" onerror="this.remove()">`:""}
+          <div class="rev-top"><b>${esc(p.title)}</b><span class="rev-date">${esc(p.author||"")}</span></div>
+          <div class="rev-date" style="margin:4px 0">${esc(fmtDate(p.date||p.createdAt))}</div>
+          <div class="rev-text" style="text-align:left">${p.body||p.content||""}</div>
+        </div>`).join("")||'<p class="muted">No posts yet — check back soon.</p>'}</div>`;
+    }catch(_){pc.innerHTML='<h1 class="page-title">Blog</h1><p class="muted">Coming soon.</p>';}
+    window.scrollTo(0,0);return;
+  }
   try{
-    const r=await fetch("/api/pages/"+slug);
+    const r=await fetch("/api/pages/"+s);
     if(!r.ok)throw 0;
     const pg=await r.json();
-    pc.innerHTML=`<h1 class="page-title">${esc(pg.title||title)}</h1><div class="page-body">${pg.content||""}</div>`;
+    pc.innerHTML=`<h1 class="page-title">${esc(pg.title||title)}</h1>${pg.image?`<img src="${esc(pg.image)}" style="border-radius:10px;max-height:340px;object-fit:cover" onerror="this.remove()">`:""}<div class="page-body">${pg.content||""}</div>`;
   }catch(_){
     pc.innerHTML=`<h1 class="page-title">${esc(title)}</h1>
       <div class="page-soon"><p>This page is being prepared — full content is coming soon.</p>
@@ -869,6 +900,7 @@ async function showPage(slug){
   }
   window.scrollTo(0,0);
 }
+
 /* ================= ROUTER ================= */
 function route(){
   const h=location.hash||"";
@@ -877,7 +909,7 @@ function route(){
   if(h.startsWith("#/diamonds")){
     diaRoute();setTimeout(()=>$("#diamonds").scrollIntoView({behavior:"smooth"}),40);return;}
   const pm=h.match(/^#\/product\/([\w-]+)/);
-  if(pm){const p=products.find(x=>x.id===decodeURIComponent(pm[1]));if(p)openProduct(p.id);return;}
+  if(pm&&products.length){const p=products.find(x=>x.id===decodeURIComponent(pm[1]));if(p)openProduct(p.id);return;}
   if(h==="#shop"||h==="#contact"){const el=$(h);if(el)el.scrollIntoView({behavior:"smooth"});}
 }
 window.addEventListener("hashchange",route);
@@ -908,6 +940,7 @@ function initHero(images){
 }
 
 /* ---- LOAD from server ---- */
+let content={hero:{},banners:{}};
 async function loadProducts(){
   try{
     const list=await fetch("/api/products").then(r=>r.json());
@@ -924,8 +957,10 @@ async function loadDiamonds(){
   }catch(_){}
 }
 (async()=>{
+  /* 1 · WhatsApp number (admin Settings → /api/config) */
   try{const cfg=await fetch("/api/config").then(r=>r.json());WA=cfg.whatsapp||WA;}catch(_){}
   $$("[data-wa]").forEach(a=>a.href=wa(MSG_GENERAL));
+  /* 2 · Hero images + text, logo, banners */
   let heroImgs=[],siteImgs={};
   try{
     const [ct,si]=await Promise.all([
@@ -933,13 +968,34 @@ async function loadDiamonds(){
       fetch("/api/site-images").then(r=>r.json()).catch(()=>({}))
     ]);
     siteImgs=si||{};
-    if(ct&&ct.hero)heroImgs=ct.hero.images&&ct.hero.images.length?ct.hero.images:(ct.hero.image?[ct.hero.image]:[]);
+    if(ct){content=ct;const h=ct.hero||{};
+      heroImgs=(Array.isArray(h.images)&&h.images.length)?h.images:(h.image?[h.image]:[]);
+      if(h.eyebrow)$("#heroEyebrow").textContent=h.eyebrow;
+      if(h.heading)$("#heroHeading").textContent=h.heading;
+      if(h.sub)$("#heroSub").textContent=h.sub;
+      if(h.ctaText){const b=$("#heroCta1");b.textContent=h.ctaText;b.href=h.ctaLink||"#shop";}
+    }
   }catch(_){}
   if(!heroImgs.length&&siteImgs.hero)heroImgs=[siteImgs.hero];
   initHero(heroImgs);
   if(siteImgs.logo){const l=$("#brandLogo");l.src=siteImgs.logo;l.hidden=false;}
   if(siteImgs["bridal-engagement"]){const i=$("#occEngImg");i.src=siteImgs["bridal-engagement"];i.hidden=false;}
   if(siteImgs["bridal-wedding"]){const i=$("#occWedImg");i.src=siteImgs["bridal-wedding"];i.hidden=false;}
+  /* 3 · Settings → footer tagline, socials, copyright, newsletter text */
+  try{
+    const st=await fetch("/api/settings").then(r=>r.json());
+    if(st.tagline){const t=$(".f-brand p");if(t)t.textContent=st.tagline;}
+    if(st.copyright){const c=$(".f-bottom span");if(c)c.textContent=st.copyright;}
+    if(st.newsletterHeading){const h=$("#newsHead");if(h)h.textContent=st.newsletterHeading;}
+    if(st.newsletterText){const p=$("#newsText");if(p)p.textContent=st.newsletterText;}
+    $$(".f-social a").forEach(a=>{
+      const t=a.textContent.trim().toLowerCase();
+      if(t==="instagram"&&st.instagram)a.href=st.instagram;
+      if(t==="facebook"&&st.facebook)a.href=st.facebook;
+      if(t==="tiktok"&&st.tiktok)a.href=st.tiktok;
+    });
+  }catch(_){}
+  /* 4 · First render */
   if(!diaRoute())renderDiaShapes();
   renderReviews();
   await loadProducts();
