@@ -41,6 +41,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .note.show{display:block}
 .warn{display:none;background:#fdf3e7;border:1.5px solid #e8d5b5;color:#8a6a2f;border-radius:10px;padding:12px 16px;font-size:.85rem;margin-bottom:18px}
 .warn.show{display:block}
+.info-box{background:var(--blush-soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:.85rem;color:var(--ink-70);margin-bottom:18px}
 .plist{display:flex;flex-direction:column;gap:10px}
 .pitem{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 .pitem img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--blush-soft);flex-shrink:0}
@@ -65,7 +66,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .chead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .chead strong{font-size:.95rem}
 .cbody{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-items:start}
-.bimg img{height:90px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px;background:var(--blush-soft)}
+.bimg img{height:110px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px;background:var(--blush-soft)}
+.bimg .noimg{height:110px;width:100%;border-radius:8px;background:var(--blush-soft);display:grid;place-items:center;font-size:.78rem;color:var(--ink-50);margin-bottom:6px;text-align:center;padding:0 10px}
 .view{display:none}.view.show{display:block}
 .subtabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .subtab{font:inherit;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
@@ -81,6 +83,9 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
 .pagerow .pbody{margin-top:12px;display:none}
 .pagerow.open .pbody{display:block}
 .revphoto{width:74px;height:74px;border-radius:10px;object-fit:cover;background:var(--blush-soft);flex-shrink:0}
+.slotcard{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.slotcard h3{font-family:var(--serif);font-size:1.15rem;margin-bottom:4px}
+.slotcard p.mini{margin-bottom:10px}
 .mini{font-size:.8rem;color:var(--ink-50)}
 #loginView{max-width:420px;margin:60px auto 0}
 #loginView h1{text-align:center}
@@ -209,7 +214,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-diamonds">
     <h1>Loose diamonds</h1>
     <p class="sub">These appear in "Shop by Diamond Shape" on the site. No price is ever shown to customers.</p>
-    <p class="warn" id="diaWarn">⚠ The server has no /api/diamonds yet — add the diamonds block to server.js.</p>
+    <p class="warn" id="diaWarn">⚠ The server has no /api/diamonds yet — deploy the latest server.js.</p>
     <div class="card">
       <form id="diaForm">
         <input type="hidden" id="dId">
@@ -246,18 +251,23 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-categories">
     <h1>Categories & banners</h1>
     <p class="sub">The tree drives the whole site. Each category gets its own page and banner.</p>
+    <div class="info-box">
+      <b>How categories appear on the site:</b> a category with a <b>parent</b> (e.g. Jewellery › Pendants) becomes a <b>filter chip</b> in "Shop the Collection" and can hold products. Top-level sections (Jewellery, Cosmetics) are containers only — products go in their children. After adding a category here, it appears on the site within ~20 seconds (or on refresh).
+    </div>
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px">Add a category</h2>
       <form id="catForm">
         <div class="row">
-          <label class="field">Name <input name="name" required placeholder="e.g. Anklets"></label>
-          <label class="field">Parent <select name="parent" id="cParent"></select></label>
+          <label class="field">Name <input name="name" required placeholder="e.g. Pendants"></label>
+          <label class="field">Parent — pick Jewellery or Cosmetics so it becomes a chip
+            <select name="parent" id="cParent"></select></label>
         </div>
         <div class="row">
           <label class="field">Section <select name="productType"><option value="jewellery">Jewellery</option><option value="cosmetic">Cosmetics</option></select></label>
           <label class="field">Description <input name="description" placeholder="Shown under the page title"></label>
         </div>
         <button class="btn btn-dark btn-block">Add category</button>
+        <p class="note" id="catNote">✓ Category added — it now appears in the product form and on the site.</p>
       </form>
     </div>
     <div id="catList"></div>
@@ -267,7 +277,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-reviews">
     <h1>Customer reviews</h1>
     <p class="sub">Approve or decline reviews submitted from the website. Approved reviews (and their photos) appear in "Be Inspired" and on the Customer Reviews page.</p>
-    <p class="warn" id="revWarn">⚠ The server has no reviews endpoints yet — reviews are being sent to WhatsApp instead. Add the reviews block to server.js.</p>
+    <p class="warn" id="revWarn">⚠ The server has no reviews endpoints yet — deploy the latest server.js.</p>
     <div class="chips" id="rFilters">
       <button class="chip active" data-r="pending">Pending</button>
       <button class="chip" data-r="approved">Approved</button>
@@ -281,7 +291,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-content">
     <h1>Website content</h1>
     <p class="sub">Every footer link opens its own page — edit them here. Customers never see this content on the homepage.</p>
-    <p class="warn" id="pgWarn">⚠ The server has no pages endpoints yet — add the pages block to server.js.</p>
+    <p class="warn" id="pgWarn">⚠ The server has no pages endpoints yet — deploy the latest server.js.</p>
     <div class="subtabs">
       <button class="subtab active" data-c="pages">Pages</button>
       <button class="subtab" data-c="blog">Blog posts</button>
@@ -333,6 +343,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-home">
     <h1>Homepage control</h1>
     <p class="sub">Hero pictures rotate every 3 seconds. Upload up to 3 for the slideshow.</p>
+    <p class="warn" id="slotWarn">⚠ The server is rejecting banner slots ("Unknown slot") — deploy the latest server.js so it allows bridal-engagement and bridal-wedding.</p>
     <div class="card">
       <form id="heroForm">
         <label class="field">Hero pictures — up to 3; the site cross-fades them every 3 seconds <input type="file" id="heroFile" accept="image/*" multiple></label>
@@ -352,10 +363,17 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
         <p class="note" id="heroNote">✓ Homepage updated.</p>
       </form>
     </div>
+
+    <!-- Engagement & Wedding section pictures -->
     <div class="card">
-      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Section banners & logo</h2>
-      <div class="row3" id="slotCards"></div>
-      <div class="row" style="margin-top:18px;align-items:center">
+      <h2 style="font-family:var(--serif);font-size:1.35rem;margin-bottom:4px">Engagement & Wedding section pictures</h2>
+      <p class="sub" style="margin-bottom:16px">These are the two big banners in "Shop the Collection" on the homepage. Upload one picture per section — the text stays as it is.</p>
+      <div class="row" id="slotCards"></div>
+    </div>
+
+    <div class="card">
+      <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Brand logo</h2>
+      <div class="row" style="align-items:center">
         <div><img id="logoPrev" style="height:70px;border-radius:8px;background:var(--blush-soft)" hidden></div>
         <div>
           <label class="field" style="margin-top:0">Brand logo <input type="file" id="logoFile" accept="image/*"></label>
@@ -372,7 +390,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-settings">
     <h1>Settings</h1>
     <p class="sub">Change these once and the whole website updates — no code, no redeploy.</p>
-    <p class="warn" id="setWarn">⚠ The server has no /api/settings yet — add the settings block to server.js.</p>
+    <p class="warn" id="setWarn">⚠ The server has no /api/settings yet — deploy the latest server.js.</p>
     <div class="card">
       <form id="setForm">
         <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:4px">Brand & contact</h2>
@@ -401,7 +419,6 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
     </div>
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Newsletter subscribers <span class="mini" id="subCount"></span></h2>
-      <p class="warn" id="subWarn">⚠ The server has no /api/subscribers yet.</p>
       <div id="subList" class="plist"></div>
       <button class="btn btn-ghost" type="button" onclick="copySubs()" style="margin-top:12px">Copy email list</button>
     </div>
@@ -410,8 +427,8 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <!-- ============ USERS ============ -->
   <div class="view" id="v-users">
     <h1>Admin users</h1>
-    <p class="sub">Anyone listed here can log in with their own username and password. New accounts work immediately — no Railway setup needed. You cannot delete yourself or the last remaining account.</p>
-    <p class="warn" id="usrWarn">⚠ The server has no /api/users yet — add the users block to server.js (it seeds Awonke / Awonke@2026 automatically).</p>
+    <p class="sub">Anyone listed here can log in with their own username and password. New accounts work immediately. You cannot delete yourself or the last remaining account.</p>
+    <p class="warn" id="usrWarn">⚠ The server has no /api/users yet — deploy the latest server.js (it seeds Awonke / Awonke@2026 automatically).</p>
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px" id="usrFormTitle">Add a user</h2>
       <form id="userForm">
@@ -442,7 +459,6 @@ const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const MAT={none:"—",gold:"Gold",silver:"Silver","rose-gold":"Rose Gold",platinum:"Platinum",diamond:"Diamond",gemstone:"Gemstone"};
 const STATUS={"in-stock":"In stock","out-of-stock":"Out of stock","sold":"Sold"};
-const money=p=>(p==null||p==="")?"Enquire for price":"R "+Number(p).toLocaleString("en-ZA");
 const PH='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="#F9EDE7"/></svg>');
 const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
 const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
@@ -472,7 +488,6 @@ function setWho(name){
 function showLogin(){$("#loginView").style.display="block";$("#dashView").hidden=true;$("#logoutBtn").hidden=true;$("#whoChip").hidden=true;}
 function showDash(){$("#loginView").style.display="none";$("#dashView").hidden=false;$("#logoutBtn").hidden=false;refresh();}
 
-/* ---------- LOGIN (username + password) ---------- */
  $("#showPw").addEventListener("change",()=>{$("#password").type=$("#showPw").checked?"text":"password";});
  $("#uShow").addEventListener("change",()=>{$("#uPw").type=$("#uShow").checked?"text":"password";});
  $("#loginForm").addEventListener("submit",async e=>{
@@ -503,7 +518,7 @@ async function refresh(){
     api("/api/pages").then(d=>{pages=Array.isArray(d)?d:[];$("#pgWarn").classList.remove("show");}).catch(()=>$("#pgWarn").classList.add("show")),
     api("/api/admin/blog").then(d=>posts=Array.isArray(d)?d:[]).catch(()=>{}),
     api("/api/settings").then(d=>{settings=d||{};$("#setWarn").classList.remove("show");}).catch(()=>$("#setWarn").classList.add("show")),
-    api("/api/subscribers").then(d=>{subs=Array.isArray(d)?d:[];$("#subWarn").classList.remove("show");}).catch(()=>$("#subWarn").classList.add("show")),
+    api("/api/subscribers").then(d=>{subs=Array.isArray(d)?d:[];$("#subWarn")?.classList.remove("show");}).catch(()=>{}),
     api("/api/users").then(d=>{users=Array.isArray(d)?d:[];$("#usrWarn").classList.remove("show");}).catch(()=>$("#usrWarn").classList.add("show"))
   ];
   await Promise.all(jobs);
@@ -534,7 +549,7 @@ function fillSelects(){
   const cur=catSel.value;
   catSel.innerHTML=opts.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("")||'<option value="">— add a category first —</option>';
   if(opts.some(c=>c.slug===cur))catSel.value=cur;
-  $("#cParent").innerHTML='<option value="">— top level —</option>'+categories.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("");
+  $("#cParent").innerHTML='<option value="">— top level (container only) —</option>'+categories.map(c=>`<option value="${c.slug}">${esc(pathLabel(c))}</option>`).join("");
   $("#linkList").innerHTML=categories.map(c=>`<option value="#/shop/${c.slug}"></option>`).join("")
     +'<option value="#/diamonds"></option>'
     +Object.keys(PAGE_SEED).map(s=>`<option value="#/page/${s}"></option>`).join("")
@@ -684,15 +699,20 @@ function resetDia(){$("#diaForm").reset();$("#dId").value="";$("#dSave").textCon
  $("#catForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const body=Object.fromEntries(new FormData(e.target).entries());
-  try{await api("/api/categories",{method:"POST",body:JSON.stringify(body)});e.target.reset();refresh();}
-  catch(err){alert(err.message);}
+  try{
+    await api("/api/categories",{method:"POST",body:JSON.stringify(body)});
+    e.target.reset();refresh();
+    const n=$("#catNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),3000);
+  }catch(err){alert(err.message);}
 });
 function renderCats(){
   $("#catList").innerHTML=categories.map(c=>{
     const b=(content.banners||{})[c.slug]||{};
     return `<div class="ccard">
       <div class="chead"><strong>${esc(pathLabel(c))}</strong><span class="badge">${c.productType}</span>
+        ${c.parent?'<span class="badge approved">chip on site</span>':'<span class="badge draft">container — not a chip</span>'}
         <span class="spacer"></span>
+        <a class="mini" href="/#/shop/${esc(c.slug)}" target="_blank" rel="noopener">View ↗</a>
         ${c.parent?`<button class="btn btn-red" style="padding:7px 14px;font-size:.6rem" onclick="delCat('${c.slug}')">Delete</button>`:""}
       </div>
       <div class="cbody">
@@ -700,11 +720,12 @@ function renderCats(){
           <label class="field">Banner title <input id="bt-${c.slug}" value="${esc(b.title||c.name)}"></label>
           <label class="field">Banner description <input id="bd-${c.slug}" value="${esc(b.description||c.description||"")}"></label>
           <label class="field inline"><input type="checkbox" id="ba-${c.slug}" ${b.active!==false?"checked":""}> Show banner on this page</label>
+          <button class="btn btn-dark" style="margin-top:12px" onclick="saveBanner('${c.slug}')">Save banner text</button>
         </div>
         <div>
-          <div class="bimg">${b.image?`<img src="${esc(b.image)}">`:""}</div>
+          <div class="bimg">${b.image?`<img src="${esc(b.image)}">`:'<div class="noimg">No banner picture yet</div>'}</div>
           <input type="file" id="bf-${c.slug}" accept="image/*">
-          <button class="btn btn-dark" style="margin-top:8px" onclick="saveBanner('${c.slug}')">Save banner</button>
+          <button class="btn btn-dark" style="margin-top:8px" onclick="saveBanner('${c.slug}')">Save with picture</button>
         </div>
       </div></div>`;
   }).join("");
@@ -765,7 +786,8 @@ const PAGE_SEED={
   "orders":"View Your Orders","repairs-sizing":"Repairs & Sizing","returns-exchange":"Returns or Exchange",
   "terms":"Terms & Conditions of Sale","returns-refunds":"Returns, Refunds & Exchanges",
   "shipping":"Shipping & Delivery","warranty":"Warranty & Care","privacy":"Privacy Notice",
-  "cookies":"Cookie Policy","paia":"PAIA Manual","complaints":"Complaints & Disputes","company":"Company & Legal Information"
+  "cookies":"Cookie Policy","cookie-preferences":"Cookie Preferences","paia":"PAIA Manual",
+  "complaints":"Complaints & Disputes","company":"Company & Legal Information"
 };
 function edWrap(sel,open,close){
   const ta=$(sel),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;
@@ -806,7 +828,7 @@ function renderPages(){
         <div class="row" style="margin-top:12px">
           <div>
             <label class="field">Page image (optional, shown at the top)</label>
-            <div class="bimg">${p.image?`<img src="${esc(p.image)}">`:""}</div>
+            <div class="bimg">${p.image?`<img src="${esc(p.image)}">`:'<div class="noimg">No picture yet</div>'}</div>
             <input type="file" id="pimg-${p.slug}" accept="image/*">
           </div>
           <div>
@@ -895,7 +917,7 @@ function resetBlog(){
   }catch(err){alert(err.message);}
 });
 
-/* ================= HOMEPAGE (multi-hero + slots) ================= */
+/* ================= HOMEPAGE (hero + section banners + logo) ================= */
 function fillHero(){
   const h=content.hero||{};
   currentHeroImages=(Array.isArray(h.images)&&h.images.length)?h.images.slice():(h.image?[h.image]:[]);
@@ -924,29 +946,39 @@ function rmHero(i){currentHeroImages.splice(i,1);renderHeroStrip();}
     const n=$("#heroNote");n.classList.add("show");setTimeout(()=>n.classList.remove("show"),2500);}
   catch(err){alert(err.message);}
 });
+/* Engagement & Wedding section banners — uploaded via /api/site-images/:slot */
 const SLOTS=[
-  {key:"bridal-engagement",label:"Engagement banner"},
-  {key:"bridal-wedding",label:"Wedding banner"}
+  {key:"bridal-engagement",label:"Engagement section picture",desc:"The big 'Say yes — Engagement Rings' banner"},
+  {key:"bridal-wedding",label:"Wedding section picture",desc:"The big 'Forever bands — Wedding Rings' banner"}
 ];
 function renderSlots(){
   $("#slotCards").innerHTML=SLOTS.map(s=>`
-    <div class="ccard" style="margin:0">
-      <div class="bimg">${siteImages[s.key]?`<img src="${esc(siteImages[s.key])}">`:""}</div>
-      <label class="field" style="margin-top:8px">${s.label} <input type="file" id="slot-${s.key}" accept="image/*"></label>
+    <div class="slotcard">
+      <h3>${esc(s.label)}</h3>
+      <p class="mini">${esc(s.desc)}</p>
+      <div class="bimg">${siteImages[s.key]?`<img src="${esc(siteImages[s.key])}?t=${Date.now()}">`:'<div class="noimg">No picture yet — the section shows its blush gradient</div>'}</div>
+      <label class="field" style="margin-top:8px">Choose picture <input type="file" id="slot-${s.key}" accept="image/*"></label>
       <div class="row" style="margin-top:10px">
-        <button class="btn btn-dark" style="padding:9px 12px;font-size:.62rem" onclick="upSlot('${s.key}')">Upload</button>
-        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:9px 12px;font-size:.62rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
+        <button class="btn btn-dark" style="padding:10px 14px;font-size:.64rem" onclick="upSlot('${s.key}')">Upload picture</button>
+        ${siteImages[s.key]?`<button class="btn btn-red" style="padding:10px 14px;font-size:.64rem" onclick="delSlot('${s.key}')">Remove</button>`:""}
       </div>
     </div>`).join("");
+  /* hide the "Unknown slot" warning if uploads work */
 }
 async function upSlot(key){
-  const f=$("#slot-"+key).files[0];if(!f)return alert("Choose an image first");
+  const f=$("#slot-"+key).files[0];if(!f)return alert("Choose a picture first");
   const fd=new FormData();fd.append("imageFile",f);
-  try{siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});renderSlots();}
-  catch(err){alert(err.message);}
+  try{
+    siteImages=await api("/api/site-images/"+key,{method:"POST",body:fd});
+    $("#slotWarn").classList.remove("show");
+    renderSlots();
+  }catch(err){
+    if((err.message||"").toLowerCase().includes("unknown slot"))$("#slotWarn").classList.add("show");
+    alert(err.message);
+  }
 }
 async function delSlot(key){
-  if(!confirm("Remove this image? The section falls back to its default."))return;
+  if(!confirm("Remove this picture? The section falls back to its gradient default."))return;
   try{siteImages=await api("/api/site-images/"+key,{method:"DELETE"});renderSlots();}
   catch(err){alert(err.message);}
 }
@@ -1000,7 +1032,7 @@ function copySubs(){
   navigator.clipboard.writeText(emails).then(()=>alert("Email list copied")).catch(()=>alert("Copy failed"));
 }
 
-/* ================= USERS (admin accounts) ================= */
+/* ================= USERS ================= */
 function renderUsers(){
   $("#usrCount").textContent=users.length?`(${users.length})`:"";
   $("#usrList").innerHTML=users.map(u=>{
@@ -1020,6 +1052,7 @@ function resetUserForm(){
   $("#userForm").reset();$("#uId").value="";
   $("#uSave").textContent="Create user";$("#uCancel").hidden=true;
   $("#usrFormTitle").textContent="Add a user";
+  $("#uPw").placeholder="Set or change the password";
 }
  $("#uCancel").addEventListener("click",resetUserForm);
  $("#usrList").addEventListener("click",e=>{
