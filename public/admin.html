@@ -17,8 +17,8 @@ img{max-width:100%;display:block}
 .brand img{width:38px;height:38px;border-radius:8px;object-fit:cover;vertical-align:middle;margin-right:8px}
 .spacer{flex:1}
 .topbar a{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-70)}
-.who{display:inline-flex;align-items:center;gap:8px;background:var(--blush-soft);border-radius:999px;padding:7px 16px;font-size:.74rem;font-weight:600}
-.who .dot{width:9px;height:9px;border-radius:50%;background:#1c7c39}
+.who{display:inline-flex;align-items:center;gap:8px;background:var(--blush-soft);border-radius:999px;padding:7px 16px;font-size:.74rem;font-weight:600;max-width:260px;overflow:hidden}
+.who .dot{width:9px;height:9px;border-radius:50%;background:#1c7c39;flex-shrink:0}
 .tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}
 .tab{font:inherit;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
 .tab.active{background:var(--ink);color:var(--blush);border-color:var(--ink)}
@@ -37,6 +37,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);bac
 .btn-red{border-color:#b3261e;color:#b3261e;background:#fff}
 .btn-block{display:block;width:100%;margin-top:18px}
 .inline{display:flex!important;flex-direction:row!important;align-items:center;gap:8px;font-size:.8rem!important;letter-spacing:0!important;text-transform:none!important;font-weight:500!important}
+.inline input[type=checkbox]{width:auto!important;flex:0 0 auto;accent-color:var(--ink)}
 .note{display:none;margin-top:12px;font-size:.85rem;font-weight:600;color:#1c7c39}
 .note.show{display:block}
 .warn{display:none;background:#fdf3e7;border:1.5px solid #e8d5b5;color:#8a6a2f;border-radius:10px;padding:12px 16px;font-size:.85rem;margin-bottom:18px}
@@ -95,7 +96,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
 <body>
 
 <header class="topbar"><div class="wrap">
-  <span class="brand"><img id="logoImg" hidden>ZanJewelry Admin</span>
+  <span class="brand"><img id="logoImg" hidden onerror="this.hidden=true">ZanJewelry Admin</span>
   <span class="spacer"></span>
   <span class="who" id="whoChip" hidden><span class="dot"></span><span id="whoName">Admin</span></span>
   <a href="/" target="_blank" rel="noopener">View site ↗</a>
@@ -104,7 +105,6 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
 
 <main class="wrap">
 
-<!-- ================= LOGIN ================= -->
 <section id="loginView">
   <h1>Admin Portal</h1>
   <p class="sub" style="text-align:center">Enter your username and password.</p>
@@ -121,7 +121,6 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   </div>
 </section>
 
-<!-- ================= DASHBOARD ================= -->
 <section id="dashView" hidden>
   <div class="tabs">
     <button class="tab active" data-tab="products">Products</button>
@@ -168,12 +167,8 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
             </select>
           </label>
         </div>
-        <div class="row" id="subRow" style="display:none">
-          <label class="field">Sub-type (e.g. Lip Gloss, Face Mist) <input name="subcategory" id="fSub" list="subList" placeholder="Lip Gloss">
-            <datalist id="subList"><option>Lip Gloss</option><option>Lipstick</option><option>Lip Liner</option><option>Lip Oil</option><option>Face Mist</option><option>Serum</option><option>Moisturiser</option><option>Body Butter</option><option>Body Wash</option><option>Soap</option><option>Eau de Parfum</option><option>Body Spray</option></datalist>
-          </label>
-          <label class="field">Price in Rand <span style="text-transform:none;letter-spacing:0;font-weight:500">(hidden on the site — used only in WhatsApp enquiries)</span> <input name="price" type="number" min="0" step="0.01" placeholder="Optional"></label>
-        </div>
+        <!-- FIX: price is ALWAYS visible now (was trapped in the cosmetics-only row) -->
+        <label class="field">Price in Rand <span style="text-transform:none;letter-spacing:0;font-weight:500">(never shown on the site — used only in WhatsApp enquiries)</span> <input name="price" type="number" min="0" step="0.01" placeholder="Optional — e.g. 4500"></label>
         <div class="row">
           <label class="field">Status
             <select name="stockStatus" id="fStatus">
@@ -183,6 +178,11 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
             </select>
           </label>
           <label class="field">Reference <input id="fRef" disabled placeholder="Auto (ZJ-0001)"></label>
+        </div>
+        <div class="row" id="subRow" style="display:none">
+          <label class="field">Sub-type (e.g. Lip Gloss, Face Mist) <input name="subcategory" id="fSub" list="subList" placeholder="Lip Gloss">
+            <datalist id="subList"><option>Lip Gloss</option><option>Lipstick</option><option>Lip Liner</option><option>Lip Oil</option><option>Face Mist</option><option>Serum</option><option>Moisturiser</option><option>Body Butter</option><option>Body Wash</option><option>Soap</option><option>Eau de Parfum</option><option>Body Spray</option></datalist>
+          </label>
         </div>
         <div class="row">
           <label class="inline"><input type="checkbox" name="featured" id="fFeatured"> Featured product</label>
@@ -251,7 +251,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
     <h1>Categories & banners</h1>
     <p class="sub">The tree drives the whole site. Each category gets its own page and banner.</p>
     <div class="info-box">
-      <b>How categories appear on the site:</b> every active category becomes a chip in "Shop the Collection" and opens its own page. After adding a category here, it appears on the site within ~15 seconds.
+      <b>How categories appear on the site:</b> every active category becomes a chip in "Shop the Collection" and opens its own page. After adding one here, it appears on the site within ~15 seconds.
     </div>
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:6px">Add a category</h2>
@@ -341,7 +341,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
   <div class="view" id="v-home">
     <h1>Homepage control</h1>
     <p class="sub">Hero pictures rotate every 3 seconds. Upload up to 3 for the slideshow.</p>
-    <p class="warn" id="slotWarn">⚠ The server is rejecting banner slots ("Unknown slot") — deploy the latest server.js so it allows bridal-engagement and bridal-wedding.</p>
+    <p class="warn" id="slotWarn">⚠ The server is rejecting banner slots ("Unknown slot") — deploy the latest server.js.</p>
     <div class="card">
       <form id="heroForm">
         <label class="field">Hero pictures — up to 3; the site cross-fades them every 3 seconds <input type="file" id="heroFile" accept="image/*" multiple></label>
@@ -371,7 +371,7 @@ textarea.editor{min-height:220px;font-family:ui-monospace,Consolas,monospace;fon
     <div class="card">
       <h2 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:8px">Brand logo</h2>
       <div class="row" style="align-items:center">
-        <div><img id="logoPrev" style="height:70px;border-radius:8px;background:var(--blush-soft)" hidden></div>
+        <div><img id="logoPrev" style="height:70px;border-radius:8px;background:var(--blush-soft)" hidden onerror="this.hidden=true"></div>
         <div>
           <label class="field" style="margin-top:0">Brand logo <input type="file" id="logoFile" accept="image/*"></label>
           <div class="row" style="margin-top:10px">
@@ -459,7 +459,6 @@ const STATUS={"in-stock":"In stock","out-of-stock":"Out of stock","sold":"Sold"}
 const PH='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="100%" height="100%" fill="#F9EDE7"/></svg>');
 const starStr=r=>"★".repeat(Number(r)||0)+"☆".repeat(5-(Number(r)||0));
 const fmtDate=iso=>{try{return new Date(iso).toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}catch{return"";}};
-/* FIX: bust cached /uploads/... images so replaced pictures render immediately */
 let IMG_T=Date.now();
 const ub=p=>p?(p+(p.includes("?")?"&":"?")+"t="+IMG_T):p;
 
@@ -470,7 +469,6 @@ let allDia=[],reviews=[],pages=[],posts=[],settings={},subs=[],users=[];
 let editingId=null,currentImages=[],listFilter="all",formType="jewellery";
 let currentHeroImages=[],revFilter="pending",contentSub="pages",editingPost=null,editingUser=null;
 
-/* FIX: cache-bust every GET so saved data always displays */
 async function api(path,opts={}){
   const headers={...(opts.headers||{})};
   if(token)headers.Authorization="Bearer "+token;
@@ -485,7 +483,8 @@ async function api(path,opts={}){
   return data;
 }
 function setWho(name){
-  myUsername=name||"Admin";
+  /* fallback: never display a garbled/legacy username */
+  myUsername=(name&&/^[A-Za-z0-9][A-Za-z0-9 ._-]{0,39}$/.test(name))?name:"Admin";
   $("#whoName").textContent=myUsername;
   $("#whoChip").hidden=false;
 }
@@ -512,7 +511,7 @@ function showDash(){$("#loginView").style.display="none";$("#dashView").hidden=f
 });
 
 async function refresh(){
-  IMG_T=Date.now(); /* fresh image stamps every refresh */
+  IMG_T=Date.now();
   const jobs=[
     api("/api/admin/products").then(d=>products=Array.isArray(d)?d:[]).catch(()=>{}),
     api("/api/categories").then(d=>categories=Array.isArray(d)?d:[]).catch(()=>{}),
@@ -533,7 +532,6 @@ async function refresh(){
   $("#reviewsTab").innerHTML="Reviews"+(pend?` <span class="cnt">${pend}</span>`:"");
 }
 
-/* ---------- tabs ---------- */
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("show"));
